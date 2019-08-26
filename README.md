@@ -15,4 +15,3 @@
 - First line of commit is a short summary
 - After adding and commiting, push feature branch while in feature branch: git push -u origin feature branch name
 - After feature branch is merged to develop on git hub then delete feature branch
-- Hello
