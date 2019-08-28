@@ -1,5 +1,11 @@
 header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
+    border: 1px solid lightblue;
+}
+
+.logo-wrapper a:link, a:visited {
+    text-decoration: none; 
+    color: #000;
 }
