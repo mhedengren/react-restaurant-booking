@@ -5,7 +5,7 @@ import Home from './components/Home/Home'
 import About from './components/About/About'
 import Contact from './components/Contact/Contact'
 import NotFound from './components/NotFound/NotFound'
-import Navigation from './components/Navigation/Navigation'
+import Header from './components/Header/Header'
 
 class App extends React.Component<{}, {}> {
   constructor(props: any) {
@@ -14,13 +14,15 @@ class App extends React.Component<{}, {}> {
   render() {
     return (
       <BrowserRouter>
-        <Navigation />
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route component={NotFound}/>
-        </Switch>
+        <Header />
+          <main className="main-wrapper">
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route component={NotFound}/>
+            </Switch>
+          </main>
       </BrowserRouter>
     )
   }
