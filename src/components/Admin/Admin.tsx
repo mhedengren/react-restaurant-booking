@@ -29,7 +29,7 @@ interface IState {
            }
         } 
         componentDidMount() {
-            axios.get('http://localhost/react-restaurant-booking-backend/reservations.php/')
+            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: result.data
@@ -39,11 +39,10 @@ interface IState {
         }
 
         render() {
-
-    
+   
         return (
             <div>
-                <p>{this.state.reservations}</p>
+                <p>{[this.state.reservations]}</p>
             </div>
         )
     }
