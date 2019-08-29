@@ -11,10 +11,11 @@ const Header = () => {
             <nav className="main-navigation">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
-                <NavLink to="/contact">Contact</NavLink>
+                <NavLink to="/booking">Book</NavLink>
+                <NavLink to="/admin">Admin</NavLink>
             </nav>
         </header>
     )
-}
+};
 
 export default Header

@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home/Home'
 import About from './components/About/About'
-import Contact from './components/Contact/Contact'
 import NotFound from './components/NotFound/NotFound'
 import Header from './components/Header/Header'
+import Booking from "./components/Booking/Booking";
+import Admin from "./components/Admin/Admin";
 
 class App extends React.Component<{}, {}> {
   constructor(props: any) {
@@ -19,7 +20,8 @@ class App extends React.Component<{}, {}> {
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
+              <Route path="/booking" component={Booking} />
+              <Route path="/admin" component={Admin} />
               <Route component={NotFound}/>
             </Switch>
           </main>
