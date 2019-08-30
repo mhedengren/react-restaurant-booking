@@ -40,8 +40,16 @@ interface IState {
             return (
                 <ReservationsView
                     reservations={this.state.reservations}
+                    deleteFunction={this.reservationDelete}
                 />
               )
+        }
+
+        reservationDelete(id: number) {
+            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/${id}`);
+                // .then((res: any) => {
+                    console.log('Item clicked');
+                // })
         }
 }
 
