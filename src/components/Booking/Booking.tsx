@@ -1,17 +1,18 @@
 import React from 'react'
 import Calendar from 'react-calendar'
+import moment from 'moment';
 
 interface IBookingState {
-    numberOfGuests: number
-    date: any
-    time: number
+    numberOfGuests: number;
+    date: Date;
+    time: number;
 }
 
 class BookingForm extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props)
     this.state = {
-      numberOfGuests: 0,
+      numberOfGuests: 1,
       date: new Date(),
       time: 18
     }
@@ -21,13 +22,15 @@ class BookingForm extends React.Component<{}, IBookingState> {
   }
 
   handleSubmit(event: any) {
-    alert('This is how many who wants to book: ' + this.state.numberOfGuests)
-    alert('This is what date they want to go ' + this.state.date)
-    alert('This is when they want to go ' + this.state.time)
+      console.log(event)
+   let newDate = moment(this.state.date);
+   alert(newDate.format('MMMM Do YYYY, h:mm'))
+  
+   //    alert(this.state.numberOfGuests + this.state.date + this.state.time)
     event.preventDefault()
   }
 
-  onChange = (date:any) => this.setState({ date })
+  calendarOnChange = (date:any) => this.setState({ date })
 
   handleInputChange(event:any) {
     const target = event.target;
@@ -45,18 +48,26 @@ class BookingForm extends React.Component<{}, IBookingState> {
         <label>
           Number of guests:
           <input
-            name="numberOfGuests"
+            name='numberOfGuests'
             type='number'
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange}
+            min='1'
             max='6'
           />
         </label>
-        <select name="time" value={this.state.time} onChange={this.handleInputChange}>
+        <label>
+            Time:
+        <select
+          name='time'
+          value={this.state.time}
+          onChange={this.handleInputChange}
+        >
           <option value='18'>18</option>
           <option value='21'>21</option>
         </select>
-        <Calendar onChange={this.onChange} value={this.state.date} />
+        </label>
+        <Calendar onChange={this.calendarOnChange} value={this.state.date} />
         <input type='submit' value='Submit' />
       </form>
     )
