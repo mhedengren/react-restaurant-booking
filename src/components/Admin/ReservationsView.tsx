@@ -35,7 +35,7 @@ class ReservationsView extends React.Component <IReservationViewProps,{}> {
                                 <td>{reservation.id}</td>
                                 <td>{reservation.guests}</td>
                                 <td>{reservation.date}</td>
-                                <td>{reservation.time}</td>
+                                <td>{reservation.time}:00</td>
                                 <td>{reservation.name}</td>
                                 <td>{reservation.email}</td>
                                 <td>{reservation.phone}</td>
