@@ -55,6 +55,7 @@ interface IState {
         reservationDelete(id: number) {
             console.log(id);
             axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+
                 .then((res: any) => {
                    
                     // 1. Make a copy of the state object (the list)
@@ -68,11 +69,6 @@ interface IState {
                     this.getAdmin();                                           
                 })
         }
-
-        // reservationUpdate(id: number) {
-        //     console.log(id);
-        //     axios.
-        // }
 }
 
 export default Admin
