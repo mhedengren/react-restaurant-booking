@@ -27,7 +27,7 @@ interface IState {
 
         } 
         componentDidMount() {
-            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: JSON.parse(result.data)
@@ -48,12 +48,12 @@ interface IState {
 
         reservationDelete(id: number) {
             console.log(id);
-            console.log(this.state.reservations)
+            // console.log(this.state.reservations)
             // myArr.splice(id,1)
             // this.setState({
             //     reservations: myArr
             // })
-            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                  
                     console.log('Item clicked' + {res_id: 'id'});
