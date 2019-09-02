@@ -3,6 +3,8 @@ import { IReservation } from './Admin';
 
 interface IReservationViewProps {
     reservations: IReservation[];
+
+    deleteFunction(id: number): void;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps,{}> {
@@ -24,6 +26,7 @@ class ReservationsView extends React.Component <IReservationViewProps,{}> {
                                 <th>name</th>
                                 <th>email</th>
                                 <th>phone</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +42,7 @@ class ReservationsView extends React.Component <IReservationViewProps,{}> {
                                 <td>{reservation.name}</td>
                                 <td>{reservation.email}</td>
                                 <td>{reservation.phone}</td>
+                                <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
                             </tr>
                         
             )
