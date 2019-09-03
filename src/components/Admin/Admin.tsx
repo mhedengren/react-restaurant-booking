@@ -48,13 +48,25 @@ interface IState {
                 <ReservationsView
                     reservations={this.state.reservations}
                     deleteFunction={this.reservationDelete}
+
                     updateFunction={this.reservationUpdate}
+
                 />
               )
         }
 
         reservationDelete(id: number) {
             console.log(id);
+            console.log(this.state.reservations)
+            // myArr.splice(id,1)
+            // this.setState({
+            //     reservations: myArr
+            // })
+            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+                .then((res: any) => {
+                 
+                    console.log('Item clicked' + {res_id: 'id'});
+                    console.log(res);
             axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
 
                 .then((res: any) => {
