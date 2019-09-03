@@ -5,6 +5,7 @@ interface IReservationViewProps {
     reservations: IReservation[];
 
     deleteFunction(id: number): void;
+    updateFunction(id: number): void;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps,{}> {
