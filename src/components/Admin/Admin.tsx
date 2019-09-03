@@ -27,6 +27,7 @@ interface IState {
 
             this.getAdmin = this.getAdmin.bind(this);
             this.reservationDelete = this.reservationDelete.bind(this);
+            this.reservationUpdate = this.reservationUpdate.bind(this);
 
         } 
         componentDidMount() {
@@ -47,7 +48,7 @@ interface IState {
                 <ReservationsView
                     reservations={this.state.reservations}
                     deleteFunction={this.reservationDelete}
-                    // updateFunction={this.reservationUpdate}
+                    updateFunction={this.reservationUpdate}
                 />
               )
         }
@@ -67,6 +68,14 @@ interface IState {
                         reservations: newList
                     })
                     this.getAdmin();                                           
+                })
+        }
+
+        reservationUpdate(id: number) {
+            console.log(id);
+            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: { params: { res_id: id}}})
+                .then((res: any) => {
+                    
                 })
         }
 }
