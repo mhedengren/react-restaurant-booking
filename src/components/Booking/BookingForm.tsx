@@ -40,7 +40,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
     let dateToSend = newDate.format('YYYY-MM-DD');
     console.log(dateToSend)
     
-    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+    axios.get(`http://localhost/react-restaurant-booking-backend/fetch-reservation.php/`,
       { params: { res_date: dateToSend}})
     .then((res: any) => {
   
