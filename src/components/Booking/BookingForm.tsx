@@ -3,6 +3,7 @@ import Calendar from 'react-calendar'
 import moment from 'moment'
 const axios = require('axios')
 
+// Interface for BookingState.
 interface IBookingState {
   numberOfGuests: number
   date: Date
@@ -14,6 +15,7 @@ interface IBookingState {
 class BookingForm extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props)
+    // Set default values.
     this.state = {
       numberOfGuests: 1,
       date: new Date(),
@@ -26,6 +28,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  // Will get reservations for todays date.
   componentDidMount(){
     let today = moment(new Date)
     let dateToSend = today.format('YYYY-MM-DD')
@@ -36,10 +39,10 @@ class BookingForm extends React.Component<{}, IBookingState> {
       )
       .then((res: any) => {
         console.log(res.data)
-        //this.setState({ date: date })
       })
   }
 
+  // Handles the form submit.
   handleSubmit(event: any) {
     console.log(event)
     let newDate = moment(this.state.date)
@@ -48,6 +51,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
     event.preventDefault()
   }
 
+  // Gets reservations every time date changes in the calendar.
   calendarOnChange(date: any) {
     let newDate = moment(date)
     let dateToSend = newDate.format('YYYY-MM-DD')
@@ -64,6 +68,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
       })
   }
 
+  // Reacts default multiple form input handler.
   handleInputChange(event: any) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
@@ -74,6 +79,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
     } as any)
   }
 
+  //Render booking form.
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
