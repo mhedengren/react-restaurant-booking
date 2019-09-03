@@ -82,7 +82,8 @@ interface IState {
                     })
                     this.getAdmin();                                           
                 })
-        }
+            }) }
+    
 
         reservationUpdate(id: number) {
             console.log(id);
