@@ -4,11 +4,11 @@ import moment from 'moment'
 const axios = require('axios')
 
 interface IBookingState {
-    numberOfGuests: number;
-    date: Date;
-    time: number;
-    show18: boolean;
-    show21: boolean;
+  numberOfGuests: number
+  date: Date
+  time: number
+  show18: boolean
+  show21: boolean
 }
 
 class BookingForm extends React.Component<{}, IBookingState> {
@@ -26,6 +26,20 @@ class BookingForm extends React.Component<{}, IBookingState> {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+    let today = moment(new Date)
+    let dateToSend = today.format('YYYY-MM-DD')
+    axios
+      .get(
+        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+        { params: { res_date: dateToSend } }
+      )
+      .then((res: any) => {
+        console.log(res.data)
+        //this.setState({ date: date })
+      })
+  }
+
   handleSubmit(event: any) {
     console.log(event)
     let newDate = moment(this.state.date)
@@ -35,22 +49,19 @@ class BookingForm extends React.Component<{}, IBookingState> {
   }
 
   calendarOnChange(date: any) {
-
-    let newDate = moment(date);
-    let dateToSend = newDate.format('YYYY-MM-DD');
+    let newDate = moment(date)
+    let dateToSend = newDate.format('YYYY-MM-DD')
     console.log(dateToSend)
-    
-    axios.get(`http://localhost/react-restaurant-booking-backend/fetch-reservation.php/`,
-      { params: { res_date: dateToSend}})
-    .then((res: any) => {
-  
-      console.log(res.data);
-      //this.setState({ date: date })
 
-        
-    });
-
-
+    axios
+      .get(
+        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+        { params: { res_date: dateToSend } }
+      )
+      .then((res: any) => {
+        console.log(res.data)
+        //this.setState({ date: date })
+      })
   }
 
   handleInputChange(event: any) {
