@@ -34,8 +34,23 @@ class BookingForm extends React.Component<{}, IBookingState> {
     event.preventDefault()
   }
 
-  calendarOnChange = (date: any) => {
-    this.setState({ date })
+  calendarOnChange(date: any) {
+
+    let newDate = moment(date);
+    let dateToSend = newDate.format('YYYY-MM-DD');
+    console.log(dateToSend)
+    
+    axios.get(`http://localhost/react-restaurant-booking-backend/fetch-reservation.php/`,
+      { params: { res_date: dateToSend}})
+    .then((res: any) => {
+  
+      console.log(res.data);
+      //this.setState({ date: date })
+
+        
+    });
+
+
   }
 
   handleInputChange(event: any) {

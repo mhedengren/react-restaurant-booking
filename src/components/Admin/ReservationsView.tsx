@@ -43,13 +43,13 @@ class ReservationsView extends React.Component <IReservationViewProps,{}> {
                                 <td>{reservation.email}</td>
                                 <td>{reservation.phone}</td>
                                 <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
+                                <td><button type="button" onClick={this.props.updateFunction.bind(this, reservation.id)}>Update</button></td>
                             </tr>
-                        
             )
         })}
-
                         </tbody>
                     </table>
+                    
                     <p>This is the Reservations view component!</p>
                 </div>
         )
