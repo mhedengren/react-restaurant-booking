@@ -1,6 +1,7 @@
 import React from 'react'
 import Calendar from 'react-calendar'
 import moment from 'moment'
+import { object, string } from 'prop-types';
 const axios = require('axios')
 
 interface IBookingState {
@@ -9,6 +10,7 @@ interface IBookingState {
     time: number;
     show18: boolean;
     show21: boolean;
+    timePicked: string;
 }
 
 class BookingForm extends React.Component<{}, IBookingState> {
@@ -19,11 +21,14 @@ class BookingForm extends React.Component<{}, IBookingState> {
       date: new Date(),
       time: 0,
       show18: false,
-      show21: false
+      show21: false,
+      timePicked: '',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmitTime = this.handleSubmitTime.bind(this)
+    this.handleRadioChange = this.handleRadioChange.bind(this)
   }
 
   handleSubmit(event: any) {
@@ -34,24 +39,43 @@ class BookingForm extends React.Component<{}, IBookingState> {
     event.preventDefault()
   }
 
-  calendarOnChange(date: any) {
+  handleSubmitTime(event: any) {
+    alert(this.state.timePicked)
+    event.preventDefault();
+  }
 
+  calendarOnChange(date: any) {
     let newDate = moment(date);
     let dateToSend = newDate.format('YYYY-MM-DD');
     console.log(dateToSend)
     
-    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
-      { params: { res_date: dateToSend}})
+    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,      { params: { res_date: dateToSend}})
     .then((res: any) => {
-  
-      console.log(res.data);
+      console.log(res.data)
+
       //this.setState({ date: date })
+      
+      var firstSitting = "18";
+      var count = res.data.filter((obj:any) => obj.time === firstSitting)
+      var secondSitting = "21";
+      var count2 = res.data.filter((obj:any) => obj.time === secondSitting)
+      console.log(count.length);
+      console.log(count2.length);
 
+      if (count <15) {
+        //toggle radio-button 18
+      } else {
+
+      }
+
+      if (count2 <15) {
+        //toggle radio-button 21
+      } else {
         
-    });
-
-
+      }
+    })
   }
+
 
   handleInputChange(event: any) {
     const target = event.target
@@ -63,23 +87,61 @@ class BookingForm extends React.Component<{}, IBookingState> {
     } as any)
   }
 
+  handleRadioChange(event: any) {
+    this.setState({
+      timePicked: event.target.value
+    });
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Number of guests:
-          <input
-            name='numberOfGuests'
-            type='number'
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange}
-            min='1'
-            max='6'
-          />
-        </label>
-        <Calendar onChange={this.calendarOnChange} value={this.state.date} />
-        <input type='submit' value='Submit' />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Number of guests:
+            <input
+              name='numberOfGuests'
+              type='number'
+              value={this.state.numberOfGuests}
+              onChange={this.handleInputChange}
+              min='1'
+              max='6'
+            />
+          </label>
+          <Calendar onChange={this.calendarOnChange} value={this.state.date} />
+          <input type='submit' value='Submit' />
+        </form>
+        
+        <form onSubmit={this.handleSubmitTime}>
+          <p>Pick a time for your reservation please</p>
+            <ul>
+              <li>
+                <label>
+                  <input
+                    name='sitting18'
+                    type='radio'
+                    value='18'
+                    checked={this.state.timePicked === "18"}
+                    onChange={this.handleRadioChange}
+                  />
+                Time: 18</label>
+              </li>
+
+              <li>
+                <label>
+                  <input
+                    name='sitting21'
+                    type='radio'
+                    value='21'
+                    checked={this.state.timePicked === "21"}
+                    onChange={this.handleRadioChange}
+                  />
+                  Time: 21</label>
+                </li>
+              <button type="submit">Make reservation</button>
+            </ul>
+          </form>
+      </div>
     )
   }
 }
