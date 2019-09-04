@@ -5,6 +5,7 @@ interface IReservationViewProps {
     reservations: IReservation[];
 
     deleteFunction(id: number): void;
+    updateFunction(id: number): void;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps,{}> {
@@ -43,7 +44,7 @@ class ReservationsView extends React.Component <IReservationViewProps,{}> {
                                 <td>{reservation.email}</td>
                                 <td>{reservation.phone}</td>
                                 <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
-                                {/* <td><button type="button" onClick={this.props.updateFunction.bind(this, reservation.id)}>Update</button></td> */}
+                                <td><button type="button" onClick={this.props.updateFunction.bind(this, reservation.id)}>Update</button></td>
                             </tr>
             )
         })}

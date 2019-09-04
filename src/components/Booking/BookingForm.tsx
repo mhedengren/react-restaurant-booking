@@ -4,18 +4,22 @@ import moment from 'moment'
 import { object, string } from 'prop-types';
 const axios = require('axios')
 
+// Interface for BookingState.
 interface IBookingState {
+
     numberOfGuests: number;
     date: Date;
     time: number;
     show18: boolean;
     show21: boolean;
     timePicked: string;
+
 }
 
 class BookingForm extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props)
+    // Set default values.
     this.state = {
       numberOfGuests: 1,
       date: new Date(),
@@ -31,6 +35,21 @@ class BookingForm extends React.Component<{}, IBookingState> {
     this.handleRadioChange = this.handleRadioChange.bind(this)
   }
 
+  // Will get reservations for todays date.
+  componentDidMount(){
+    let today = moment(new Date)
+    let dateToSend = today.format('YYYY-MM-DD')
+    axios
+      .get(
+        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+        { params: { res_date: dateToSend } }
+      )
+      .then((res: any) => {
+        console.log(res.data)
+      })
+  }
+
+  // Handles the form submit.
   handleSubmit(event: any) {
     console.log(event)
     let newDate = moment(this.state.date)
@@ -38,6 +57,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
 
     event.preventDefault()
   }
+
 
   handleSubmitTime(event: any) {
     alert(this.state.timePicked)
@@ -77,6 +97,24 @@ class BookingForm extends React.Component<{}, IBookingState> {
   }
 
 
+  // Gets reservations every time date changes in the calendar.
+  calendarOnChange(date: any) {
+    let newDate = moment(date)
+    let dateToSend = newDate.format('YYYY-MM-DD')
+    console.log(dateToSend)
+
+    axios
+      .get(
+        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+        { params: { res_date: dateToSend } }
+      )
+      .then((res: any) => {
+        console.log(res.data)
+        //this.setState({ date: date })
+      })
+  }
+
+  // Reacts default multiple form input handler.
   handleInputChange(event: any) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
@@ -93,6 +131,7 @@ class BookingForm extends React.Component<{}, IBookingState> {
     });
   }
 
+  //Render booking form.
   render() {
     return (
       <div>
