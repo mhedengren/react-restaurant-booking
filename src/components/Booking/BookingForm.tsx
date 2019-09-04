@@ -97,32 +97,6 @@ class BookingForm extends React.Component<{}, IBookingState> {
   }
 
 
-  // Gets reservations every time date changes in the calendar.
-  calendarOnChange(date: any) {
-    let newDate = moment(date)
-    let dateToSend = newDate.format('YYYY-MM-DD')
-    console.log(dateToSend)
-    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
-      { params: { res_date: dateToSend}})
-    .then((res: any) => {
-  
-      console.log(res.data);
-      //this.setState({ date: date })
-
-        
-    });
-
-    axios
-      .get(
-        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
-        { params: { res_date: dateToSend } }
-      )
-      .then((res: any) => {
-        console.log(res.data)
-        //this.setState({ date: date })
-      })
-  }
-
   // Reacts default multiple form input handler.
   handleInputChange(event: any) {
     const target = event.target
