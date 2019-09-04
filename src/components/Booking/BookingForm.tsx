@@ -2,10 +2,11 @@ import React from 'react'
 import Calendar from 'react-calendar'
 import moment from 'moment'
 import { object, string } from 'prop-types';
+import { IReservation } from '../Admin/Admin';
 const axios = require('axios')
 
 // Interface for BookingState.
-interface IBookingState {
+interface IBookingFormState {
 
     numberOfGuests: number;
     date: Date;
@@ -13,10 +14,15 @@ interface IBookingState {
     show18: boolean;
     show21: boolean;
     timePicked: string;
+    bookingArrayByDate: IReservation[];
 
 }
 
-class BookingForm extends React.Component<{}, IBookingState> {
+interface IBookingFormProps {
+    sendToBooking(numberOfGuests: number, date: moment.Moment, time:number ):void;
+}
+
+class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> {
   constructor(props: any) {
     super(props)
     // Set default values.
@@ -27,12 +33,14 @@ class BookingForm extends React.Component<{}, IBookingState> {
       show18: false,
       show21: false,
       timePicked: '',
+      bookingArrayByDate: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSubmitTime = this.handleSubmitTime.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
+    this.toggleOptions = this.toggleOptions.bind(this);
   }
 
   // Will get reservations for todays date.
@@ -47,15 +55,17 @@ class BookingForm extends React.Component<{}, IBookingState> {
       .then((res: any) => {
         console.log(res.data)
       })
+      this.toggleOptions();
   }
 
   // Handles the form submit.
   handleSubmit(event: any) {
-    console.log(event)
-    let newDate = moment(this.state.date)
-    alert(newDate.format('YYYY-MM-DD'))
+    // console.log(event)
+    // let newDate = moment(this.state.date)
+    // alert(newDate.format('YYYY-MM-DD'))
 
-    event.preventDefault()
+    event.preventDefault();
+    // this.props.sendToBooking(this.state.numberOfGuests, this.state.)
   }
 
 
@@ -67,34 +77,43 @@ class BookingForm extends React.Component<{}, IBookingState> {
   calendarOnChange(date: any) {
     let newDate = moment(date);
     let dateToSend = newDate.format('YYYY-MM-DD');
-    console.log(dateToSend)
-    
     axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,      { params: { res_date: dateToSend}})
     .then((res: any) => {
+ 
       console.log(res.data)
+      // this.setState({
+      //   bookingArrayByDate: res.data
+      // })
 
-      //this.setState({ date: date })
-      
-      var firstSitting = "18";
-      var count = res.data.filter((obj:any) => obj.time === firstSitting)
-      var secondSitting = "21";
-      var count2 = res.data.filter((obj:any) => obj.time === secondSitting)
-      console.log(count.length);
-      console.log(count2.length);
-
-      if (count <15) {
-        //toggle radio-button 18
-      } else {
-
-      }
-
-      if (count2 <15) {
-        //toggle radio-button 21
-      } else {
-        
-      }
+      // this.toggleOptions();
     })
   }
+
+  toggleOptions(){
+    var firstSitting = 18;
+    var count18 = this.state.bookingArrayByDate.filter((obj:any) => obj.time === firstSitting)
+    var secondSitting = 21;
+    var count21 = this.state.bookingArrayByDate.filter((obj:any)  => obj.time === secondSitting)
+    console.log(count18.length);
+    console.log(count21.length);
+
+    if (count18.length < 15) {
+      this.setState({
+        show18: true
+      })
+    } else {
+
+    }
+
+    if (count21.length < 15) {
+      this.setState({
+        show21: true
+      })
+    } else {
+      return false
+    }
+  }
+  
 
 
   // Reacts default multiple form input handler.
@@ -131,38 +150,13 @@ class BookingForm extends React.Component<{}, IBookingState> {
             />
           </label>
           <Calendar onChange={this.calendarOnChange} value={this.state.date} />
+          <select>
+            <option value='1'>Välj tid</option>
+            { this.state.show18 ? <option value="18">18</option> : null }
+            { this.state.show21 ? <option value="21">21</option> : null }
+          </select>
           <input type='submit' value='Submit' />
         </form>
-        
-        <form onSubmit={this.handleSubmitTime}>
-          <p>Pick a time for your reservation please</p>
-            <ul>
-              <li>
-                <label>
-                  <input
-                    name='sitting18'
-                    type='radio'
-                    value='18'
-                    checked={this.state.timePicked === "18"}
-                    onChange={this.handleRadioChange}
-                  />
-                Time: 18</label>
-              </li>
-
-              <li>
-                <label>
-                  <input
-                    name='sitting21'
-                    type='radio'
-                    value='21'
-                    checked={this.state.timePicked === "21"}
-                    onChange={this.handleRadioChange}
-                  />
-                  Time: 21</label>
-                </li>
-              <button type="submit">Make reservation</button>
-            </ul>
-          </form>
       </div>
     )
   }
