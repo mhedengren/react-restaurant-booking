@@ -1,5 +1,6 @@
 import React from 'react'
 import BookingForm from './BookingForm';
+import ContactForm from "./ContactForm";
 
 class Booking extends React.Component<{}, {}> {
   constructor(props:any){
@@ -8,8 +9,12 @@ class Booking extends React.Component<{}, {}> {
 
   render(){
     return(
-   
-        <BookingForm />
+        <div>
+            <BookingForm/>
+            <div>
+                <ContactForm/>
+            </div>
+        </div>
     
     )
   }
