@@ -35,7 +35,7 @@ interface IState {
             this.getAdmin();
         }
         getAdmin() {
-            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: JSON.parse(result.data)
@@ -63,12 +63,12 @@ interface IState {
             // this.setState({
             //     reservations: myArr
             // })
-            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                  
                     console.log('Item clicked' + {res_id: 'id'});
                     console.log(res);
-            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
 
                 .then((res: any) => {
                    
@@ -87,7 +87,7 @@ interface IState {
 
         reservationUpdate(id: number) {
             console.log(id);
-            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: { params: { res_id: id}}})
+            axios.put(`http://localhost:8888/react-restaurant-booking-backend/update.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                     
                 })
