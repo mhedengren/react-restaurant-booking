@@ -1,8 +1,9 @@
 import React from 'react'
 import Calendar from 'react-calendar'
 import moment from 'moment'
-import { object, string } from 'prop-types';
 import { IReservation } from '../Admin/Admin';
+import { randomBytes } from 'crypto';
+import { isTSTypeParameterInstantiation } from '@babel/types';
 const axios = require('axios')
 
 // Interface for BookingState.
@@ -15,7 +16,9 @@ interface IBookingFormState {
     show21: boolean;
     timePicked: string;
     bookingArrayByDate: IReservation[];
-
+    test: string;
+    testArray: IReservation[];
+    x: []
 }
 
 interface IBookingFormProps {
@@ -33,19 +36,25 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
       show18: false,
       show21: false,
       timePicked: '',
-      bookingArrayByDate: []
+      bookingArrayByDate: [],
+      test: '',
+      testArray: [],
+      x: []
+
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleSubmitTime = this.handleSubmitTime.bind(this)
+    //this.handleSubmitTime = this.handleSubmitTime.bind(this)
     this.handleRadioChange = this.handleRadioChange.bind(this)
-    this.toggleOptions = this.toggleOptions.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this)
+    this.calendarOnChange = this.calendarOnChange.bind(this)
   }
 
   // Will get reservations for todays date.
   componentDidMount(){
     let today = moment(new Date)
+    console.log(today)
     let dateToSend = today.format('YYYY-MM-DD')
     axios
       .get(
@@ -69,33 +78,44 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
   }
 
 
-  handleSubmitTime(event: any) {
-    alert(this.state.timePicked)
-    event.preventDefault();
-  }
+  //(event: any) {
+   // alert(this.state.timePicked)
+    //event.preventDefault();
+  //}
 
   calendarOnChange(date: any) {
-    let newDate = moment(date);
-    let dateToSend = newDate.format('YYYY-MM-DD');
-    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,      { params: { res_date: dateToSend}})
+    
+    let newDate =  moment(date).format('YYYY-MM-DD')
+    
+    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,      { params: { res_date: newDate}})
     .then((res: any) => {
- 
-      console.log(res.data)
-      // this.setState({
-      //   bookingArrayByDate: res.data
-      // })
+      
+      console.log(res) 
+      console.log(newDate) // visar datumet som är valt
+      console.log(res.data) //bokningarna för dagens datum
+    
 
-      // this.toggleOptions();
+
+      this.toggleOptions();
+
+      this.setState({
+
+        bookingArrayByDate: res.data
+        
+     })
     })
   }
 
   toggleOptions(){
-    var firstSitting = 18;
-    var count18 = this.state.bookingArrayByDate.filter((obj:any) => obj.time === firstSitting)
-    var secondSitting = 21;
-    var count21 = this.state.bookingArrayByDate.filter((obj:any)  => obj.time === secondSitting)
+
+    let firstSitting = 18;
+    let count18 = this.state.bookingArrayByDate.filter((obj:any) => obj.time === firstSitting)
+    let secondSitting = 21;
+    let count21 = this.state.bookingArrayByDate.filter((obj:any)  => obj.time === secondSitting)
     console.log(count18.length);
     console.log(count21.length);
+
+    
 
     if (count18.length < 15) {
       this.setState({

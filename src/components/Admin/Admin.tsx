@@ -34,6 +34,7 @@ interface IState {
         componentDidMount() {
             this.getAdmin();
         }
+        
         getAdmin() {
             axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
