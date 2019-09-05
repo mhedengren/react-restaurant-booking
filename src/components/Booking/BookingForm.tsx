@@ -85,12 +85,12 @@ class BookingForm extends React.Component<
 
 
   calendarOnChange(date: any) {
-    let newDate =  moment(date).format('YYYY-MM-DD')
+    let dateToSend =  moment(date).format('YYYY-MM-DD')
 
     axios
     .get(
       `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
-      { params: { res_date: newDate } }
+      { params: { res_date: dateToSend } }
     )
     .then((result: any) => {
       this.setState({
