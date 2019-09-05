@@ -87,8 +87,8 @@ interface IState {
                         reservations: newList
                     })
                     this.getAdmin();                                           
-                })
-            }) }
+                });
+            } 
             
         getSingleReservation(id: number) {
             axios.get('http://localhost/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
