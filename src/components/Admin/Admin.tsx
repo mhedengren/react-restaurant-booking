@@ -1,5 +1,5 @@
 import React from 'react';
-import ReservationsView from './ReservationsView';
+import ReservationsView, { IReservationUpdate } from './ReservationsView';
 
 
 const axios = require('axios');
@@ -14,21 +14,34 @@ export interface IReservation {
     phone: number
 }
 
+
+
 interface IState {
     reservations: IReservation[];
+    reservation: IReservation;
 }
 
-    class Admin extends React.Component <{}, IState >{  // Should be a stateless functional component
+    class Admin extends React.Component <{}, IState >{ 
         constructor(props: any){
             super(props);
 
             this.state = {
-                reservations: []
+                reservations: [],
+                reservation: {
+                    id: 0,
+                    guests: 0,
+                    date: '',
+                    time: 0,
+                    name: '',
+                    email:'',
+                    phone:0
+                }
             }
 
             this.getAdmin = this.getAdmin.bind(this);
             this.reservationDelete = this.reservationDelete.bind(this);
             this.reservationUpdate = this.reservationUpdate.bind(this);
+            this.getSingleReservation = this.getSingleReservation.bind(this);
 
         } 
         componentDidMount() {
@@ -47,30 +60,22 @@ interface IState {
         render() {
    
             return (
-                <ReservationsView
-                    reservations={this.state.reservations}
-                    deleteFunction={this.reservationDelete}
 
-                    updateFunction={this.reservationUpdate}
+                <div>
+                    <ReservationsView
+                        reservations={this.state.reservations}
+                        deleteFunction={this.reservationDelete}
+                        updateFunction={this.getSingleReservation}
+                        saveUpdate={this.reservationUpdate}
+                        reservation={this.state.reservation}
+                    />
+                </div>
 
-                />
               )
         }
 
-        reservationDelete(id: number) {
-            console.log(id);
-            console.log(this.state.reservations)
-            // myArr.splice(id,1)
-            // this.setState({
-            //     reservations: myArr
-            // })
-            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
-                .then((res: any) => {
-                 
-                    console.log('Item clicked' + {res_id: 'id'});
-                    console.log(res);
-            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
-
+        reservationDelete(id: number) {  
+            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                    
                     // 1. Make a copy of the state object (the list)
@@ -84,13 +89,26 @@ interface IState {
                     this.getAdmin();                                           
                 })
             }) }
-    
-
-        reservationUpdate(id: number) {
-            console.log(id);
-            axios.put(`http://localhost:8888/react-restaurant-booking-backend/update.php/`, {data: { params: { res_id: id}}})
+            
+        getSingleReservation(id: number) {
+            axios.get('http://localhost/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
+            .then((result: any)=> {
+                let singleReservation = result.data
+                
+                this.setState({
+                    reservation: singleReservation
+                });
+            });
+        }
+        
+        reservationUpdate(reservation: IReservationUpdate) { 
+            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: {reservation}})
                 .then((res: any) => {
-                    
+                    let updatedReservation = this.state.reservation
+                    console.log(updatedReservation);
+                    this.setState({
+                        reservation: updatedReservation
+                    })
                 })
         }
 }
