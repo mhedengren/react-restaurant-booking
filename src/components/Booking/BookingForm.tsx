@@ -19,7 +19,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-    sendToBooking(numberOfGuests: number, date: moment.Moment, time:number ):void;
+    sendToBooking(numberOfGuests: number, date: string, time: number):void;
 }
 
 class BookingForm extends React.Component<
@@ -50,6 +50,7 @@ class BookingForm extends React.Component<
   getTodaysBookings(){
     let today = moment(new Date())
     let dateToSend = today.format('YYYY-MM-DD')
+    console.log(dateToSend)
     axios
       .get(
         `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
@@ -68,24 +69,28 @@ class BookingForm extends React.Component<
 
   }
 
-  // Handles the form submit.
-  handleSubmit(event: any) {
-    // console.log(event)
-    // let newDate = moment(this.state.date)
-    // alert(newDate.format('YYYY-MM-DD'))
 
-    event.preventDefault()
-    // this.props.sendToBooking(this.state.numberOfGuests, this.state.)
+  //kallar på funktionen this.props.sendtobooking och skickar med värden från denna komponents state
+  //det här är propsen som kommer lyfta vårt state upp
+
+  handleSubmit(event: any) {
+    
+    
+    console.log(event)
+    let newDate = moment(this.state.date).format('YYYY-MM-DD')
+    this.props.sendToBooking(this.state.numberOfGuests, newDate, this.state.time)
+    console.log(this.state.numberOfGuests)
+    console.log(newDate)
+    console.log(this.state.time) //HÄR BLIR DET AUTOMATISKT DAGENS DATUM 
+
   }
 
-  // handleSubmitTime(event: any) {
-  //   alert(this.state.timePicked)
-  //   event.preventDefault()
-  // }
+
 
 
   calendarOnChange(date: any) {
     let dateToSend =  moment(date).format('YYYY-MM-DD')
+    console.log(dateToSend)//HÄR ÄR DET RÄTT DATUM
 
     axios
     .get(
@@ -100,7 +105,7 @@ class BookingForm extends React.Component<
   }
 
   toggleOptions() {
-    console.log('this is the array from state',this.state.bookingArrayByDate)
+    //console.log('this is the array from state',this.state.bookingArrayByDate)
     var firstSitting = '18'
     var count18 = this.state.bookingArrayByDate.filter(
       (obj: any) => obj.time === firstSitting
@@ -109,8 +114,8 @@ class BookingForm extends React.Component<
     var count21 = this.state.bookingArrayByDate.filter(
       (obj: any) => obj.time === secondSitting
     )
-    console.log('this is how many bookings at 18',count18.length);
-    console.log('this is how many bookings at 21', count21.length);
+    //console.log('this is how many bookings at 18',count18.length);
+    //console.log('this is how many bookings at 21', count21.length);
 
     if (count18.length <= 15) {
       this.setState({
@@ -151,10 +156,11 @@ class BookingForm extends React.Component<
   }
 
   //Render booking form.
+  
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             Number of guests:
             <input
@@ -167,12 +173,11 @@ class BookingForm extends React.Component<
             />
           </label>
           <Calendar onChange={this.calendarOnChange} value={this.state.date} />
-          <select>
+          <select onChange={this.handleSubmit}>
             <option value='1'>Välj tid</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
             {this.state.show21 ? <option value='21'>21</option> : null}
           </select>
-          <input type='submit' value='Submit' />
         </form>
       </div>
     )
