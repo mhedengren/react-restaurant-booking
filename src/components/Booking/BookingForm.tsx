@@ -5,7 +5,7 @@ import { object, string } from 'prop-types';
 const axios = require('axios')
 
 // Interface for BookingState.
-interface IBookingState {
+interface IBookingState { // change to IBookingFormState pls!
 
     numberOfGuests: number;
     date: Date;
