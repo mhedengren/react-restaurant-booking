@@ -47,8 +47,9 @@ interface IState {
         componentDidMount() {
             this.getAdmin();
         }
+        
         getAdmin() {
-            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: JSON.parse(result.data)
@@ -59,6 +60,7 @@ interface IState {
         render() {
    
             return (
+
                 <div>
                     <ReservationsView
                         reservations={this.state.reservations}
@@ -68,13 +70,12 @@ interface IState {
                         reservation={this.state.reservation}
                     />
                 </div>
+
               )
         }
 
-        reservationDelete(id: number) {
-           
+        reservationDelete(id: number) {  
             axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
-
                 .then((res: any) => {
                    
                     // 1. Make a copy of the state object (the list)
@@ -87,8 +88,8 @@ interface IState {
                     })
                     this.getAdmin();                                           
                 })
-        }
-
+            }) }
+            
         getSingleReservation(id: number) {
             axios.get('http://localhost/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
             .then((result: any)=> {
