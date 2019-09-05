@@ -1,5 +1,5 @@
 import React from 'react';
-import ReservationsView from './ReservationsView';
+import ReservationsView, { IReservationUpdate } from './ReservationsView';
 
 
 const axios = require('axios');
@@ -100,16 +100,14 @@ interface IState {
             });
         }
         
-        reservationUpdate(id: number) { 
-            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: { params: { res_id: id}}})
+        reservationUpdate(reservation: IReservationUpdate) { 
+            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: {reservation}})
                 .then((res: any) => {
-                    this.getSingleReservation(id);
-                    
                     let updatedReservation = this.state.reservation
+                    console.log(updatedReservation);
                     this.setState({
                         reservation: updatedReservation
                     })
-                    // console.log(this.getSingleReservation(id));
                 })
         }
 }

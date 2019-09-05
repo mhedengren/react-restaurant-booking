@@ -7,11 +7,11 @@ interface IReservationViewProps {
 
     deleteFunction(id: number): void;
     updateFunction(id: number): void;
-    saveUpdate(id: number): void;
+    saveUpdate(updateItem: IReservationUpdate): void;
     
 }
 
-interface IReservationUpdate {
+export interface IReservationUpdate {
     id: number,
     guests: number,
     date: string,
@@ -64,7 +64,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
         }
     }
     render() {
-
+        console.log(this.state);
         return (
             <div>
                     <table>
@@ -117,7 +117,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         <label htmlFor="phone">Phone:</label>
                         <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
                         
-                        <button type="button" onClick={this.props.saveUpdate.bind(this, this.props.reservation.id)}>Save Changes</button>
+                        <button type="button" onClick={this.props.saveUpdate.bind(this, this.state)}>Save Changes</button>
                     </form>
                 </div>
         )
