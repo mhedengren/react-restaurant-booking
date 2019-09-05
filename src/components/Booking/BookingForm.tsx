@@ -1,9 +1,8 @@
 import React from 'react'
 import Calendar from 'react-calendar'
 import moment from 'moment'
+import { object, string } from 'prop-types';
 import { IReservation } from '../Admin/Admin';
-import { randomBytes } from 'crypto';
-import { isTSTypeParameterInstantiation } from '@babel/types';
 const axios = require('axios')
 
 // Interface for BookingState.
@@ -16,16 +15,17 @@ interface IBookingFormState {
     show21: boolean;
     timePicked: string;
     bookingArrayByDate: IReservation[];
-    test: string;
-    testArray: IReservation[];
-    x: []
+
 }
 
 interface IBookingFormProps {
     sendToBooking(numberOfGuests: number, date: moment.Moment, time:number ):void;
 }
 
-class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> {
+class BookingForm extends React.Component<
+  IBookingFormProps,
+  IBookingFormState
+> {
   constructor(props: any) {
     super(props)
     // Set default values.
@@ -36,35 +36,36 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
       show18: false,
       show21: false,
       timePicked: '',
-      bookingArrayByDate: [],
-      test: '',
-      testArray: [],
-      x: []
-
+      bookingArrayByDate: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    //this.handleSubmitTime = this.handleSubmitTime.bind(this)
-    this.handleRadioChange = this.handleRadioChange.bind(this)
+    // this.handleRadioChange = this.handleRadioChange.bind(this)
     this.toggleOptions = this.toggleOptions.bind(this)
+    this.getTodaysBookings = this.getTodaysBookings.bind(this)
     this.calendarOnChange = this.calendarOnChange.bind(this)
   }
 
-  // Will get reservations for todays date.
-  componentDidMount(){
-    let today = moment(new Date)
-    console.log(today)
+  getTodaysBookings(){
+    let today = moment(new Date())
     let dateToSend = today.format('YYYY-MM-DD')
     axios
       .get(
         `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
         { params: { res_date: dateToSend } }
       )
-      .then((res: any) => {
-        console.log(res.data)
+      .then((result: any) => {
+        this.setState({
+          bookingArrayByDate: result.data
+        }, () => this.toggleOptions())
       })
-      this.toggleOptions();
+  }
+
+  // Will get reservations for todays date.
+  componentDidMount() {
+    this.getTodaysBookings();
+
   }
 
   // Handles the form submit.
@@ -73,68 +74,64 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     // let newDate = moment(this.state.date)
     // alert(newDate.format('YYYY-MM-DD'))
 
-    event.preventDefault();
+    event.preventDefault()
     // this.props.sendToBooking(this.state.numberOfGuests, this.state.)
   }
 
+  // handleSubmitTime(event: any) {
+  //   alert(this.state.timePicked)
+  //   event.preventDefault()
+  // }
 
-  //(event: any) {
-   // alert(this.state.timePicked)
-    //event.preventDefault();
-  //}
 
   calendarOnChange(date: any) {
-    
-    let newDate =  moment(date).format('YYYY-MM-DD')
-    
-    axios.get(`http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,      { params: { res_date: newDate}})
-    .then((res: any) => {
-      
-      console.log(res) 
-      console.log(newDate) // visar datumet som är valt
-      console.log(res.data) //bokningarna för dagens datum
-    
-
-
-      this.toggleOptions();
-
+    let newDate = moment(date)
+    let dateToSend = newDate.format('YYYY-MM-DD')
+    axios
+    .get(
+      `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+      { params: { res_date: dateToSend } }
+    )
+    .then((result: any) => {
       this.setState({
-
-        bookingArrayByDate: res.data
-        
-     })
+        bookingArrayByDate: result.data
+      }, () => this.toggleOptions())
     })
   }
 
-  toggleOptions(){
+  toggleOptions() {
+    console.log('this is the array from state',this.state.bookingArrayByDate)
+    var firstSitting = '18'
+    var count18 = this.state.bookingArrayByDate.filter(
+      (obj: any) => obj.time === firstSitting
+    )
+    var secondSitting = '21'
+    var count21 = this.state.bookingArrayByDate.filter(
+      (obj: any) => obj.time === secondSitting
+    )
+    console.log('this is how many bookings at 18',count18.length);
+    console.log('this is how many bookings at 21', count21.length);
 
-    let firstSitting = 18;
-    let count18 = this.state.bookingArrayByDate.filter((obj:any) => obj.time === firstSitting)
-    let secondSitting = 21;
-    let count21 = this.state.bookingArrayByDate.filter((obj:any)  => obj.time === secondSitting)
-    console.log(count18.length);
-    console.log(count21.length);
-
-    
-
-    if (count18.length < 15) {
+    if (count18.length <= 15) {
       this.setState({
         show18: true
       })
-    } else {
-
+    } else if (count18.length >= 15) {
+      this.setState({
+        show18: false
+      })
     }
 
-    if (count21.length < 15) {
+    if (count21.length <= 15) {
       this.setState({
         show21: true
       })
-    } else {
-      return false
+    } else if (count21.length >= 15) {
+      this.setState({
+        show21: false
+      })
     }
   }
-  
-
 
   // Reacts default multiple form input handler.
   handleInputChange(event: any) {
@@ -150,7 +147,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
   handleRadioChange(event: any) {
     this.setState({
       timePicked: event.target.value
-    });
+    })
   }
 
   //Render booking form.
@@ -172,8 +169,8 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
           <Calendar onChange={this.calendarOnChange} value={this.state.date} />
           <select>
             <option value='1'>Välj tid</option>
-            { this.state.show18 ? <option value="18">18</option> : null }
-            { this.state.show21 ? <option value="21">21</option> : null }
+            {this.state.show18 ? <option value='18'>18</option> : null}
+            {this.state.show21 ? <option value='21'>21</option> : null}
           </select>
           <input type='submit' value='Submit' />
         </form>
