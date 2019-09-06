@@ -7,13 +7,14 @@ import moment from 'moment'
 //Interface för hur hela bokningen ser ut
 interface IBookingState {
   guests: number
-  date: string
+  date: Date;
   time: number
   name: string
   email: string
   tel: string
   GDPRconsent: boolean
   contactFormValid: boolean
+  showSecondForm: boolean
 }
 
 class Booking extends React.Component<{}, IBookingState> {
@@ -27,15 +28,17 @@ class Booking extends React.Component<{}, IBookingState> {
     this.handleGDPRChange = this.handleGDPRChange.bind(this)
     this.state = {
       guests: 0,
-      date: '',
+      date: new Date(),
       time: 0,
       name: '',
       email: '',
       tel: '',
       GDPRconsent: false,
-      contactFormValid: false
+      contactFormValid: false,
+      showSecondForm: false
     }
   }
+  
   displayGuestLog() {
     console.log('Welcome to June ' + JSON.stringify(this.state))
   }
@@ -61,11 +64,12 @@ class Booking extends React.Component<{}, IBookingState> {
   //getFirstFormInfo är funktionen som vi skickar ned till BookingForm via props
   //Sätta state/Lyfta ut state från vår andra komponent
   //hämtar värdena
-  getFirstFormInfo(numberOfGuests: number, date: string, time: number) {
+  getFirstFormInfo(numberOfGuests: number, date: Date, time: number) {
     this.setState({
       guests: numberOfGuests,
       date: date,
-      time: time
+      time: time,
+      showSecondForm: true
     })
   }
 
@@ -81,7 +85,7 @@ class Booking extends React.Component<{}, IBookingState> {
         {/* Namnger propsen och skickar ner funktionen*/}
         <BookingForm sendToBooking={this.getFirstFormInfo} />
         <div>
-          <ContactForm onChangeHandler={this.contactFormValues} />
+         {this.state.showSecondForm ? <ContactForm onChangeHandler={this.contactFormValues} /> :null}
         </div>
         <div className="gdpr-notice-wrapper">
         <input type='checkbox' onChange={this.handleGDPRChange} />
