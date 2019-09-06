@@ -5,9 +5,7 @@ import { object, string } from 'prop-types';
 import { IReservation } from '../Admin/Admin';
 const axios = require('axios')
 
-// Interface for BookingState.
 interface IBookingFormState {
-
     numberOfGuests: number;
     date: Date;
     time: number;
