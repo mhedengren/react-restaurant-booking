@@ -1,6 +1,7 @@
 import React from 'react'
 import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
+import './booking.css'
 import moment from 'moment'
 
 //Interface för hur hela bokningen ser ut
@@ -11,6 +12,7 @@ interface IBookingState {
   name: string
   email: string
   tel: string
+  GDPRconsent: boolean
   contactFormValid: boolean
 }
 
@@ -22,6 +24,7 @@ class Booking extends React.Component<{}, IBookingState> {
     this.formValues = this.formValues.bind(this)
     this.contactFormValues = this.contactFormValues.bind(this)
     this.getFirstFormInfo = this.getFirstFormInfo.bind(this)
+    this.handleGDPRChange = this.handleGDPRChange.bind(this)
     this.state = {
       guests: 0,
       date: '',
@@ -29,6 +32,7 @@ class Booking extends React.Component<{}, IBookingState> {
       name: '',
       email: '',
       tel: '',
+      GDPRconsent: false,
       contactFormValid: false
     }
   }
@@ -65,6 +69,12 @@ class Booking extends React.Component<{}, IBookingState> {
     })
   }
 
+  handleGDPRChange(){
+    this.setState({
+      GDPRconsent: true
+    })
+  }
+
   render() {
     return (
       <div>
@@ -72,6 +82,14 @@ class Booking extends React.Component<{}, IBookingState> {
         <BookingForm sendToBooking={this.getFirstFormInfo} />
         <div>
           <ContactForm onChangeHandler={this.contactFormValues} />
+        </div>
+        <div className="gdpr-notice-wrapper">
+        <input type='checkbox' onChange={this.handleGDPRChange} />
+        <p>
+          Genom att klicka i denna checkbox godkänner du att vi hanterar dina
+          personuppgifter enligt GDPR. Du kan läsa mer om detta under vår{' '}
+          <a href='#'>sida för integritet.</a>
+        </p>
         </div>
         <button onClick={this.submitBook}> Book your table </button>
       </div>
