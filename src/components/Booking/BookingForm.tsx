@@ -17,7 +17,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-    sendToBooking(numberOfGuests: number, date: string, time: number):void;
+    sendToBooking(numberOfGuests: number, date: Date, time: number):void;
 }
 
 class BookingForm extends React.Component<
@@ -74,12 +74,12 @@ class BookingForm extends React.Component<
   handleSubmit(event: any) {
     
     
-    console.log(event)
+    // console.log(event)
     let newDate = moment(this.state.date).format('YYYY-MM-DD')
-    this.props.sendToBooking(this.state.numberOfGuests, newDate, this.state.time)
+    this.props.sendToBooking(this.state.numberOfGuests, this.state.date, event.target.value)
     console.log(this.state.numberOfGuests)
     console.log(newDate)
-    console.log(this.state.time) //HÄR BLIR DET AUTOMATISKT DAGENS DATUM 
+    console.log(event.target.value) 
 
   }
 
@@ -97,7 +97,8 @@ class BookingForm extends React.Component<
     )
     .then((result: any) => {
       this.setState({
-        bookingArrayByDate: result.data
+        bookingArrayByDate: result.data,
+        date: date
       }, () => this.toggleOptions())
     })
   }
