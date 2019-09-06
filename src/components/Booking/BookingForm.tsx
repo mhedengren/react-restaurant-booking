@@ -8,6 +8,7 @@ const axios = require('axios')
 interface IBookingFormState {
     numberOfGuests: number;
     date: Date;
+    dateToSend: string;
     time: number;
     show18: boolean;
     show21: boolean;
@@ -17,7 +18,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-    sendToBooking(numberOfGuests: number, date: Date, time: number):void;
+    sendToBooking(numberOfGuests: number, date: string, time: number):void;
 }
 
 class BookingForm extends React.Component<
@@ -30,6 +31,7 @@ class BookingForm extends React.Component<
     this.state = {
       numberOfGuests: 1,
       date: new Date(),
+      dateToSend: '',
       time: 0,
       show18: false,
       show21: false,
@@ -75,11 +77,11 @@ class BookingForm extends React.Component<
     
     
     // console.log(event)
-    let newDate = moment(this.state.date).format('YYYY-MM-DD')
-    this.props.sendToBooking(this.state.numberOfGuests, this.state.date, event.target.value)
-    console.log(this.state.numberOfGuests)
-    console.log(newDate)
-    console.log(event.target.value) 
+    // let newDate = moment(this.state.date).format('YYYY-MM-DD')
+    this.props.sendToBooking(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
+    // console.log(this.state.numberOfGuests)
+    // console.log(newDate)
+    // console.log(event.target.value) 
 
   }
 
@@ -88,8 +90,7 @@ class BookingForm extends React.Component<
 
   calendarOnChange(date: any) {
     let dateToSend =  moment(date).format('YYYY-MM-DD')
-    console.log(dateToSend)//HÄR ÄR DET RÄTT DATUM
-
+    // console.log(dateToSend)//HÄR ÄR DET RÄTT DATUM
     axios
     .get(
       `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
@@ -98,7 +99,7 @@ class BookingForm extends React.Component<
     .then((result: any) => {
       this.setState({
         bookingArrayByDate: result.data,
-        date: date
+        dateToSend: dateToSend
       }, () => this.toggleOptions())
     })
   }

@@ -75,7 +75,7 @@ interface IState {
         }
 
         reservationDelete(id: number) {  
-            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                    
                     // 1. Make a copy of the state object (the list)
@@ -91,7 +91,7 @@ interface IState {
             } 
             
         getSingleReservation(id: number) {
-            axios.get('http://localhost/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
             .then((result: any)=> {
                 let singleReservation = result.data
                 
@@ -102,7 +102,7 @@ interface IState {
         }
         
         reservationUpdate(reservation: IReservationUpdate) { 
-            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: {reservation}})
+            axios.put(`http://localhost:8888/react-restaurant-booking-backend/update.php/`, {data: {reservation}})
                 .then((res: any) => {
                     let updatedReservation = this.state.reservation
                     console.log(updatedReservation);

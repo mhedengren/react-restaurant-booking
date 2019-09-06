@@ -52,7 +52,7 @@ class ContactForm extends React.Component<IValuesProps, IValuesState> {
 
     displayGuestLog() {
         const name = this.state.name;
-        console.log('Welcome to June ' + JSON.stringify(name));
+        // console.log('Welcome to June ' + JSON.stringify(name));
     }
 
     handleValues(event: any) {
@@ -61,9 +61,9 @@ class ContactForm extends React.Component<IValuesProps, IValuesState> {
             [name]: value
         }  as IValuesState, 
         () => { this.props.onChangeHandler(this.state.name, this.state.tel, this.state.email, this.state.contactFormValid ); // Keeps the method and state values in sync
-        console.log(this.state.name)
-        console.log(this.state.email)
-        console.log(this.state.tel)
+        // console.log(this.state.name)
+        // console.log(this.state.email)
+        // console.log(this.state.tel)
         }); 
     }
 
