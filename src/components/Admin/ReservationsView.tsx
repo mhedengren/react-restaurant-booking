@@ -7,9 +7,9 @@ interface IReservationViewProps {
 
     deleteFunction(id: number): void;
     updateFunction(id: number): void;
-    saveUpdate(updateItem: IReservationUpdate): void;
-    
+    saveUpdate(updateItem: IReservationUpdate): void;  
 }
+
 
 export interface IReservationUpdate {
     id: number,
@@ -37,7 +37,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
     
     }
     onChange(event: any) {
-        const target = event.target
+        const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
         this.setState({
@@ -45,13 +45,13 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
         } as any)
       }
     componentDidUpdate(prevProps:any){
-        if (this.props.reservation.id != prevProps.reservation.id &&
-            this.props.reservation.guests != prevProps.reservation.guests &&
-            this.props.reservation.date != prevProps.reservation.date &&
-            this.props.reservation.time != prevProps.reservation.time &&
-            this.props.reservation.name != prevProps.reservation.name &&
-            this.props.reservation.email != prevProps.reservation.email &&
-            this.props.reservation.phone != prevProps.reservation.phone){
+        if (this.props.reservation.id !== prevProps.reservation.id &&
+            this.props.reservation.guests !== prevProps.reservation.guests &&
+            this.props.reservation.date !== prevProps.reservation.date &&
+            this.props.reservation.time !== prevProps.reservation.time &&
+            this.props.reservation.name !== prevProps.reservation.name &&
+            this.props.reservation.email !== prevProps.reservation.email &&
+            this.props.reservation.phone !== prevProps.reservation.phone){
             this.setState({
                 id: this.props.reservation.id,
                 guests: this.props.reservation.guests,
@@ -103,7 +103,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     
                     <form action="submit">
                         <label htmlFor="id">Id:</label>
-                        <input name="id" type="text" value={this.state.id} disabled/>
+                        <input name="id" type="text" value={this.props.reservation.id} disabled/>
                         <label htmlFor="guests">Guests:</label>
                         <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
                         <label htmlFor="date">Date:</label>
@@ -121,9 +121,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     </form>
                 </div>
         )
-        
-        
-        
+           
         
     }
 }

@@ -53,7 +53,7 @@ class BookingForm extends React.Component<
     console.log(dateToSend)
     axios
       .get(
-        `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+        `http://localhost/react-restaurant-booking-backend/fetch-reservation.php/`,
         { params: { res_date: dateToSend } }
       )
       .then((result: any) => {
