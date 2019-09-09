@@ -93,7 +93,7 @@ class BookingForm extends React.Component<
     // console.log(dateToSend)//HÄR ÄR DET RÄTT DATUM
     axios
     .get(
-      `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
+      `http://localhost/react-restaurant-booking-backend/fetch-reservation.php/`,
       { params: { res_date: dateToSend } }
     )
     .then((result: any) => {
@@ -117,7 +117,7 @@ class BookingForm extends React.Component<
     //console.log('this is how many bookings at 18',count18.length);
     //console.log('this is how many bookings at 21', count21.length);
 
-    if (count18.length <= 15) {
+    if (count18.length < 15) {
       this.setState({
         show18: true
       })
@@ -127,7 +127,7 @@ class BookingForm extends React.Component<
       })
     }
 
-    if (count21.length <= 15) {
+    if (count21.length < 15) {
       this.setState({
         show21: true
       })
