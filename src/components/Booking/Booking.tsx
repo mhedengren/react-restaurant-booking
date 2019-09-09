@@ -4,9 +4,9 @@ import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import './booking.css'
 import { withRouter } from 'react-router'
+import GdprConsent from './GdprConsent';
 const axios = require('axios')
 
-//Interface för hur hela bokningen ser ut
 interface IBookingState {
   guests: number
   date: string
@@ -28,7 +28,7 @@ class Booking extends React.Component<{}, IBookingState> {
     this.postReservation = this.postReservation.bind(this)
     this.contactFormValues = this.contactFormValues.bind(this)
     this.getFirstFormInfo = this.getFirstFormInfo.bind(this)
-    this.handleGDPRChange = this.handleGDPRChange.bind(this)
+    this.toggleGdpr = this.toggleGdpr.bind(this)
     this.state = {
       guests: 0,
       date: '',
@@ -54,6 +54,9 @@ class Booking extends React.Component<{}, IBookingState> {
   }
 
   postReservation() {
+    if (!this.state.GDPRconsent){
+      return
+    }
     axios
       .post(
         'http://localhost:8888/react-restaurant-booking-backend/post-reservation.php',
@@ -74,10 +77,8 @@ class Booking extends React.Component<{}, IBookingState> {
       showSecondForm: false,
       showFirstForm: false
     })
+    
   }
-  //getFirstFormInfo är funktionen som vi skickar ned till BookingForm via props
-  //Sätta state/Lyfta ut state från vår andra komponent
-  //hämtar värdena
 
   getFirstFormInfo(numberOfGuests: number, date: string, time: number) {
     console.log(date)
@@ -89,10 +90,8 @@ class Booking extends React.Component<{}, IBookingState> {
     })
   }
 
-  handleGDPRChange() {
-    this.setState({
-      GDPRconsent: true
-    })
+  toggleGdpr() {
+    this.setState({GDPRconsent: !this.state.GDPRconsent},()=>console.log(this.state.GDPRconsent))
   }
 
   render() {
@@ -100,16 +99,7 @@ class Booking extends React.Component<{}, IBookingState> {
       <div>
         {this.state.showFirstForm ? <BookingForm getFirstFormInfo={this.getFirstFormInfo}/> :null }
         {this.state.showSecondForm ? <ContactForm onChangeHandler={this.contactFormValues} /> : null}
-        {this.state.showSecondForm ? 
-          <div className='gdpr-notice-wrapper'>
-            <input type='checkbox' onChange={this.handleGDPRChange} />
-            <p>
-            Genom att klicka i denna checkbox godkänner du att vi hanterar
-            dina personuppgifter enligt GDPR. Du kan läsa mer om detta under
-            vår <a href='#'>sida för integritet.</a>
-            </p>
-          </div>
-         : null}
+        {this.state.showSecondForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
         {this.state.showSecondForm ? <button onClick={this.postReservation}> Book your table </button> : null}
         {this.state.showBookingComplete ? <BookingComplete /> :null}
       </div> 
