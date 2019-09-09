@@ -18,7 +18,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-    sendToBooking(numberOfGuests: number, date: string, time: number):void;
+  getFirstFormInfo(numberOfGuests: number, date: string, time: number):void;
 }
 
 class BookingForm extends React.Component<
@@ -78,7 +78,7 @@ class BookingForm extends React.Component<
     
     // console.log(event)
     // let newDate = moment(this.state.date).format('YYYY-MM-DD')
-    this.props.sendToBooking(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
+    this.props.getFirstFormInfo(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
     // console.log(this.state.numberOfGuests)
     // console.log(newDate)
     // console.log(event.target.value) 
@@ -172,7 +172,7 @@ class BookingForm extends React.Component<
               max='6'
             />
           </label>
-          <Calendar onChange={this.calendarOnChange} value={this.state.date} />
+          <Calendar onChange={this.calendarOnChange} value={this.state.date} minDate={new Date()} />
           <select onChange={this.handleSubmit}>
             <option value='1'>Välj tid</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
