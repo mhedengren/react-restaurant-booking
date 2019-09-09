@@ -1,5 +1,6 @@
 import React from 'react';
 import ReservationsView, { IReservationUpdate } from './ReservationsView';
+import CreateReservation, { ICreateReservationState } from './CreateReservation';
 
 
 const axios = require('axios');
@@ -19,6 +20,7 @@ export interface IReservation {
 interface IState {
     reservations: IReservation[];
     reservation: IReservation;
+    showCreateNewReservation: boolean
 }
 
     class Admin extends React.Component <{}, IState >{ 
@@ -35,13 +37,17 @@ interface IState {
                     name: '',
                     email:'',
                     phone:0
-                }
+                },
+                showCreateNewReservation: false
+                
             }
 
             this.getAdmin = this.getAdmin.bind(this);
             this.reservationDelete = this.reservationDelete.bind(this);
             this.reservationUpdate = this.reservationUpdate.bind(this);
             this.getSingleReservation = this.getSingleReservation.bind(this);
+            this.toggleCreateNewReservation = this.toggleCreateNewReservation.bind(this)
+            this.createBooking = this.createBooking.bind(this)
 
         } 
         componentDidMount() {
@@ -49,7 +55,7 @@ interface IState {
         }
         
         getAdmin() {
-            axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
+            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: JSON.parse(result.data)
@@ -57,21 +63,26 @@ interface IState {
                 
             });
         }
-        render() {
-   
-            return (
 
-                <div>
-                    <ReservationsView
-                        reservations={this.state.reservations}
-                        deleteFunction={this.reservationDelete}
-                        updateFunction={this.getSingleReservation}
-                        saveUpdate={this.reservationUpdate}
-                        reservation={this.state.reservation}
-                    />
-                </div>
+        createBooking(values: ICreateReservationState) {
+            axios.post('http://localhost/react-restaurant-booking-backend/post-reservation.php', {
+            res_guests: values.guests,
+            res_date: values.date,
+            res_time: values.time,
+            res_name: values.name,
+            res_email: values.email,
+            res_tel: values.tel
+            })
+            .then((res:any) => {
+                this.getAdmin();
+            });
+        }
+    
 
-              )
+        toggleCreateNewReservation(){
+            this.setState({
+                showCreateNewReservation: true
+            })
         }
 
         reservationDelete(id: number) {  
@@ -102,15 +113,33 @@ interface IState {
         }
         
         reservationUpdate(reservation: IReservationUpdate) { 
-            axios.put(`http://localhost/react-restaurant-booking-backend/update.php/`, {data: {reservation}})
+            axios.post(`http://localhost/react-restaurant-booking-backend/update.php/`, reservation)
                 .then((res: any) => {
-                    let updatedReservation = this.state.reservation
-                    console.log(updatedReservation);
-                    this.setState({
-                        reservation: updatedReservation
-                    })
+                    this.getAdmin();
                 })
         }
+
+        render() {
+   
+            return (
+
+                <div>
+                    <ReservationsView
+                        reservations={this.state.reservations}
+                        deleteFunction={this.reservationDelete}
+                        updateFunction={this.getSingleReservation}
+                        saveUpdate={this.reservationUpdate}
+                        reservation={this.state.reservation}
+                    />
+                <button onClick={this.toggleCreateNewReservation}>Create new</button>
+                  {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null } 
+
+                </div>
+
+              )
+        }
+
 }
+
 
 export default Admin
