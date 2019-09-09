@@ -1,5 +1,4 @@
 import React from 'react'
-import { thisExpression } from '@babel/types';
 
 interface IValuesState {
   name: string;
@@ -8,16 +7,19 @@ interface IValuesState {
   nameError: string;
   telError: string;
   emailError: string;
+  contactFormValid: boolean;
 }
 
+interface IValuesProps {
+  onChangeHandler: (name: string, tel: string, email: string, contactFormValid: boolean) => void;
+  }
 
 
-class ContactForm extends React.Component<{}, IValuesState> {
+class ContactForm extends React.Component<IValuesProps, IValuesState> {
     constructor(p: any) {
-        super(p); 
+        super(p);
         this.handleValues = this.handleValues.bind(this);
         this.validateInput = this.validateInput.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);  // temporary method - should be in parent 
 
         this.state = {
             name: "",
@@ -26,83 +28,80 @@ class ContactForm extends React.Component<{}, IValuesState> {
             nameError: "",
             telError: "",
             emailError: "",
+            contactFormValid: false
         }
     }
 
     validateInput(){
-        // let nameError = "";
-        // let telError = "";
         let emailError = "";
 
         if (!this.state.email.includes('@')) {
                 emailError = "invalid email";
-        } 
+        }
         if(emailError){
-            this.setState({emailError})
+            this.setState({emailError});
             return false;
         } else {
             return true;
         }
     }
-    handleValues(event: any) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        } as IValuesState );
 
+    handleValues(event: React.FormEvent<HTMLInputElement>) {
+        const { name, value } = event.currentTarget;        
+        console.log("kuk " + value);
+        const cleanedValue = this.preventInjections(value);
         console.log(this.state);
+        this.setState(
+            (prevState: IValuesState) => ({...prevState, [name]: cleanedValue}),
+            () => this.props.onChangeHandler(this.state.name, this.state.tel, this.state.email, this.state.contactFormValid)
+        );
+
     }
-    handleSubmit(e:any){
-        e.preventDefault();
-        const isValid = this.validateInput();
-        console.log(this.state);
-        if(isValid){
 
-        }
+    preventInjections(value: string){
+        return value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
     render() {
+        const name = this.props;
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                 <h2>This is the Contact form component!</h2>
                 <div>
                 Name:
-                    <input  
+                    <input
                     placeholder="name"
-                    value={this.state.name}  
-                    onChange={this.handleValues} 
-                    name="name"/>
-                    {this.state.nameError ? 
-                        ( <div style={{ fontSize: 11, color: "red"}} >{this.state.nameError}</div>) 
+                    value={this.state.name}
+                    onChange={this.handleValues}
+                    name="name" required/>
+                    {this.state.nameError ?
+                        ( <div style={{ fontSize: 11, color: "red"}} >{this.state.nameError}</div>)
                         : undefined }
                 </div>
                 <div>
-                Tel: 
-                    <input 
-                    placeholder="phonenumber" 
-                    value={this.state.tel} 
-                    onChange={this.handleValues} 
-                    name="tel"/>
-                    {this.state.telError ? 
-                        ( <div style={{fontSize: 11, color: "red"}} >{this.state.telError}</div>) 
+                Tel:
+                    <input
+                    placeholder="phonenumber"
+                    value={this.state.tel}
+                    onChange={this.handleValues}
+                    name="tel" required/>
+                    {this.state.telError ?
+                        ( <div style={{fontSize: 11, color: "red"}} >{this.state.telError}</div>)
                         : undefined }
                 </div>
-                <div>  
-                Email:  
-                    <input  
+                <div>
+                Email:
+                    <input
                     placeholder="email"
-                    value={this.state.email} 
-                    onChange={this.handleValues} 
+                    value={this.state.email}
+                    onChange={this.handleValues}
                     name="email"/>
-                    {this.state.emailError ? 
-                        ( <div style={{fontSize: 11, color: "red"}} >{this.state.emailError}</div>) 
+                    {this.state.emailError ?
+                        ( <div style={{fontSize: 11, color: "red"}} >{this.state.emailError}</div>)
                         : undefined }
                 </div>
-                <button type="submit">Submit</button>
                     </form>
             </div>
         )
