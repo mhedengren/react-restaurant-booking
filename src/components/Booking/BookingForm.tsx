@@ -6,6 +6,7 @@ const axios = require('axios')
 
 interface IBookingFormState {
   numberOfGuests: number
+  numberOfGuestsError: boolean
   date: Date
   dateToSend: string
   time: number
@@ -24,6 +25,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     super(props)
     this.state = {
       numberOfGuests: 1,
+      numberOfGuestsError: false,
       date: new Date(),
       dateToSend: '',
       time: 0,
@@ -65,6 +67,10 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Lifting state up.
   handleSubmit(event: any) {
+    if (this.state.numberOfGuests > 6){
+      this.setState({numberOfGuestsError: true})
+      return
+    }
     this.props.getBookingFormInfo(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
   }
 
@@ -145,6 +151,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
               min='1'
               max='6'
             />
+            {this.state.numberOfGuestsError ? <span style={{ fontSize: 11, color: "red" }}>That's too many! Maximum amount of guests is 6.</span>:null}
           </label>
           <Calendar
             onChange={this.calendarOnChange}

@@ -59,9 +59,14 @@ class Booking extends React.Component<{}, IBookingState> {
 
   // Validation and post reservation.
   postReservation() {
-    if (!this.state.GdprConsent && !this.state.contactFormValid){
-      return
-    }
+    if (
+      !this.state.GdprConsent &&
+      this.state.guests >= 6
+      ){
+        console.log(this.state.guests)
+        return false
+        
+    } else {
     axios
       .post(
         'http://localhost:8888/react-restaurant-booking-backend/post-reservation.php',
@@ -82,6 +87,7 @@ class Booking extends React.Component<{}, IBookingState> {
       showContactForm: false,
       showBookingForm: false
     })
+  }
     
   }
 
