@@ -72,6 +72,7 @@ class Booking extends React.Component<{}, IBookingState> {
   //getFirstFormInfo är funktionen som vi skickar ned till BookingForm via props
   //Sätta state/Lyfta ut state från vår andra komponent
   //hämtar värdena
+
   getFirstFormInfo(numberOfGuests: number, date: string, time: number) {
     console.log(date)
     this.setState({
@@ -103,7 +104,7 @@ class Booking extends React.Component<{}, IBookingState> {
            personuppgifter enligt GDPR. Du kan läsa mer om detta under vår{''}
         <a href='#'>sida för integritet.</a></p>
         </div> :null}
-        {this.state.showSecondForm ?<button onClick={this.postReservation}> Book your table </button> :null}
+        {this.state.showSecondForm ? <button onClick={this.postReservation}> Book your table </button> :null}
       </div>
     )
   }
