@@ -65,7 +65,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Lifting state up.
   handleSubmit(event: any) {
-    this.props.getFirstFormInfo(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
+    this.props.getBookingFormInfo(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
   }
 
   // Fetches new reservations every time a new date is picked in the calendar.
