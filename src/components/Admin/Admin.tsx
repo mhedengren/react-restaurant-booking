@@ -55,7 +55,7 @@ interface IState {
         }
         
         getAdmin() {
-            axios.get('http://localhost/react-restaurant-booking-backend/admin.php/')
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
             .then((result: any)=> {
                 this.setState({
                     reservations: JSON.parse(result.data)
@@ -65,7 +65,7 @@ interface IState {
         }
 
         createBooking(values: ICreateReservationState) {
-            axios.post('http://localhost/react-restaurant-booking-backend/post-reservation.php', {
+            axios.post('http://localhost:8888/react-restaurant-booking-backend/post-reservation.php', {
             res_guests: values.guests,
             res_date: values.date,
             res_time: values.time,
@@ -86,7 +86,7 @@ interface IState {
         }
 
         reservationDelete(id: number) {  
-            axios.delete(`http://localhost/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
+            axios.delete(`http://localhost:8888/react-restaurant-booking-backend/delete.php/`, {data: { params: { res_id: id}}})
                 .then((res: any) => {
                    
                     // 1. Make a copy of the state object (the list)
@@ -102,7 +102,7 @@ interface IState {
             } 
             
         getSingleReservation(id: number) {
-            axios.get('http://localhost/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
+            axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
             .then((result: any)=> {
                 let singleReservation = result.data
                 
@@ -113,7 +113,7 @@ interface IState {
         }
         
         reservationUpdate(reservation: IReservationUpdate) { 
-            axios.post(`http://localhost/react-restaurant-booking-backend/update.php/`, reservation)
+            axios.post(`http://localhost:8888/react-restaurant-booking-backend/update.php/`, reservation)
                 .then((res: any) => {
                     this.getAdmin();
                 })
