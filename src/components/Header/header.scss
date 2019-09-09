@@ -1,15 +1,26 @@
+@import '../../variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+
+
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: green;
+    justify-content: center;
+    background: $wrapper;
     border: 1px solid lightblue;
 }
 
-.logo-wrapper a:link, a:visited {
-    text-decoration: none; 
-    color: #000;
+
+.logo {
+    font-family: 'Roboto Mono', monospace;
+    color: $fontcolor;
+    justify-content: flex-end;
 }
+
+
+.logo-wrapper a:link, a:visited {
+    display: flex;
+    text-decoration: none; }
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
