@@ -54,7 +54,7 @@ class Booking extends React.Component<{}, IBookingState> {
 
 
   postReservation() {
-    axios.post('http://localhost:8888/react-restaurant-booking-backend/post-reservation.php', {
+    axios.post('http://localhost/react-restaurant-booking-backend/post-reservation.php', {
       res_guests: this.state.guests,
       res_date: this.state.date,
       res_time: this.state.time,
