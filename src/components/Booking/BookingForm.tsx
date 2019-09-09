@@ -16,7 +16,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-  getFirstFormInfo(numberOfGuests: number, date: string, time: number): void
+  getBookingFormInfo(numberOfGuests: number, date: string, time: number): void
 }
 
 class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> {

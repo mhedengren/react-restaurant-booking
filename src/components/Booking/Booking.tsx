@@ -2,9 +2,8 @@ import React from 'react'
 import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
-import './booking.css'
-import { withRouter } from 'react-router'
 import GdprConsent from './GdprConsent';
+import './booking.css'
 const axios = require('axios')
 
 interface IBookingState {
@@ -14,21 +13,16 @@ interface IBookingState {
   name: string
   email: string
   tel: string
-  GDPRconsent: boolean
+  GdprConsent: boolean
   contactFormValid: boolean
-  showFirstForm: boolean
-  showSecondForm: boolean
+  showBookingForm: boolean
+  showContactForm: boolean
   showBookingComplete: boolean
 }
 
 class Booking extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props)
-
-    this.postReservation = this.postReservation.bind(this)
-    this.contactFormValues = this.contactFormValues.bind(this)
-    this.getFirstFormInfo = this.getFirstFormInfo.bind(this)
-    this.toggleGdpr = this.toggleGdpr.bind(this)
     this.state = {
       guests: 0,
       date: '',
@@ -36,25 +30,36 @@ class Booking extends React.Component<{}, IBookingState> {
       name: '',
       email: '',
       tel: '',
-      GDPRconsent: false,
+      GdprConsent: false,
       contactFormValid: false,
-      showFirstForm: true,
-      showSecondForm: false,
+      showBookingForm: true,
+      showContactForm: false,
       showBookingComplete: false
     }
+    this.postReservation = this.postReservation.bind(this)
+    this.contactFormValues = this.contactFormValues.bind(this)
+    this.getBookingFormInfo = this.getBookingFormInfo.bind(this)
+    this.toggleGdpr = this.toggleGdpr.bind(this)
   }
 
-  contactFormValues(
-    name: string,
-    tel: string,
-    email: string,
-    contactFormValid: boolean
-  ) {
+  //Get values from the booking form.
+  getBookingFormInfo(numberOfGuests: number, date: string, time: number) {
+    this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
+  }
+  
+   //Get values from the contact form.
+  contactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
+  // Toggle GDPR-consent.
+  toggleGdpr() {
+    this.setState({GdprConsent: !this.state.GdprConsent})
+  }
+
+  // Validation and post reservation.
   postReservation() {
-    if (!this.state.GDPRconsent){
+    if (!this.state.GdprConsent && !this.state.contactFormValid){
       return
     }
     axios
@@ -74,33 +79,19 @@ class Booking extends React.Component<{}, IBookingState> {
       })
     this.setState({
       showBookingComplete: true,
-      showSecondForm: false,
-      showFirstForm: false
+      showContactForm: false,
+      showBookingForm: false
     })
     
-  }
-
-  getFirstFormInfo(numberOfGuests: number, date: string, time: number) {
-    console.log(date)
-    this.setState({
-      guests: numberOfGuests,
-      date: date,
-      time: time,
-      showSecondForm: true
-    })
-  }
-
-  toggleGdpr() {
-    this.setState({GDPRconsent: !this.state.GDPRconsent},()=>console.log(this.state.GDPRconsent))
   }
 
   render() {
     return (
       <div>
-        {this.state.showFirstForm ? <BookingForm getFirstFormInfo={this.getFirstFormInfo}/> :null }
-        {this.state.showSecondForm ? <ContactForm onChangeHandler={this.contactFormValues} /> : null}
-        {this.state.showSecondForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-        {this.state.showSecondForm ? <button onClick={this.postReservation}> Book your table </button> : null}
+        {this.state.showBookingForm ? <BookingForm getBookingFormInfo={this.getBookingFormInfo}/> :null }
+        {this.state.showContactForm ? <ContactForm onChangeHandler={this.contactFormValues} /> : null}
+        {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+        {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
         {this.state.showBookingComplete ? <BookingComplete /> :null}
       </div> 
     )
