@@ -1,0 +1,17 @@
+@import 'variables';
+/* Mobil + grundlayout */
+// body {
+//   background: $background;
+// }
+.main-wrapper {
+  border: 1px solid lightgreen;
+  max-width: 1200px;
+  margin: 0 auto;
+
+}
+
+/* Tablet och desktop */
+@media screen and (min-width: 768px){
+
+    
+}
