@@ -67,8 +67,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Lifting state up.
   handleSubmit(event: any) {
-    if (this.state.numberOfGuests > 6 || this.state.numberOfGuests < 1 ){
-      this.setState({numberOfGuestsError: true})
+    if (this.state.numberOfGuestsError){
       return
     }
     this.props.getBookingFormValues(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
@@ -130,13 +129,20 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Reacts default multiple form input handler.
   handleInputChange(event: any) {
+
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
 
     this.setState({
       [name]: value
-    } as any)
+    } as any, () => {
+
+      if (this.state.numberOfGuests > 6 || this.state.numberOfGuests < 1 ){
+        this.setState({numberOfGuestsError: true})
+      } else this.setState({numberOfGuestsError: false})
+    })
+
   }
 
   //Render booking form.
