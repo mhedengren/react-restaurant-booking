@@ -6,6 +6,7 @@ const axios = require('axios')
 
 interface IBookingFormState {
   numberOfGuests: number
+  numberOfGuestsError: boolean
   date: Date
   dateToSend: string
   time: number
@@ -16,7 +17,7 @@ interface IBookingFormState {
 }
 
 interface IBookingFormProps {
-  getBookingFormInfo(numberOfGuests: number, date: string, time: number): void
+  getBookingFormValues(numberOfGuests: number, date: string, time: number): void
 }
 
 class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> {
@@ -24,6 +25,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     super(props)
     this.state = {
       numberOfGuests: 1,
+      numberOfGuestsError: false,
       date: new Date(),
       dateToSend: '',
       time: 0,
@@ -65,7 +67,14 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Lifting state up.
   handleSubmit(event: any) {
-    this.props.getBookingFormInfo(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
+    if (this.state.numberOfGuests > 6 || this.state.numberOfGuests < 1 ){
+      this.setState({numberOfGuestsError: true})
+      return
+    }
+    this.props.getBookingFormValues(this.state.numberOfGuests, this.state.dateToSend, event.target.value)
+    this.setState({
+      numberOfGuestsError: false
+    })
   }
 
   // Fetches new reservations every time a new date is picked in the calendar.
@@ -145,6 +154,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
               min='1'
               max='6'
             />
+            {this.state.numberOfGuestsError ? <span style={{ fontSize: 11, color: "red" }}>Somethings wrong, make sure you selected between 1-6 guests!</span>:null}
           </label>
           <Calendar
             onChange={this.calendarOnChange}
