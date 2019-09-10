@@ -7,6 +7,9 @@ import NotFound from './components/NotFound/NotFound'
 import Header from './components/Header/Header'
 import Booking from "./components/Booking/Booking";
 import Admin from "./components/Admin/Admin";
+import ReactDOM from 'react-dom';
+// import the library
+
 
 class App extends React.Component<{}, {}> {
   constructor(props: any) {

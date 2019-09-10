@@ -1,9 +1,66 @@
+@import '../../variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+
+
+
 .welcome {
     background-image: url('../../assets/img/welcome_mobile.png');
-    height: 500px; /* You must set a specified height */
+    height: 600px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire */
+}
+
+.BeigeBoxOne {
+    height: 100px;
+    background-color: $wrapper;
+}
+
+.whiteBox {
+    height: 300px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .welcomeTextBox {
+        border: 2px black solid;
+        padding: 70px; 
+        .welcomeText {
+            font-family: 'Roboto Mono', monospace;
+            color: black;
+            align-self: flex-end;
+        }
+        .adressText {
+            font-family: 'Raleway', sans-serif;
+            color: black;
+
+        }
+    }
+}
+
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    height: 200px;
+    background-color: $wrapper;
+    .vl {
+        border-right: 3px solid black;
+        height: 100px;
+
+    }
+    .page01 {
+        font-family: 'Raleway';
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: 4px;
+        align-self: flex-end;
+        //margin-right: 10px;
+
+    }
+
 }
 
 /* Tablet och desktop */

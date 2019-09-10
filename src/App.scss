@@ -1,5 +1,9 @@
 @import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 /* Mobil + grundlayout */
+
+ 
 // body {
 //   background: $background;
 // }
@@ -7,6 +11,7 @@
   border: 1px solid lightgreen;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0;
 
 }
 
