@@ -1,25 +1,38 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
     background: $wrapper;
     height: 300px;
+
     .main-navigation {
-        //writing-mode: vertical-rl;
-       //text-orientation: mixed;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .logo {
+            order: 2;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 30px;
+            font-weight: lighter;
+            color: $fontcolor;
+            text-decoration: none; 
+        }
+  
        .about {
+            order: 3;
             font-size: 20px;
             font-weight: bold;
             writing-mode: vertical-lr;
             text-decoration: none;
             color: black;
-        
+            margin: 40px;
         }
+
         .booking {
+            order: 1;
             font-size: 20px;
             font-weight: bold;
             -webkit-transform: rotate(270deg);
@@ -30,32 +43,19 @@ header {
             display: inline-block;
             text-decoration: none;
             color: black;
+        }
 
+        .adminlink {
+            display: none;
         }
     }
-    
-    
-    .adminlink {
-        display: none;
-    }
 }
 
 
-.logo {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 30px;
-    color: $fontcolor;
-}
-
-
-.logo-wrapper a:link, a:visited {
-    display: flex;
-    text-decoration: none; }
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
     header .adminlink {
         display: inline;
     }
-
 }
