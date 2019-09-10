@@ -1,5 +1,6 @@
 import React from 'react';
 import { IReservation } from './Admin';
+import moment from 'moment';
 
 const axios = require('axios');
 
@@ -21,7 +22,6 @@ export interface IReservationUpdate {
     name: string,
     email: string,
     phone: number
-    emailError: string;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps, IReservationUpdate> {
@@ -34,24 +34,10 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
             time: this.props.reservation.time,
             name: this.props.reservation.name,
             email: this.props.reservation.email,
-            phone: this.props.reservation.phone,
-            emailError: ""
+            phone: this.props.reservation.phone
         }
             this.onChange = this.onChange.bind(this);
-            this.emailValid = this.emailValid.bind(this);
     }
-
-    emailValid() {
-        let emailError = "";
-    
-        if (!this.state.email.includes("@")) {
-          emailError = "invalid email";
-          this.setState({ emailError });
-        } else {
-          console.log("valid mail" + emailError); 
-         this.setState({ emailError });
-        }
-      }
 
     onChange(event: any) {
         const target = event.target;
@@ -59,10 +45,9 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
         const name = target.name
         this.setState({
           [name]: value
-        } as any, 
-        () => this.emailValid())
-      }
-      
+        } as any)
+    }
+ 
 
       getSingleReservation(id: number) {
         axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
@@ -85,29 +70,20 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
 
       update(e: any){
         e.preventDefault();
-
+        console.log(this.state.date)
+        if (this.state.guests <= 1 || 
+            this.state.date != moment(this.state.date).format('YYYY-MM-DD') || 
+            this.state.time === 0 || 
+            this.state.name === '' || 
+            this.state.name === '' ||
+            this.state.email === '' ||
+            this.state.phone === 0) {
+            alert('Please fill in all fields before saving reservation!')
+            return false
+        }
         this.props.saveUpdate(this.state)
       } 
 
-    // componentDidUpdate(prevProps:any){
-    //     if (this.props.reservation.id !== prevProps.reservation.id &&
-    //         this.props.reservation.guests !== prevProps.reservation.guests &&
-    //         this.props.reservation.date !== prevProps.reservation.date &&
-    //         this.props.reservation.time !== prevProps.reservation.time &&
-    //         this.props.reservation.name !== prevProps.reservation.name &&
-    //         this.props.reservation.email !== prevProps.reservation.email &&
-    //         this.props.reservation.phone !== prevProps.reservation.phone){
-    //         this.setState({
-    //             id: this.props.reservation.id,
-    //             guests: this.props.reservation.guests,
-    //             date: this.props.reservation.date,
-    //             time: this.props.reservation.time,
-    //             name: this.props.reservation.name,
-    //             email: this.props.reservation.email,
-    //             phone: this.props.reservation.phone
-    //         })
-    //     }
-    // }
     render() {
         return (
             <div>
@@ -158,12 +134,6 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
                         <label htmlFor="email">Email:</label>
                         <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
-                        {this.state.emailError ? (
-                            <div style={{ fontSize: 11, color: "red" }}>
-                                 {this.state.emailError}
-                            </div>
-                            ) : (undefined
-                        )}
                         <label htmlFor="phone">Phone:</label>
                         <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
                         
