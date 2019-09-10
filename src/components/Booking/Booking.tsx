@@ -3,7 +3,7 @@ import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import GdprConsent from './GdprConsent';
-import './booking.css'
+import './booking.scss'
 const axios = require('axios')
 
 interface IBookingState {
@@ -18,6 +18,7 @@ interface IBookingState {
   showBookingForm: boolean
   showContactForm: boolean
   showBookingComplete: boolean
+  showGdprError: boolean
 }
 
 class Booking extends React.Component<{}, IBookingState> {
@@ -34,7 +35,8 @@ class Booking extends React.Component<{}, IBookingState> {
       contactFormValid: false,
       showBookingForm: true,
       showContactForm: false,
-      showBookingComplete: false
+      showBookingComplete: false,
+      showGdprError: false
     }
     this.postReservation = this.postReservation.bind(this)
     this.getContactFormValues = this.getContactFormValues.bind(this)
@@ -44,29 +46,48 @@ class Booking extends React.Component<{}, IBookingState> {
 
   //Get values from the booking form.
   getBookingFormValues(numberOfGuests: number, date: string, time: number) {
+    // If time selection dropdown is on "Choose time" it wont display the contact form.
+    if (time == 1){
+      this.setState({
+        showContactForm: false
+      })
+      return
+    }
     this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
   }
   
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
+    console.log(contactFormValid)
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
   // Toggle GDPR-consent.
   toggleGdpr() {
-    this.setState({GdprConsent: !this.state.GdprConsent})
+    this.setState({GdprConsent: !this.state.GdprConsent},()=> this.GdprValidation())
   }
 
+  // If the user tried to submit without GDPR consent
+  // this function will remove the warning when user checks the box.
+  GdprValidation(){
+    if (this.state.showGdprError && this.state.GdprConsent === true) {
+      this.setState({
+        showGdprError: false
+      })
+    }
+  }
 
   // Validation and post reservation.
   postReservation() {
     if (!this.state.GdprConsent){
+        this.setState({
+          showGdprError: true
+        }) 
         return false
     } 
+
+    console.log(this.state.contactFormValid)
     if (!this.state.contactFormValid){
-      return false
-    }
-    if (this.state.time == 1){
       return false
     }
     axios
@@ -96,8 +117,9 @@ class Booking extends React.Component<{}, IBookingState> {
   render() {
     return (
       <div>
-        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues} /> :null }
         {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+        {this.state.showGdprError ? <p style={{ fontSize: 11, color: "red", margin: 0 }}>You need to accept our terms to continue.</p>:null}
         {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
         {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
         {this.state.showBookingComplete ? <BookingComplete /> :null}

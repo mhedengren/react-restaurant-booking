@@ -13,6 +13,7 @@ class GdprConsent extends React.Component <IGdprConsentProps, {}> {
         this.props.toggleGdpr();
     }
 
+    
     render(){
         return(
             <div className='gdpr-notice-wrapper'>
