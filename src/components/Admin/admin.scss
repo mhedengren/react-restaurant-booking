@@ -1,0 +1,28 @@
+@import '../../variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+
+div {
+    display: flexbox;
+    
+}
+
+h3 {
+    color: $fontcolor;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+table {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+form {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+div .createNewButton {
+    max-width: 90%;
+    margin-left: 2rem; 
+}

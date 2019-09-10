@@ -86,7 +86,11 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
 
     render() {
         return (
-            <div>
+            <div>   
+                <div>
+                    <h3>For best results while using a mobile phone, please rotate to landscape.</h3>
+                </div>
+                <div>
                     <table>
                         <thead>
                             <tr>
@@ -120,7 +124,8 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         })}
                         </tbody>
                     </table>
-                    
+                </div>
+                <div>    
                     <form action="submit">
                         <label htmlFor="id">Id:</label>
                         <input name="id" type="text" value={this.state.id} disabled/>
@@ -140,6 +145,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         <button type="button" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
+            </div>
         )
            
         

@@ -112,7 +112,7 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
 
     render() {
         return(
-            <form action="submit">
+          <form action="submit">
             <label htmlFor="guests">Guests:</label>
             <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
             <Calendar
@@ -130,7 +130,7 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             <input name="phone" type="text" value={this.state.phone} onChange={this.onChange} />
            
             <button type="button" onClick={this.postReservation}>Create Now</button>
-        </form>
+          </form>
         )
     }
 }
