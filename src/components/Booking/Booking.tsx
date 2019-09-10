@@ -37,18 +37,18 @@ class Booking extends React.Component<{}, IBookingState> {
       showBookingComplete: false
     }
     this.postReservation = this.postReservation.bind(this)
-    this.contactFormValues = this.contactFormValues.bind(this)
-    this.getBookingFormInfo = this.getBookingFormInfo.bind(this)
+    this.getContactFormValues = this.getContactFormValues.bind(this)
+    this.getBookingFormValues = this.getBookingFormValues.bind(this)
     this.toggleGdpr = this.toggleGdpr.bind(this)
   }
 
   //Get values from the booking form.
-  getBookingFormInfo(numberOfGuests: number, date: string, time: number) {
+  getBookingFormValues(numberOfGuests: number, date: string, time: number) {
     this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
   }
   
    //Get values from the contact form.
-  contactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
+  getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
@@ -57,15 +57,15 @@ class Booking extends React.Component<{}, IBookingState> {
     this.setState({GdprConsent: !this.state.GdprConsent})
   }
 
+
   // Validation and post reservation.
   postReservation() {
     if (
       !this.state.GdprConsent &&
-      this.state.guests >= 6
+      this.state.time === 1
       ){
-        console.log(this.state.guests)
+        console.log(this.state.time)
         return false
-        
     } else {
     axios
       .post(
@@ -94,8 +94,8 @@ class Booking extends React.Component<{}, IBookingState> {
   render() {
     return (
       <div>
-        {this.state.showBookingForm ? <BookingForm getBookingFormInfo={this.getBookingFormInfo}/> :null }
-        {this.state.showContactForm ? <ContactForm onChangeHandler={this.contactFormValues} /> : null}
+        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+        {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
         {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
         {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
         {this.state.showBookingComplete ? <BookingComplete /> :null}

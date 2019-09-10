@@ -11,7 +11,7 @@ interface IValuesState {
 }
 
 interface IValuesProps {
-  onChangeHandler: (
+  getContactFormValues: (
     name: string,
     tel: string,
     email: string,
@@ -78,7 +78,7 @@ class ContactForm extends React.Component<IValuesProps, IValuesState> {
     this.setState(
       (prevState: IValuesState) => ({ ...prevState, [name]: cleanedValue }),
       () => {
-        this.props.onChangeHandler(
+        this.props.getContactFormValues(
           this.state.name,
           this.state.tel,
           this.state.email,
