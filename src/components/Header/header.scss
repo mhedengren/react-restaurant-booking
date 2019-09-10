@@ -1,14 +1,30 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-
 header {
     display: flex;
     align-items: center;
     justify-content: center;
     background: $wrapper;
     height: 300px;
+
+    .adminlink {
+        display: none;
+    }
+
+    .logo-wrapper a:link, a:visited {
+        text-decoration: none; 
+        color: $fontcolor;
+
+        .logo {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 30px;
+            
+        }
+    }
+
     .main-navigation {
+        margin: 40px;
         //writing-mode: vertical-rl;
        //text-orientation: mixed;
        .about {
@@ -30,32 +46,18 @@ header {
             display: inline-block;
             text-decoration: none;
             color: black;
+            margin-right: 40px;
 
         }
     }
-    
-    
-    .adminlink {
-        display: none;
-    }
 }
 
 
-.logo {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 30px;
-    color: $fontcolor;
-}
 
-
-.logo-wrapper a:link, a:visited {
-    display: flex;
-    text-decoration: none; }
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
     header .adminlink {
         display: inline;
     }
-
 }
