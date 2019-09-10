@@ -7,14 +7,44 @@ header {
     align-items: center;
     justify-content: center;
     background: $wrapper;
-    border: 1px solid lightblue;
+    height: 300px;
+    .main-navigation {
+        //writing-mode: vertical-rl;
+       //text-orientation: mixed;
+       .about {
+            font-size: 20px;
+            font-weight: bold;
+            writing-mode: vertical-lr;
+            text-decoration: none;
+            color: black;
+        
+        }
+        .booking {
+            font-size: 20px;
+            font-weight: bold;
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            transform: rotate(270deg);
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+
+        }
+    }
+    
+    
+    .adminlink {
+        display: none;
+    }
 }
 
 
 .logo {
     font-family: 'Roboto Mono', monospace;
+    font-size: 30px;
     color: $fontcolor;
-    justify-content: flex-end;
 }
 
 
@@ -24,6 +54,8 @@ header {
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
-
+    header .adminlink {
+        display: inline;
+    }
 
 }
