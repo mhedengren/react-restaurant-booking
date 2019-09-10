@@ -21,6 +21,7 @@ export interface IReservationUpdate {
     name: string,
     email: string,
     phone: number
+    emailError: string;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps, IReservationUpdate> {
@@ -33,18 +34,35 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
             time: this.props.reservation.time,
             name: this.props.reservation.name,
             email: this.props.reservation.email,
-            phone: this.props.reservation.phone
+            phone: this.props.reservation.phone,
+            emailError: ""
         }
             this.onChange = this.onChange.bind(this);
+            this.emailValid = this.emailValid.bind(this);
     }
+
+    emailValid() {
+        let emailError = "";
+    
+        if (!this.state.email.includes("@")) {
+          emailError = "invalid email";
+          this.setState({ emailError });
+        } else {
+          console.log("valid mail" + emailError); 
+         this.setState({ emailError });
+        }
+      }
+
     onChange(event: any) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
         this.setState({
           [name]: value
-        } as any)
+        } as any, 
+        () => this.emailValid())
       }
+      
 
       getSingleReservation(id: number) {
         axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
@@ -91,7 +109,6 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
     //     }
     // }
     render() {
-        console.log(this.state);
         return (
             <div>
                     <table>
@@ -141,6 +158,12 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
                         <label htmlFor="email">Email:</label>
                         <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
+                        {this.state.emailError ? (
+                            <div style={{ fontSize: 11, color: "red" }}>
+                                 {this.state.emailError}
+                            </div>
+                            ) : (undefined
+                        )}
                         <label htmlFor="phone">Phone:</label>
                         <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
                         
