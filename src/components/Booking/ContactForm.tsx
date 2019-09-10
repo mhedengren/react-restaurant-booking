@@ -1,6 +1,6 @@
 import React from "react";
 
-interface IValuesState {
+interface IContactFormState {
   name: string;
   tel: string;
   email: string;
@@ -10,7 +10,7 @@ interface IValuesState {
   contactFormValid: boolean;
 }
 
-interface IValuesProps {
+interface IContactFormProps {
   getContactFormValues: (
     name: string,
     tel: string,
@@ -19,7 +19,7 @@ interface IValuesProps {
   ) => void;
 }
 
-class ContactForm extends React.Component<IValuesProps, IValuesState> {
+class ContactForm extends React.Component<IContactFormProps, IContactFormState> {
   constructor(p: any) {
     super(p);
     this.handleValues = this.handleValues.bind(this);
@@ -76,7 +76,7 @@ class ContactForm extends React.Component<IValuesProps, IValuesState> {
     const cleanedValue = this.preventInjections(value);
     console.log(this.state);
     this.setState(
-      (prevState: IValuesState) => ({ ...prevState, [name]: cleanedValue }),
+      (prevState: IContactFormState) => ({ ...prevState, [name]: cleanedValue }),
       () => {
         this.props.getContactFormValues(
           this.state.name,
