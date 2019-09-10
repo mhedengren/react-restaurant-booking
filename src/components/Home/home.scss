@@ -1,0 +1,14 @@
+.welcome {
+    background-image: url('../../assets/img/welcome_mobile.png');
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire */
+}
+
+/* Tablet och desktop */
+@media screen and (min-width: 768px){
+    .welcome {
+        background-image: url('../../assets/img/welcome_mobile.png');
+    }
+}

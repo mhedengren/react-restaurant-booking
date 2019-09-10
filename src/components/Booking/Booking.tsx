@@ -1,32 +1,28 @@
 import React from 'react'
 import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
+import BookingComplete from './BookingComplete'
+import GdprConsent from './GdprConsent';
 import './booking.css'
-import moment from 'moment'
-const axios = require('axios');
+const axios = require('axios')
 
-//Interface för hur hela bokningen ser ut
 interface IBookingState {
   guests: number
-  date: string;
+  date: string
   time: number
   name: string
   email: string
   tel: string
-  GDPRconsent: boolean
+  GdprConsent: boolean
   contactFormValid: boolean
-  showSecondForm: boolean
+  showBookingForm: boolean
+  showContactForm: boolean
+  showBookingComplete: boolean
 }
 
 class Booking extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props)
-
-    this.postReservation = this.postReservation.bind(this)
-    this.formValues = this.formValues.bind(this)
-    this.contactFormValues = this.contactFormValues.bind(this)
-    this.getFirstFormInfo = this.getFirstFormInfo.bind(this)
-    this.handleGDPRChange = this.handleGDPRChange.bind(this)
     this.state = {
       guests: 0,
       date: '',
@@ -34,78 +30,76 @@ class Booking extends React.Component<{}, IBookingState> {
       name: '',
       email: '',
       tel: '',
-      GDPRconsent: false,
+      GdprConsent: false,
       contactFormValid: false,
-      showSecondForm: false
+      showBookingForm: true,
+      showContactForm: false,
+      showBookingComplete: false
     }
+    this.postReservation = this.postReservation.bind(this)
+    this.getContactFormValues = this.getContactFormValues.bind(this)
+    this.getBookingFormValues = this.getBookingFormValues.bind(this)
+    this.toggleGdpr = this.toggleGdpr.bind(this)
   }
 
-  contactFormValues(
-    name: string,
-    tel: string,
-    email: string,
-    contactFormValid: boolean
-  ) {
-    this.setState(
-      () => ({ name, tel, email, contactFormValid })
-    )
+  //Get values from the booking form.
+  getBookingFormValues(numberOfGuests: number, date: string, time: number) {
+    this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
+  }
+  
+   //Get values from the contact form.
+  getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
+    this.setState(() => ({ name, tel, email, contactFormValid }))
+  }
+
+  // Toggle GDPR-consent.
+  toggleGdpr() {
+    this.setState({GdprConsent: !this.state.GdprConsent})
   }
 
 
-
+  // Validation and post reservation.
   postReservation() {
-    axios.post('http://localhost:8888/react-restaurant-booking-backend/post-reservation.php', {
-      res_guests: this.state.guests,
-      res_date: this.state.date,
-      res_time: this.state.time,
-      res_name: this.state.name,
-      res_email: this.state.email,
-      res_tel: this.state.tel
-    })
-    .then(function (res:any) {
-      console.log(res);
+    if (
+      !this.state.GdprConsent &&
+      this.state.time === 1
+      ){
+        console.log(this.state.time)
+        return false
+    } else {
+    axios
+      .post(
+        'http://localhost:8888/react-restaurant-booking-backend/post-reservation.php',
+        {
+          res_guests: this.state.guests,
+          res_date: this.state.date,
+          res_time: this.state.time,
+          res_name: this.state.name,
+          res_email: this.state.email,
+          res_tel: this.state.tel
+        }
+      )
+      .then(function(res: any) {
+        console.log(res)
+      })
+    this.setState({
+      showBookingComplete: true,
+      showContactForm: false,
+      showBookingForm: false
     })
   }
-
-  formValues() {}
-
-  //getFirstFormInfo är funktionen som vi skickar ned till BookingForm via props
-  //Sätta state/Lyfta ut state från vår andra komponent
-  //hämtar värdena
-
-  getFirstFormInfo(numberOfGuests: number, date: string, time: number) {
-    console.log(date)
-    this.setState({
-      guests: numberOfGuests,
-      date: date,
-      time: time,
-      showSecondForm: true
-    })
-  }
-
-  handleGDPRChange(){
-    this.setState({
-      GDPRconsent: true
-    })
+    
   }
 
   render() {
     return (
       <div>
-        {/* Namnger propsen och skickar ner funktionen*/}
-        <BookingForm sendToBooking={this.getFirstFormInfo} />
-        <div>
-         {this.state.showSecondForm ? <ContactForm onChangeHandler={this.contactFormValues} /> :null}
-        </div>
-        {this.state.showSecondForm ?
-        <div className="gdpr-notice-wrapper">
-        <input type='checkbox' onChange={this.handleGDPRChange} />
-        <p>Genom att klicka i denna checkbox godkänner du att vi hanterar dina
-           personuppgifter enligt GDPR. Du kan läsa mer om detta under vår{''}
-        <a href='#'>sida för integritet.</a></p>
-        </div> :null}
-        {this.state.showSecondForm ? <button onClick={this.postReservation}> Book your table </button> :null}
-      </div>
+        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+        {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+        {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+        {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
+        {this.state.showBookingComplete ? <BookingComplete /> :null}
+      </div> 
     )
   }
 }
