@@ -15,9 +15,9 @@ export interface ICreateReservationState {
     numberOfGuestsError: boolean
     date: Date
     dateToSend: string
-    show18: boolean
-    show21: boolean
-    timePicked: string
+    // show18: boolean
+    // show21: boolean
+    // timePicked: string
     bookingArrayByDate: IReservation[]
 }
 
@@ -38,15 +38,15 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             numberOfGuestsError: false,
             date: new Date(),
             dateToSend: '',
-            show18: false,
-            show21: false,
-            timePicked: '',
+            // show18: false,
+            // show21: false,
+            // timePicked: '',
             bookingArrayByDate: []
         }
 
         this.postReservation = this.postReservation.bind(this)
         this.onChange = this.onChange.bind(this)
-        this.toggleOptions = this.toggleOptions.bind(this)
+        // this.toggleOptions = this.toggleOptions.bind(this)
         this.getTodaysBookings = this.getTodaysBookings.bind(this)
         this.calendarOnChange = this.calendarOnChange.bind(this)
 
@@ -64,42 +64,43 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             {
               bookingArrayByDate: result.data,
               dateToSend: dateToSend
-            },
-            () => this.toggleOptions()
+            }
+            // ,
+            // () => this.toggleOptions()
           )
         })
     }
 
-    toggleOptions() {
-      let firstSitting = '18'
-      let count18 = this.state.bookingArrayByDate.filter(
-        (obj: any) => obj.time === firstSitting
-      )
-      let secondSitting = '21'
-      let count21 = this.state.bookingArrayByDate.filter(
-        (obj: any) => obj.time === secondSitting
-      )
+    // toggleOptions() {
+    //   let firstSitting = '18'
+    //   let count18 = this.state.bookingArrayByDate.filter(
+    //     (obj: any) => obj.time === firstSitting
+    //   )
+    //   let secondSitting = '21'
+    //   let count21 = this.state.bookingArrayByDate.filter(
+    //     (obj: any) => obj.time === secondSitting
+    //   )
   
-      if (count18.length < 15) {
-        this.setState({
-          show18: true
-        })
-      } else if (count18.length >= 15) {
-        this.setState({
-          show18: false
-        })
-      }
+    //   if (count18.length < 15) {
+    //     this.setState({
+    //       show18: true
+    //     })
+    //   } else if (count18.length >= 15) {
+    //     this.setState({
+    //       show18: false
+    //     })
+    //   }
   
-      if (count21.length < 15) {
-        this.setState({
-          show21: true
-        })
-      } else if (count21.length >= 15) {
-        this.setState({
-          show21: false
-        })
-      }
-    }
+    //   if (count21.length < 15) {
+    //     this.setState({
+    //       show21: true
+    //     })
+    //   } else if (count21.length >= 15) {
+    //     this.setState({
+    //       show21: false
+    //     })
+    //   }
+    // }
 
     getTodaysBookings() {
       let today = moment(new Date())
@@ -115,8 +116,9 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
           this.setState(
             {
               bookingArrayByDate: result.data
-            },
-            () => this.toggleOptions()
+            }
+            // ,
+            // () => this.toggleOptions()
           )
         })
     }
