@@ -1,6 +1,8 @@
 import React from 'react';
 import { IReservation } from './Admin';
 
+const axios = require('axios');
+
 interface IReservationViewProps {
     reservations: IReservation[];
     reservation: IReservation;
@@ -34,7 +36,6 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
             phone: this.props.reservation.phone
         }
             this.onChange = this.onChange.bind(this);
-    
     }
     onChange(event: any) {
         const target = event.target;
@@ -44,25 +45,51 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
           [name]: value
         } as any)
       }
-    componentDidUpdate(prevProps:any){
-        if (this.props.reservation.id !== prevProps.reservation.id &&
-            this.props.reservation.guests !== prevProps.reservation.guests &&
-            this.props.reservation.date !== prevProps.reservation.date &&
-            this.props.reservation.time !== prevProps.reservation.time &&
-            this.props.reservation.name !== prevProps.reservation.name &&
-            this.props.reservation.email !== prevProps.reservation.email &&
-            this.props.reservation.phone !== prevProps.reservation.phone){
+
+      getSingleReservation(id: number) {
+        axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
+        .then((result: any)=> {
+            let singleReservation = result.data
+            
             this.setState({
-                id: this.props.reservation.id,
-                guests: this.props.reservation.guests,
-                date: this.props.reservation.date,
-                time: this.props.reservation.time,
-                name: this.props.reservation.name,
-                email: this.props.reservation.email,
-                phone: this.props.reservation.phone
-            })
-        }
+                id: singleReservation.id,
+                guests: singleReservation.guests,
+                date: singleReservation.date,
+                time: singleReservation.time,
+                name: singleReservation.name,
+                email: singleReservation.email,
+                phone: singleReservation.phone
+
+
+            });
+        });
     }
+
+      update(e: any){
+        e.preventDefault();
+
+        this.props.saveUpdate(this.state)
+      } 
+
+    // componentDidUpdate(prevProps:any){
+    //     if (this.props.reservation.id !== prevProps.reservation.id &&
+    //         this.props.reservation.guests !== prevProps.reservation.guests &&
+    //         this.props.reservation.date !== prevProps.reservation.date &&
+    //         this.props.reservation.time !== prevProps.reservation.time &&
+    //         this.props.reservation.name !== prevProps.reservation.name &&
+    //         this.props.reservation.email !== prevProps.reservation.email &&
+    //         this.props.reservation.phone !== prevProps.reservation.phone){
+    //         this.setState({
+    //             id: this.props.reservation.id,
+    //             guests: this.props.reservation.guests,
+    //             date: this.props.reservation.date,
+    //             time: this.props.reservation.time,
+    //             name: this.props.reservation.name,
+    //             email: this.props.reservation.email,
+    //             phone: this.props.reservation.phone
+    //         })
+    //     }
+    // }
     render() {
         console.log(this.state);
         return (
@@ -94,7 +121,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                                     <td>{reservation.email}</td>
                                     <td>{reservation.phone}</td>
                                     <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
-                                    <td><button type="button" onClick={this.props.updateFunction.bind(this, reservation.id)}>Update</button></td>
+                                    <td><button type="button" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
                                 </tr>
                             )
                         })}
@@ -103,7 +130,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     
                     <form action="submit">
                         <label htmlFor="id">Id:</label>
-                        <input name="id" type="text" value={this.props.reservation.id} disabled/>
+                        <input name="id" type="text" value={this.state.id} disabled/>
                         <label htmlFor="guests">Guests:</label>
                         <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
                         <label htmlFor="date">Date:</label>
@@ -117,7 +144,7 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                         <label htmlFor="phone">Phone:</label>
                         <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
                         
-                        <button type="button" onClick={this.props.saveUpdate.bind(this, this.state)}>Save Changes</button>
+                        <button type="button" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
         )
