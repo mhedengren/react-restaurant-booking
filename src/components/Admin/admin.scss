@@ -9,11 +9,11 @@ div {
 h3 {
     color: $fontcolor;
     max-width: 90%;
-    margin: 0 auto;
+    text-align: center;
     border: 1px solid $fontcolor;
     border-radius: 4px;
-    padding: 10%;
-    margin: 10%;
+    padding: 5%;
+    margin: 5%;
 }
 
 table {
@@ -29,15 +29,21 @@ thead {
 }
 
 form {
-    max-width: 90%;
-    margin: 0 auto;
+    max-width: 80%;
+    margin: 2% auto 2% auto;
     border: 1px solid $fontcolor;
     border-radius: 4px;
     padding: 5%;
-    margin: 10%;
+    // margin: 10%;
     input {
         width: 100%;
-        resize: vertical;
+        padding: 1%;
+        margin: 1% auto;
+        // display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        // resize: vertical;
         input:focus {
             background-color: $wrapper;   
         }
@@ -48,16 +54,17 @@ label {
     display: inline-block;
   }
 
-div .createNewButton {
-    max-width: 90%;
-    margin-left: 10%; 
+.createDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%; 
 }
 
 .saveUpdateButton, .update, .createNewButton, .createNowButton {
     display: inline-block;
     padding: 0.35em 1.2em;
     border: 2px solid $fontcolor;
-    margin: 0 0.3em 0.3em 0;
+    
     border-radius: 4px;
     box-sizing: border-box;
     text-decoration:none;
@@ -65,14 +72,17 @@ div .createNewButton {
     font-weight: 300;
     color: $fontcolor;
     text-align: center;
-    transition: all 0.2s;
 }
-
-.saveUpdateButton:hover, .update:hover, .createNewButton:hover, .createNowButton:hover {
+.saveUpdateButton, .update, .createNowButton { 
+    margin: 2% auto;
+}
+.saveUpdateButton:hover, .update:hover, .createNewButton:hover, .createNowButton:hover,
+.saveUpdateButton:focus, .update:focus, .createNewButton:focus, .createNowButton:focus {
     color: #ffffff !important;
     background: $buttonColor2;
     border-color: $buttonColor2 !important;
     transition: all 0.4s ease 0s;
+    box-shadow: 0 0 10px #43D1AF;
     }
 
 .delete {
@@ -95,4 +105,12 @@ div .createNewButton {
         display: block;
         margin: 0.4em auto;
     }
+}
+
+/* Tablet och desktop */
+@media screen and (min-width: 768px) {
+    div {
+        display: flexbox;
+        max-width: 1200px;
+    }    
 }

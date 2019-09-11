@@ -132,10 +132,11 @@ interface IState {
                         saveUpdate={this.reservationUpdate}
                         reservation={this.state.reservation}
                     />
-                    <div>
+                    <div className="createDiv">
                         <button className="createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
-                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
                     </div>
+                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
+                    
                    
                 </div>
 
