@@ -1,0 +1,39 @@
+@import '../../variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+
+    .footer-mobile {
+        display: flex;
+        align-items: flex-end;
+        height: 200px;
+        background-color: $wrapper;
+        padding: 20px;
+    
+        .vl {
+            align-self: baseline;
+            border-right: 3px solid black;
+            height: 130px;
+            margin-top: 20px;
+            margin-left: 200px;
+        }
+    
+        .page {
+            font-family: 'Raleway';
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 15px;
+            letter-spacing: 4px;
+        }
+    }
+
+
+/* Tablet och desktop */
+@media screen and (min-width: 768px){
+
+    .footer-mobile {
+        display:none;
+    }
+    
+    .footer-desktop {
+        display: flex;
+    }
+}

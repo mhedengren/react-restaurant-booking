@@ -1,17 +1,21 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
+
+.desktop-landing-page {
+    display:none;
+}
+
+.mobile-landing-page {
+
+
 .welcome {
     background-image: url('../../assets/img/welcome_mobile.png');
     height: 600px; 
     background-position: center; 
     background-repeat: no-repeat; 
     background-size: cover; 
-}
-
-.BeigeBoxOne {
-    height: 100px;
-    background-color: $wrapper;
+    margin-bottom: 100px;
 }
 
 .whiteBox {
@@ -20,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
 
     .welcomeTextBox {
         border: 2px black solid;
@@ -35,32 +40,17 @@
         }
     }
 }
-
-.footer {
-    display: flex;
-    align-items: flex-end;
-    height: 200px;
-    background-color: $wrapper;
-    padding: 20px;
-    .vl {
-        align-self: baseline;
-        border-right: 3px solid black;
-        height: 130px;
-        margin-top: 20px;
-        margin-left: 200px;
-    }
-
-    .page {
-        font-family: 'Raleway';
-        font-weight: bold;
-        margin-top: 20px;
-        font-size: 15px;
-        letter-spacing: 4px;
-    }
 }
+
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
-    .welcome {
-        background-image: url('../../assets/img/welcome_mobile.png');
+
+    .mobile-landing-page {
+        display:none;
+    }
+
+    .desktop-landing-page {
+        background: $landingpagecolor;
+        display:block;
     }
 }
