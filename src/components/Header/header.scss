@@ -8,7 +8,7 @@
 .header-mobile {
     display: flex;
     align-items: center;
-    background: $wrapper;
+    background: $background;
     height: 300px;
     padding:  0 1em;
 
@@ -28,7 +28,7 @@
             text-decoration: none; 
         }
   
-       .nav-link-about {
+       .about {
             // order: 3;
             font-size: 20px;
             font-weight: bold;
@@ -38,7 +38,7 @@
             //margin: 40px;
         }
 
-        .nav-link-booking {
+        .booking {
             // order: 1;
             font-size: 20px;
             font-weight: bold;
@@ -53,7 +53,7 @@
             color: black;
         }
 
-        .nav-link-adminlink {
+        .adminlink {
             display: none;
         }
 
@@ -72,12 +72,29 @@
     }
 
     .header-desktop {
+        padding:  3em;
        display: block;
+       //border: 1px solid blue;
+
+       .logo {
+           color: white;
+           text-decoration: none;
+           display:none;
+       }
 
        .header-desktop-wrapper {
            display:flex;
            justify-content: space-between;
            align-items: baseline;
+
+           .nav-link {
+               margin-left: 1em;
+               font-weight: bold;
+               color: white;
+               text-decoration: none;
+               font-size: 1.3em;
+               letter-spacing: 2px;
+           }
        }
     }
 }

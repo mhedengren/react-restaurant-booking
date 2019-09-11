@@ -20,7 +20,8 @@ class App extends React.Component<{}, {}> {
   render() {
     return (
       <BrowserRouter>
-          <Header />
+        {/* <div className="color-wrapper"> */}
+          {/* <Header /> */}
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/about" component={About} />
@@ -28,7 +29,8 @@ class App extends React.Component<{}, {}> {
               <Route path="/admin" component={Admin} />
               <Route component={NotFound}/>
             </Switch>
-            <Footer />
+            {/* <Footer /> */}
+          {/* </div> */}
       </BrowserRouter>
     )
   }

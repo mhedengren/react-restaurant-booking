@@ -10,7 +10,7 @@ import {
   const About = () => {
     return(
         <div>  
-            <div className="aboutBoxWhite">
+            <div className="about-box-white">
                 <div className="blackBorderAbout">
                     <p className="aboutTextName">JOHN J. ANDERSEN . </p>
                     <p className="aboutTextQuote">EXPERTISE STEMS FROM PASSION .</p>

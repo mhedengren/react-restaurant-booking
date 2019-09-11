@@ -35,5 +35,20 @@
     
     .footer-desktop {
         display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        .vl {
+            // align-self: baseline;
+            border-right: 3px solid black;
+            height: 130px;
+        }
+    
+        .page {
+            font-family: 'Raleway';
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 4px;
+        }
     }
 }

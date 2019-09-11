@@ -29,7 +29,7 @@ const Footer = () => {
                </div>
                <div className="page-number-wrapper">
                     <div className="vl"></div>
-                    <span className="page">01 .</span>
+                    <span className="page"></span>
                </div>
             </footer>
         </div>

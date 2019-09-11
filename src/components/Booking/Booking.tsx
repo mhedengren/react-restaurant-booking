@@ -3,7 +3,8 @@ import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import GdprConsent from './GdprConsent';
-import './booking.css'
+import './booking.scss'
+import Header from '../Header/Header';
 const axios = require('axios')
 
 interface IBookingState {
@@ -96,6 +97,7 @@ class Booking extends React.Component<{}, IBookingState> {
   render() {
     return (
       <div>
+        <Header />
         {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
         {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
         {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}

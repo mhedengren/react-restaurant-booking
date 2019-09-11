@@ -6,8 +6,11 @@
     display:none;
 }
 
-.mobile-landing-page {
+.footer-desktop {
+    display: none;
+}
 
+.mobile-landing-page {
 
 .welcome {
     background-image: url('../../assets/img/welcome_mobile.png');
@@ -25,32 +28,141 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 50px;
+    text-align:right;
 
     .welcomeTextBox {
         border: 2px black solid;
         padding: 70px; 
 
         .welcomeText {
-            font-family: 'Roboto Mono', monospace;
+            
+            font-family: $robotomono;
             color: black;
         }
         .adressText {
-            font-family: 'Raleway', sans-serif;
+            font-family: $raleway;
             color: black;
         }
     }
 }
+
+.footer-mobile {
+    padding: 3em;
+    //border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    
+
+    .vl {
+        // align-self: baseline;
+        text-align:center;
+        border-right: 2px solid black;
+        height: 90px;
+    
+    }
+
+    .page {
+        font-family: $raleway;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 4px;
+        color: black;
+
+    }
+}
+
 }
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
+    
+    .footer-mobile {
+        display:none;
+    }
+
+    
+    .footer-desktop {
+        padding: 3em;
+        //border: 1px solid red;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        
+
+        .vl {
+            // align-self: baseline;
+            border-right: 2px solid white;
+            height: 90px;
+        
+        }
+    
+        .page {
+            font-family: $raleway;
+            font-weight: 
+            bold;
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: white;
+
+        }
+    }
 
     .mobile-landing-page {
         display:none;
     }
 
     .desktop-landing-page {
-        background: $landingpagecolor;
-        display:block;
+        // background: $landingpagecolor;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-image: url('../../assets/img/landingpageall.png');
+        height: 600px;
+        margin:2em;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover; 
+    
+     
+        .entry-text {
+            padding-left: 3em;
+            position: absolute;
+            top: 50vh;
+            text-align:right;
+            width: 220px;
+            h2 {
+                font-family: $robotomono;
+                font-size: 0.8em;
+                letter-spacing: 2px;
+             
+            }
+
+            h3 {
+                font-family: $raleway;
+                letter-spacing: 4px;
+                font-size: 1em;
+                font-weight: bold;
+            }
+        }
+      
+     
     }
+}
+
+@media screen and (min-width: 1024px){
+
+    .desktop-landing-page {
+        margin-top: 2em;
+        height: 90vh;
+
+        .entry-text {
+            position: absolute;
+            top: 60vh;
+        }
+
+
+    }
+
+
 }
