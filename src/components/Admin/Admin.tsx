@@ -134,8 +134,9 @@ interface IState {
                     />
                     <div>
                         <button className="createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
-                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
                     </div>
+                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
+                    
                    
                 </div>
 
