@@ -94,13 +94,13 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>guests</th>
-                                <th>date</th>
-                                <th>time</th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>phone</th>
+                                <th>ID</th>
+                                <th>Guests</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -117,8 +117,8 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                                     <td>{reservation.name}</td>
                                     <td>{reservation.email}</td>
                                     <td>{reservation.phone}</td>
-                                    <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
-                                    <td><button type="button" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
+                                    <td><button type="button" className="delete" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
+                                    <td><button type="button" className="update" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
                                 </tr>
                             )
                         })}
@@ -126,23 +126,23 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     </table>
                 </div>
                 <div>    
-                    <form action="submit">
+                    <form action="submit" className="form-inside-input">
                         <label htmlFor="id">Id:</label>
                         <input name="id" type="text" value={this.state.id} disabled/>
                         <label htmlFor="guests">Guests:</label>
-                        <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
+                        <input name="guests" placeholder="Number of guests" required type="text" value={this.state.guests} onChange={this.onChange} />
                         <label htmlFor="date">Date:</label>
-                        <input name="date" type="text" value={this.state.date} onChange={this.onChange} />
+                        <input name="date" type="text" placeholder="Date" required value={this.state.date} onChange={this.onChange} />
                         <label htmlFor="time">Time:</label>
-                        <input name="time" type="text" value={this.state.time} onChange={this.onChange} />
+                        <input name="time" type="text" placeholder="Time" required value={this.state.time} onChange={this.onChange} />
                         <label htmlFor="name">Name:</label>
-                        <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
+                        <input name="name" type="text" placeholder="Name" required value={this.state.name} onChange={this.onChange} />
                         <label htmlFor="email">Email:</label>
-                        <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
+                        <input name="email" type="text" placeholder="Email" required value={this.state.email} onChange={this.onChange} />
                         <label htmlFor="phone">Phone:</label>
-                        <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
+                        <input name="phone" type="text" placeholder="Phone number" required value={this.state.phone} onChange={this.onChange }/>
                         
-                        <button type="button" onClick={this.update.bind(this)}>Save Changes</button>
+                    <button type="button" className="saveUpdateButton" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
             </div>

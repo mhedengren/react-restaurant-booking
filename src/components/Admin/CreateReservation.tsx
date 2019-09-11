@@ -129,7 +129,7 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             <label htmlFor="phone">Phone:</label>
             <input name="phone" type="text" value={this.state.phone} onChange={this.onChange} />
            
-            <button type="button" onClick={this.postReservation}>Create Now</button>
+            <button type="button" className="createNowButton" onClick={this.postReservation}>Create Now</button>
           </form>
         )
     }
