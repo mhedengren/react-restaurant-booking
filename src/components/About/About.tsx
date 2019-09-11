@@ -38,7 +38,6 @@ const About = () => {
             </div>{/*Closing main div for about-mobile*/}
             
                 <div className="about-desktop"> 
-                <Header />
                 <footer className="footer-desktop">
                     <div className="social-icons">
                             <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
