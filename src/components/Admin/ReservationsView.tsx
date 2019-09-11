@@ -129,19 +129,25 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     <form action="submit" className="form-inside-input">
                         <label htmlFor="id">Id:</label>
                         <input name="id" type="text" value={this.state.id} disabled/>
+                        <br />
                         <label htmlFor="guests">Guests:</label>
                         <input name="guests" placeholder="Number of guests" required type="text" value={this.state.guests} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="date">Date:</label>
                         <input name="date" type="text" placeholder="Date" required value={this.state.date} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="time">Time:</label>
                         <input name="time" type="text" placeholder="Time" required value={this.state.time} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="name">Name:</label>
                         <input name="name" type="text" placeholder="Name" required value={this.state.name} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="email">Email:</label>
                         <input name="email" type="text" placeholder="Email" required value={this.state.email} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="phone">Phone:</label>
                         <input name="phone" type="text" placeholder="Phone number" required value={this.state.phone} onChange={this.onChange }/>
-                        
+                        <br />
                     <button type="button" className="saveUpdateButton" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
