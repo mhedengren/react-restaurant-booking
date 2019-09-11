@@ -2,7 +2,7 @@ import React from 'react';
 import ReservationsView, { IReservationUpdate } from './ReservationsView';
 import CreateReservation, { ICreateReservationState } from './CreateReservation';
 import moment from 'moment';
-
+import './admin.scss';
 
 const axios = require('axios');
 
@@ -132,8 +132,11 @@ interface IState {
                         saveUpdate={this.reservationUpdate}
                         reservation={this.state.reservation}
                     />
-                <button onClick={this.toggleCreateNewReservation}>Create new</button>
-                  {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null } 
+                    <div>
+                        <button className="createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
+                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
+                    </div>
+                   
                 </div>
 
               )
