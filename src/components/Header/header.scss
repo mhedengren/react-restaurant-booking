@@ -72,20 +72,23 @@
     }
 
     .header-desktop {
-        padding:  3em;
+        padding:  2em 3em;
        display: block;
        //border: 1px solid blue;
 
        .logo {
            color: white;
            text-decoration: none;
-           display:none;
+            h1{
+                margin: 0;
+            }
+        //    display:none;
        }
 
        .header-desktop-wrapper {
            display:flex;
            justify-content: space-between;
-           align-items: baseline;
+           align-items: flex-end;
 
            .nav-link {
                margin-left: 1em;

@@ -3,8 +3,8 @@ import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import GdprConsent from './GdprConsent';
-import './booking.scss'
 import Header from '../Header/Header';
+import './booking.scss'
 const axios = require('axios')
 
 interface IBookingState {
@@ -43,11 +43,18 @@ class Booking extends React.Component<{}, IBookingState> {
     this.toggleGdpr = this.toggleGdpr.bind(this)
   }
 
-  //Get values from the booking form.
-  getBookingFormValues(numberOfGuests: number, date: string, time: number) {
-    this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
+ //Get values from the booking form.
+ getBookingFormValues(numberOfGuests: number, date: string, time: number) {
+  // If time selection dropdown is on "Choose time" it wont display the contact form.
+  if (time == 1){
+    this.setState({
+      showContactForm: false
+    })
+    return
   }
-  
+  this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
+}
+
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
     this.setState(() => ({ name, tel, email, contactFormValid }))
@@ -97,12 +104,21 @@ class Booking extends React.Component<{}, IBookingState> {
   render() {
     return (
       <div>
+        <div className="wrapper">
         <Header />
-        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
-        {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
-        {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-        {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
-        {this.state.showBookingComplete ? <BookingComplete /> :null}
+          <div className="column-wrapper">
+            <div className="left-column">
+              {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+  
+            </div>
+            <div className="right-column">
+            {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+              {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+              {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
+              {this.state.showBookingComplete ? <BookingComplete /> :null}
+            </div>
+          </div>
+        </div>
       </div> 
     )
   }

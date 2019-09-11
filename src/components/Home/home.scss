@@ -83,7 +83,7 @@
 
     
     .footer-desktop {
-        padding: 3em;
+        padding: 2em 3em;
         //border: 1px solid red;
         display: flex;
         justify-content: space-between;
@@ -114,10 +114,11 @@
 
     .desktop-landing-page {
         // background: $landingpagecolor;
+        //border: 5px solid white;
         display:flex;
         flex-direction: column;
         justify-content: space-between;
-        background-image: url('../../assets/img/landingpageall.png');
+        background-image: url('../../assets/img/latestlandingpage.png');
         height: 600px;
         margin:2em;
         background-position: center top;
