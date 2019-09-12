@@ -15,13 +15,13 @@ class GdprConsent extends React.Component <IGdprConsentProps, {}> {
 
     
     render(){
-        return(
-            <div className='gdpr-notice-wrapper'>
+        return (
+          <div className='gdpr-notice-wrapper'>
             <input type='checkbox' onChange={this.toggle} />
             <p>
-            Genom att klicka i denna checkbox godkänner du att vi hanterar
-            dina personuppgifter enligt GDPR. Du kan läsa mer om detta under
-            vår <a href='#'>sida för integritet.</a>
+              * By clicking on this check box you agree that we handle your
+              personal data in accordance with GDPR. You can read more about
+              this under our   <a href='#'>Privacy policy page.</a>
             </p>
           </div>
         )

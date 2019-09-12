@@ -3,6 +3,7 @@ import ReservationsView, { IReservationUpdate } from './ReservationsView';
 import CreateReservation, { ICreateReservationState } from './CreateReservation';
 import moment from 'moment';
 import './admin.scss';
+import Header from '../Header/Header';
 
 const axios = require('axios');
 
@@ -125,6 +126,7 @@ interface IState {
             return (
 
                 <div>
+                    <Header />
                     <ReservationsView
                         reservations={this.state.reservations}
                         deleteFunction={this.reservationDelete}
@@ -132,8 +134,8 @@ interface IState {
                         saveUpdate={this.reservationUpdate}
                         reservation={this.state.reservation}
                     />
-                    <div className="createDiv">
-                        <button className="createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
+                    <div className="admin-createDiv">
+                        <button className="admin-createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
                     </div>
                         {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
                     

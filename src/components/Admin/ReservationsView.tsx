@@ -86,13 +86,13 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
 
     render() {
         return (
-            <div>   
+            <div className="admin-wrapper">   
                 <div>
-                    <h3>For best results while using a mobile phone, please rotate to landscape.</h3>
+                    <h3 className="admin-h3">For best results while using a mobile phone, please rotate to landscape.</h3>
                 </div>
                 <div>
-                    <table>
-                        <thead>
+                    <table className="admin-table">
+                        <thead className="admin-thead">
                             <tr>
                                 <th>ID</th>
                                 <th>Guests</th>
@@ -117,8 +117,8 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                                     <td>{reservation.name}</td>
                                     <td>{reservation.email}</td>
                                     <td>{reservation.phone}</td>
-                                    <td><button type="button" className="delete" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
-                                    <td><button type="button" className="update" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
+                                    <td><button type="button" className="admin-delete" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
+                                    <td><button type="button" className="admin-update" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
                                 </tr>
                             )
                         })}
@@ -126,29 +126,29 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                     </table>
                 </div>
                 <div>    
-                    <form action="submit" className="form-inside-input">
+                    <form action="submit" className="admin-form">
                         <label htmlFor="id">Id:</label>
-                        <input name="id" type="text" value={this.state.id} disabled/>
+                        <input name="id" className="admin-input" type="text" value={this.state.id} disabled/>
                         <br />
                         <label htmlFor="guests">Guests:</label>
-                        <input name="guests" placeholder="Number of guests" required type="text" value={this.state.guests} onChange={this.onChange} />
+                        <input name="guests" className="admin-input" placeholder="Number of guests" required type="text" value={this.state.guests} onChange={this.onChange} />
                         <br />
                         <label htmlFor="date">Date:</label>
-                        <input name="date" type="text" placeholder="Date" required value={this.state.date} onChange={this.onChange} />
+                        <input name="date" className="admin-input" type="text" placeholder="Date" required value={this.state.date} onChange={this.onChange} />
                         <br />
                         <label htmlFor="time">Time:</label>
-                        <input name="time" type="text" placeholder="Time" required value={this.state.time} onChange={this.onChange} />
+                        <input name="time" className="admin-input" type="text" placeholder="Time" required value={this.state.time} onChange={this.onChange} />
                         <br />
                         <label htmlFor="name">Name:</label>
-                        <input name="name" type="text" placeholder="Name" required value={this.state.name} onChange={this.onChange} />
+                        <input name="name" className="admin-input" type="text" placeholder="Name" required value={this.state.name} onChange={this.onChange} />
                         <br />
                         <label htmlFor="email">Email:</label>
-                        <input name="email" type="text" placeholder="Email" required value={this.state.email} onChange={this.onChange} />
+                        <input name="email" className="admin-input" type="text" placeholder="Email" required value={this.state.email} onChange={this.onChange} />
                         <br />
                         <label htmlFor="phone">Phone:</label>
-                        <input name="phone" type="text" placeholder="Phone number" required value={this.state.phone} onChange={this.onChange }/>
+                    <input name="phone" className="admin-input" type="text" placeholder="Phone number" required value={this.state.phone} onChange={this.onChange }/>
                         <br />
-                    <button type="button" className="saveUpdateButton" onClick={this.update.bind(this)}>Save Changes</button>
+                    <button type="button" className="admin-saveUpdateButton" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
             </div>

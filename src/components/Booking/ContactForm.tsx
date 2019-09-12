@@ -64,17 +64,14 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
 
     if (!emailError && !nameError && !telError) {
         this.setState({ contactFormValid: true });
-        console.log('valid');
     } else {
         this.setState({ contactFormValid: false });
-        console.log('not valid');
     }
   }
 
   handleValues(event: React.FormEvent<HTMLInputElement>) {
     const { name, value } = event.currentTarget;
     const cleanedValue = this.preventInjections(value);
-    console.log(this.state);
     this.setState(
       (prevState: IContactFormState) => ({ ...prevState, [name]: cleanedValue }),
       () => {
@@ -98,12 +95,10 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
     const name = this.props;
     return (
       <div className="contact-form-wrapper">
+        <h4>Just a little more info!</h4>
         <form>
-          <h2>This is the Contact form component!</h2>
-          <div>
-            Name:
+            <label>Name</label><br/>
             <input
-              placeholder="name"
               value={this.state.name}
               onChange={this.handleValues}
               name="name"
@@ -116,11 +111,8 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
-          <div>
-            Tel:
+          <label>Phone</label><br/>
             <input
-              placeholder="phonenumber"
               value={this.state.tel}
               onChange={this.handleValues}
               name="tel"
@@ -133,11 +125,9 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
-          <div>
-            Email:
+  
+          <label>Email</label><br/>
             <input
-              placeholder="email"
               value={this.state.email}
               onChange={this.handleValues}
               name="email"
@@ -149,7 +139,6 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
         </form>
       </div>
     );

@@ -10,7 +10,6 @@ const Header = () => {
                 <NavLink className="nav-link booking" to="/booking">book a table</NavLink>
                 <NavLink className="logo" to="/"><h1>june.</h1></NavLink>
                 <NavLink className="nav-link about" to="/about">about us</NavLink>
-                <NavLink className="nav-link adminlink" to="/admin">admin</NavLink>
                 </nav>
             </header>
 
@@ -20,9 +19,8 @@ const Header = () => {
                         <NavLink className="logo" to="/"><h1>june.</h1></NavLink>
                     </div>
                     <nav className="main-navigation">
-                        <NavLink className="nav-link about" to="/about">about</NavLink>
                         <NavLink className="nav-link booking" to="/booking">book</NavLink>
-                        <NavLink className="nav-link adminlink" to="/admin">admin</NavLink>
+                        <NavLink className="nav-link about" to="/about">about</NavLink>
                     </nav>
 
                 </div>

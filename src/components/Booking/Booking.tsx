@@ -47,7 +47,7 @@ class Booking extends React.Component<{}, IBookingState> {
 
   //Get values from the booking form.
   getBookingFormValues(numberOfGuests: number, date: string, time: number) {
-    // If time selection dropdown is on "Choose time" it wont display the contact form.
+    // If time selection dropdown is on "Pick a time" it wont display the contact form.
     if (time == 1){
       this.setState({
         showContactForm: false
@@ -59,7 +59,6 @@ class Booking extends React.Component<{}, IBookingState> {
   
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
-    console.log(contactFormValid)
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
@@ -86,8 +85,7 @@ class Booking extends React.Component<{}, IBookingState> {
         }) 
         return false
     } 
-
-    console.log(this.state.contactFormValid)
+    //This doesn't work for some reason, it will always be false :( Validation error in contact form?
     if (!this.state.contactFormValid){
       return false
     }
@@ -120,17 +118,19 @@ class Booking extends React.Component<{}, IBookingState> {
           <div>
             <div className="wrapper">
               <Header />
-              <div className="column-wrapper">
-                <div className="left-column">
-                  {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
-                </div>
-                <div className="right-column">
-                  {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
-                  {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-                  {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
-                  {this.state.showBookingComplete ? <BookingComplete /> :null}
-                </div>
-              </div>
+              {this.state.showBookingForm !? 
+                <div className="column-wrapper">
+                  <div className="left-column">
+                    {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+                  </div>
+                  <div className="right-column">
+                    {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+                    {this.state.showGdprError ? <p style={{ fontSize: 11, color: "red"}}> You need to accept our terms </p> : null}
+                    {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+                    {this.state.showContactForm ? <button className="book-button" onClick={this.postReservation}> Book your table </button> : null}
+                  </div>
+                </div> :null}
+                {this.state.showBookingComplete ? <BookingComplete /> :null}
             </div>
           </div>
     )
