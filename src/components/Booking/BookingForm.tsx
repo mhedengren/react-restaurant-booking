@@ -145,7 +145,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     return (
       <div className="booking-form-wrapper">
         <form>
-          <h4>How many guests?</h4>
+          <h4>how many guests?</h4>
           <select name="numberOfGuests" onChange={this.handleInputChange} className="select-css">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -160,7 +160,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
             minDate={new Date()}
           />
           <select onChange={this.handleSubmit} className="select-css">
-            <option value='1'>Pick a time</option>
+            <option value='1'>pick a time</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
             {this.state.show21 ? <option value='21'>21</option> : null}
           </select>

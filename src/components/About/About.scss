@@ -145,6 +145,7 @@
                     width: 200px;
 
                     .about-text-name-desktop {
+                        margin-top: 4em;
                         text-align: center;
                         font-family: $robotomono;
                         font-size: 12px;
@@ -166,16 +167,20 @@
                         font-size: 8px;
                         color: black;
                         font-weight: bolder;
-                        padding-bottom: 1em;
-                        border-bottom: 2px solid $wrapper;
+                        padding-bottom: 2em;
+                        border-bottom: 3px solid $wrapper;
                     }
 
                     .about-text-paragraph {
-                        margin-top: 4em;
+                        margin: 5em 0em;
                         font-family: $lateef;
                         color: black;
                         font-weight: thin; 
-                     }
+                        
+                    }
+                }
+                .social-media-buttons-about {
+                    align-self: flex-end;
                 }
             }
         }
@@ -204,6 +209,28 @@
                     background-repeat: no-repeat;
                     height: 100%;
                     width: 100%;
+
+                    .about-page-number-wrapper {
+                        height: 100%;
+                        padding: 2em;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+
+                        .about-vl {
+                            margin-top: 29em;
+                            align-self: flex-end;
+                            border-right: 2px solid white;
+                            height: 100px;
+                        }
+                        .about-page {
+                            font-family: $raleway;
+                            font-weight: bold;
+                            font-size: 20px;
+                            letter-spacing: 4px;
+                            color: white;
+                        }
+                    }
                 }
             
                 .main-navigation-about {
@@ -213,6 +240,7 @@
                 }
             }
         }
+        
     }
 
 /* Desktop */
@@ -221,5 +249,5 @@
     .about-wrapper-desktop {
         height: 90vh;
         margin: 2em;
-    }
+   }
 }

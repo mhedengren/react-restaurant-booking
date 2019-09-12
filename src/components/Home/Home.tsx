@@ -50,8 +50,8 @@ const Home = () => {
                             <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
                     </div>
                     <div className="page-number-wrapper">
-                            <div className="vl"></div>
-                            <span className="page">01.</span>
+                         <div className="vl"></div>
+                        <span className="page">01.</span>
                     </div>
                 </footer>
             </div>  
