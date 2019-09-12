@@ -113,7 +113,7 @@
 
     .desktop-landing-page {
         // background: $landingpagecolor;
-        //border: 5px solid white;
+        border: 5px solid white;
         display:flex;
         flex-direction: column;
         justify-content: space-between;
@@ -126,9 +126,9 @@
     
      
         .entry-text {
-            padding-left: 3em;
+            padding-left: 2.5em;
             position: absolute;
-            top: 50vh;
+            top:50vh;
             text-align:right;
             width: 220px;
             h2 {

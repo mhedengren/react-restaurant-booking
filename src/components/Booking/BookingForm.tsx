@@ -150,7 +150,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     return (
       <div className="booking-form-wrapper">
         <form>
-          <h4>How many?</h4>
+          <h4>How many guests?</h4>
           <select name="numberOfGuests" onChange={this.handleInputChange} className="select-css">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -159,24 +159,12 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
             <option value="5">5</option>
             <option value="6">6</option>
           </select>
-          {/* <label>
-            Number of guests:
-            <input
-              name='numberOfGuests'
-              type='number'
-              value={this.state.numberOfGuests}
-              onChange={this.handleInputChange}
-              min='1'
-              max='6'
-            />
-            {this.state.numberOfGuestsError ? <span style={{ fontSize: 11, color: "red" }}>Somethings wrong, make sure you selected between 1-6 guests!</span>:null}
-          </label> */}
           <Calendar
             onChange={this.calendarOnChange}
             value={this.state.date}
             minDate={new Date()}
           />
-          <select onChange={this.handleSubmit}>
+          <select onChange={this.handleSubmit} className="select-css">
             <option value='1'>Pick time</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
             {this.state.show21 ? <option value='21'>21</option> : null}

@@ -98,12 +98,10 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
     const name = this.props;
     return (
       <div className="contact-form-wrapper">
+        <h4>Just a little more info!</h4>
         <form>
-          <h2>This is the Contact form component!</h2>
-          <div>
-            Name:
+            <label>Name</label><br/>
             <input
-              placeholder="name"
               value={this.state.name}
               onChange={this.handleValues}
               name="name"
@@ -116,11 +114,8 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
-          <div>
-            Tel:
+          <label>Phone</label><br/>
             <input
-              placeholder="phonenumber"
               value={this.state.tel}
               onChange={this.handleValues}
               name="tel"
@@ -133,11 +128,9 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
-          <div>
-            Email:
+  
+          <label>Email</label><br/>
             <input
-              placeholder="email"
               value={this.state.email}
               onChange={this.handleValues}
               name="email"
@@ -149,7 +142,6 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             ) : (
               undefined
             )}
-          </div>
         </form>
       </div>
     );
