@@ -148,10 +148,10 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
   //Render booking form.
   render() {
     return (
-      <div>
+      <div className="booking-form-wrapper">
         <form>
-          <label>Number of guests: </label>
-          <select name="numberOfGuests" onChange={this.handleInputChange}>
+          <h4>How many?</h4>
+          <select name="numberOfGuests" onChange={this.handleInputChange} className="select-css">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

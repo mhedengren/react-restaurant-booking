@@ -4,6 +4,7 @@ import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import GdprConsent from './GdprConsent';
 import './booking.scss'
+import Header from '../Header/Header';
 const axios = require('axios')
 
 interface IBookingState {
@@ -116,14 +117,22 @@ class Booking extends React.Component<{}, IBookingState> {
 
   render() {
     return (
-      <div>
-        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues} /> :null }
-        {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
-        {this.state.showGdprError ? <p style={{ fontSize: 11, color: "red", margin: 0 }}>You need to accept our terms to continue.</p>:null}
-        {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-        {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
-        {this.state.showBookingComplete ? <BookingComplete /> :null}
-      </div> 
+          <div>
+            <div className="wrapper">
+              <Header />
+              <div className="column-wrapper">
+                <div className="left-column">
+                  {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+                </div>
+                <div className="right-column">
+                  {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+                  {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+                  {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
+                  {this.state.showBookingComplete ? <BookingComplete /> :null}
+                </div>
+              </div>
+            </div>
+          </div>
     )
   }
 }
