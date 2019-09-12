@@ -55,7 +55,7 @@ const About = () => {
               <p className='about-text-quote-desktop'>EXPERTISE STEMS FROM PASSION.</p>
               <p className='about-text-title-desktop'>-CHEF</p>
               <p className='about-text-paragraph'>
-                With his unparalleled experience and expertise, John created JUNE.
+                With his unparalleled experience and expertise, John created <b>june.</b>
                 I put all my passion and devotion into this. Taste, style and
                 message. Those are what count when we choose our menu.
               </p>
