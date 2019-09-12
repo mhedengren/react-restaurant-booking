@@ -113,7 +113,7 @@ class Booking extends React.Component<{}, IBookingState> {
   
     
   }
-
+  }
   render() {
     return (
       <div>
