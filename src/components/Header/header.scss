@@ -77,7 +77,6 @@
        //border: 1px solid blue;
 
        .logo {
-           position: absolute;
            color: white;
            text-decoration: none;
            transition: 1s;
@@ -94,7 +93,7 @@
        .header-desktop-wrapper {
            display:flex;
            justify-content: space-between;
-           align-items: flex-end;
+           align-items: baseline;
 
            .nav-link {
                margin-left: 1em;
