@@ -23,7 +23,7 @@ const Home = () => {
                         <p className="adressText">regeringsgatan 67</p>
                     </div>
                 </div>{/* closing div for whiteBox */} 
-                <footer className="footer-mob">
+                <footer className="footer-mobile">
                     <div className="social-icons">
                             <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
                             <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
