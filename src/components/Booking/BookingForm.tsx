@@ -44,7 +44,6 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
   getTodaysBookings() {
     let today = moment(new Date())
     let dateToSend = today.format('YYYY-MM-DD')
-    console.log(dateToSend)
     axios
       .get(
         `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
@@ -137,10 +136,6 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     this.setState({
       [name]: value
     } as any, () => {
-      console.log(this.state.numberOfGuests)
-      // if (this.state.numberOfGuests > 6 || this.state.numberOfGuests < 1 ){
-      //   this.setState({numberOfGuestsError: true})
-      // } else this.setState({numberOfGuestsError: false})
     })
 
   }
@@ -165,7 +160,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
             minDate={new Date()}
           />
           <select onChange={this.handleSubmit} className="select-css">
-            <option value='1'>Pick time</option>
+            <option value='1'>Pick a time</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
             {this.state.show21 ? <option value='21'>21</option> : null}
           </select>

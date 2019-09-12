@@ -64,17 +64,14 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
 
     if (!emailError && !nameError && !telError) {
         this.setState({ contactFormValid: true });
-        console.log('valid');
     } else {
         this.setState({ contactFormValid: false });
-        console.log('not valid');
     }
   }
 
   handleValues(event: React.FormEvent<HTMLInputElement>) {
     const { name, value } = event.currentTarget;
     const cleanedValue = this.preventInjections(value);
-    console.log(this.state);
     this.setState(
       (prevState: IContactFormState) => ({ ...prevState, [name]: cleanedValue }),
       () => {
