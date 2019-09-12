@@ -1,116 +1,111 @@
-// @import '../../variables';
-// @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
+@import '../../variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-// div {
-//     display: flexbox;
-//     max-width: 660px;
-// }
+.admin-wrapper {
+    display: flexbox;
+    max-width: 740px;
+}
 
-// h3 {
-//     color: $fontcolor;
-//     max-width: 90%;
-//     text-align: center;
-//     border: 1px solid $fontcolor;
-//     border-radius: 4px;
-//     padding: 5%;
-//     margin: 5%;
-// }
+.admin-h3 {
+    color: $fontcolor;
+    max-width: 90%;
+    text-align: center;
+    border: 1px solid $fontcolor;
+    border-radius: 4px;
+    padding: 5%;
+    margin: 5%;
+}
 
-// table {
-//     max-width: 90%;
-//     margin: 0 auto;
-//     tr:nth-child(even) {background: $wrapper};
-//     tr:nth-child(odd);
-// }
+.admin-table {
+    max-width: 80%;
+    margin: 0 auto;
+    tr:nth-child(even) {background: $wrapper};
+    tr:nth-child(odd);
+}
 
-// thead {
-//     color: $fontcolor;
+.admin-thead {
+    color: $fontcolor;
+}
+
+.admin-form {
+    max-width: 80%;
+    margin: 2% auto 2% auto;
+    border: 1px solid $fontcolor;
+    border-radius: 4px;
+    padding: 5%;
+    // margin: 10%;
+    .admin-input {
+        width: 100%;
+        padding: 1%;
+        margin: 1% auto;
+        // display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        // resize: vertical;
+        .admin-input:focus {
+            background-color: $wrapper;   
+        }
+    }
+}
+
+.admin-createDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%; 
+}
+
+.admin-saveUpdateButton, .admin-update, .admin-createNewButton, .admin-createNowButton {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 2px solid $fontcolor;
     
-// }
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight: 300;
+    color: $fontcolor;
+    text-align: center;
+}
+.admin-saveUpdateButton, .admin-update, .admmin-createNowButton { 
+    margin: 2% auto;
+}
+.admin-saveUpdateButton:hover, .admin-update:hover, .admin-createNewButton:hover, .admin-createNowButton:hover,
+.admin-saveUpdateButton:focus, .admin-update:focus, .admin-createNewButton:focus, .admin-createNowButton:focus {
+    color: #ffffff !important;
+    background: $buttonColor2;
+    border-color: $buttonColor2 !important;
+    transition: all 0.4s ease 0s;
+    box-shadow: 0 0 10px #43D1AF;
+    }
 
-// form {
-//     max-width: 80%;
-//     margin: 2% auto 2% auto;
-//     border: 1px solid $fontcolor;
-//     border-radius: 4px;
-//     padding: 5%;
-//     // margin: 10%;
-//     input {
-//         width: 100%;
-//         padding: 1%;
-//         margin: 1% auto;
-//         // display: block;
-//         border: 1px solid #ccc;
-//         border-radius: 4px;
-//         box-sizing: border-box;
-//         // resize: vertical;
-//         input:focus {
-//             background-color: $wrapper;   
-//         }
-//     }
-// }
+.admin-delete {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 2px solid $buttonColor1;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight: 300;
+    color: $buttonColor1;
+    text-align: center;
+    transition: all 0.2s;
+}
 
-// label {
-//     display: inline-block;
-//   }
+@media all and (max-width: 30em) {
+    .saveUpdateButton{
+        display: block;
+        margin: 0.4em auto;
+    }
+}
 
-// .createDiv {
-//     display: flex;
-//     justify-content: center;
-//     margin-bottom: 2%; 
-// }
-
-// .saveUpdateButton, .update, .createNewButton, .createNowButton {
-//     display: inline-block;
-//     padding: 0.35em 1.2em;
-//     border: 2px solid $fontcolor;
-    
-//     border-radius: 4px;
-//     box-sizing: border-box;
-//     text-decoration:none;
-//     font-family:'Roboto',sans-serif;
-//     font-weight: 300;
-//     color: $fontcolor;
-//     text-align: center;
-// }
-// .saveUpdateButton, .update, .createNowButton { 
-//     margin: 2% auto;
-// }
-// .saveUpdateButton:hover, .update:hover, .createNewButton:hover, .createNowButton:hover,
-// .saveUpdateButton:focus, .update:focus, .createNewButton:focus, .createNowButton:focus {
-//     color: #ffffff !important;
-//     background: $buttonColor2;
-//     border-color: $buttonColor2 !important;
-//     transition: all 0.4s ease 0s;
-//     box-shadow: 0 0 10px #43D1AF;
-//     }
-
-// .delete {
-//     display: inline-block;
-//     padding: 0.35em 1.2em;
-//     border: 2px solid $buttonColor1;
-//     margin: 0 0.3em 0.3em 0;
-//     border-radius: 4px;
-//     box-sizing: border-box;
-//     text-decoration:none;
-//     font-family:'Roboto',sans-serif;
-//     font-weight: 300;
-//     color: $buttonColor1;
-//     text-align: center;
-//     transition: all 0.2s;
-// }
-
-// @media all and (max-width: 30em) {
-//     .saveUpdateButton{
-//         display: block;
-//         margin: 0.4em auto;
-//     }
-// }
-
-// /* Tablet och desktop */
-// @media screen and (min-width: 768px) {
-//     div {
-//         display: flexbox;
-//         max-width: 1200px;
-//     }    
-// }
+/* Tablet och desktop */
+@media screen and (min-width: 768px) {
+    .admin-wrapper {
+        display: flexbox;
+        max-width: 1200px;
+    }    
+}
