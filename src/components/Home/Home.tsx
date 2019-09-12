@@ -25,9 +25,9 @@ const Home = () => {
                 </div>{/* closing div for whiteBox */} 
                 <footer className="footer-mobile">
                     <div className="social-icons">
-                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
-                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
-                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
+                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'black' }}/>
+                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'black'  }}/>
+                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'black'  }} />
                     </div>
                     <div className="page-number-wrapper">
                             <div className="vl"></div>
