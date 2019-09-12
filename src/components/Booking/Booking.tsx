@@ -47,7 +47,7 @@ class Booking extends React.Component<{}, IBookingState> {
 
   //Get values from the booking form.
   getBookingFormValues(numberOfGuests: number, date: string, time: number) {
-    // If time selection dropdown is on "Choose time" it wont display the contact form.
+    // If time selection dropdown is on "Pick a time" it wont display the contact form.
     if (time == 1){
       this.setState({
         showContactForm: false
@@ -85,6 +85,7 @@ class Booking extends React.Component<{}, IBookingState> {
         }) 
         return false
     } 
+    //This doesn't work for some reason, it will always be false :( Validation error in contact form?
     if (!this.state.contactFormValid){
       return false
     }
