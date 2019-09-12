@@ -36,7 +36,7 @@ const About = () => {
           </div>{/*Closing social-icons*/}
           <div className='page-number-wrapper'>
             <div className='vl'></div>
-            <span className='page'>01.</span>
+            <span className='page'>03.</span>
           </div>{/*Closing page-numer-wrapper*/}
         </footer>
       </div>{/*Closing main div for about-mobile*/}
