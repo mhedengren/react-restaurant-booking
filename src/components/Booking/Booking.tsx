@@ -19,6 +19,7 @@ interface IBookingState {
   showBookingForm: boolean
   showContactForm: boolean
   showBookingComplete: boolean
+  showGdprError: boolean
 }
 
 class Booking extends React.Component<{}, IBookingState> {
@@ -35,7 +36,8 @@ class Booking extends React.Component<{}, IBookingState> {
       contactFormValid: false,
       showBookingForm: true,
       showContactForm: false,
-      showBookingComplete: false
+      showBookingComplete: false,
+      showGdprError: false
     }
     this.postReservation = this.postReservation.bind(this)
     this.getContactFormValues = this.getContactFormValues.bind(this)
@@ -43,38 +45,49 @@ class Booking extends React.Component<{}, IBookingState> {
     this.toggleGdpr = this.toggleGdpr.bind(this)
   }
 
- //Get values from the booking form.
- getBookingFormValues(numberOfGuests: number, date: string, time: number) {
-  // If time selection dropdown is on "Choose time" it wont display the contact form.
-  if (time == 1){
-    this.setState({
-      showContactForm: false
-    })
-    return
-  }
-  this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
-}
+  //Get values from the booking form.
+  getBookingFormValues(numberOfGuests: number, date: string, time: number) {
+    // If time selection dropdown is on "Choose time" it wont display the contact form.
+    if (time == 1){
+      this.setState({
+        showContactForm: false
+      })
+      return
+    }
+    this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
 
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
+    console.log(contactFormValid)
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
   // Toggle GDPR-consent.
   toggleGdpr() {
-    this.setState({GdprConsent: !this.state.GdprConsent})
+    this.setState({GdprConsent: !this.state.GdprConsent},()=> this.GdprValidation())
   }
 
+  // If the user tried to submit without GDPR consent
+  // this function will remove the warning when user checks the box.
+  GdprValidation(){
+    if (this.state.showGdprError && this.state.GdprConsent === true) {
+      this.setState({
+        showGdprError: false
+      })
+    }
+  }
 
   // Validation and post reservation.
   postReservation() {
     if (!this.state.GdprConsent){
+        this.setState({
+          showGdprError: true
+        }) 
         return false
     } 
+
+    console.log(this.state.contactFormValid)
     if (!this.state.contactFormValid){
-      return false
-    }
-    if (this.state.time == 1){
       return false
     }
     axios

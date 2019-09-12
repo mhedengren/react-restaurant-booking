@@ -1,7 +1,8 @@
 import React from 'react';
 import ReservationsView, { IReservationUpdate } from './ReservationsView';
 import CreateReservation, { ICreateReservationState } from './CreateReservation';
-
+import moment from 'moment';
+import './admin.scss';
 
 const axios = require('axios');
 
@@ -67,11 +68,11 @@ interface IState {
         createBooking(values: ICreateReservationState) {
             axios.post('http://localhost:8888/react-restaurant-booking-backend/post-reservation.php', {
             res_guests: values.guests,
-            res_date: values.date,
+            res_date: moment(values.date).format('YYYY-MM-DD'),
             res_time: values.time,
             res_name: values.name,
             res_email: values.email,
-            res_tel: values.tel
+            res_tel: values.phone
             })
             .then((res:any) => {
                 this.getAdmin();
@@ -131,8 +132,12 @@ interface IState {
                         saveUpdate={this.reservationUpdate}
                         reservation={this.state.reservation}
                     />
-                <button onClick={this.toggleCreateNewReservation}>Create new</button>
-                  {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null } 
+                    <div className="createDiv">
+                        <button className="createNewButton" onClick={this.toggleCreateNewReservation}>Create new</button>
+                    </div>
+                        {this.state.showCreateNewReservation ?  <CreateReservation createBooking={this.createBooking} /> :null }
+                    
+                   
                 </div>
 
               )

@@ -10,14 +10,11 @@ export interface ICreateReservationState {
     time: number
     name: string
     email: string
-    tel: string
+    phone: number
     numberOfGuests: number
     numberOfGuestsError: boolean
     date: Date
     dateToSend: string
-    show18: boolean
-    show21: boolean
-    timePicked: string
     bookingArrayByDate: IReservation[]
 }
 
@@ -33,27 +30,24 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             time: 0,
             name: '',
             email: '',
-            tel: '',
+            phone: 0,
             numberOfGuests: 1,
             numberOfGuestsError: false,
             date: new Date(),
             dateToSend: '',
-            show18: false,
-            show21: false,
-            timePicked: '',
             bookingArrayByDate: []
         }
 
         this.postReservation = this.postReservation.bind(this)
         this.onChange = this.onChange.bind(this)
-        this.toggleOptions = this.toggleOptions.bind(this)
         this.getTodaysBookings = this.getTodaysBookings.bind(this)
         this.calendarOnChange = this.calendarOnChange.bind(this)
 
     }
 
     calendarOnChange(date: any) {
-      let dateToSend = moment(date).format('YYYY-MM-DD')
+      let dateToSend = moment(date).format('YYYY-MM-DD');
+      console.log(dateToSend);
       axios
         .get(
           `http://localhost:8888/react-restaurant-booking-backend/fetch-reservation.php/`,
@@ -63,42 +57,10 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
           this.setState(
             {
               bookingArrayByDate: result.data,
-              dateToSend: dateToSend
-            },
-            () => this.toggleOptions()
+              date: date
+            }
           )
         })
-    }
-
-    toggleOptions() {
-      let firstSitting = '18'
-      let count18 = this.state.bookingArrayByDate.filter(
-        (obj: any) => obj.time === firstSitting
-      )
-      let secondSitting = '21'
-      let count21 = this.state.bookingArrayByDate.filter(
-        (obj: any) => obj.time === secondSitting
-      )
-  
-      if (count18.length < 15) {
-        this.setState({
-          show18: true
-        })
-      } else if (count18.length >= 15) {
-        this.setState({
-          show18: false
-        })
-      }
-  
-      if (count21.length < 15) {
-        this.setState({
-          show21: true
-        })
-      } else if (count21.length >= 15) {
-        this.setState({
-          show21: false
-        })
-      }
     }
 
     getTodaysBookings() {
@@ -115,15 +77,27 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
           this.setState(
             {
               bookingArrayByDate: result.data
-            },
-            () => this.toggleOptions()
+            }
           )
         })
     }
 
-    postReservation() {
+    postReservation(e: any) {
+      e.preventDefault();
+      if (this.state.guests <= 1 || 
+        this.state.time === 0 || 
+        this.state.name === '' || 
+        this.state.name === '' ||
+        this.state.email === '' ||
+        this.state.phone === 0) {
+        alert('Please fill in all fields before saving reservation!')
+        return false
+    }
+
+
       this.props.createBooking(this.state);
         console.log(this.state)
+
         
       }
 
@@ -138,7 +112,7 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
 
     render() {
         return(
-            <form action="submit">
+          <form action="submit">
             <label htmlFor="guests">Guests:</label>
             <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
             <Calendar
@@ -152,11 +126,11 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
             <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
             <label htmlFor="email">Email:</label>
             <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
-            <label htmlFor="tel">Phone:</label>
-            <input name="tel" type="text" value={this.state.tel} onChange={this.onChange} />
+            <label htmlFor="phone">Phone:</label>
+            <input name="phone" type="text" value={this.state.phone} onChange={this.onChange} />
            
-            <button type="button" onClick={this.postReservation}>Create Now</button>
-        </form>
+            <button type="button" className="createNowButton" onClick={this.postReservation}>Create Now</button>
+          </form>
         )
     }
 }

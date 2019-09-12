@@ -1,5 +1,6 @@
 import React from 'react';
 import { IReservation } from './Admin';
+import moment from 'moment';
 
 const axios = require('axios');
 
@@ -21,7 +22,6 @@ export interface IReservationUpdate {
     name: string,
     email: string,
     phone: number
-    emailError: string;
 }
 
 class ReservationsView extends React.Component <IReservationViewProps, IReservationUpdate> {
@@ -34,24 +34,10 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
             time: this.props.reservation.time,
             name: this.props.reservation.name,
             email: this.props.reservation.email,
-            phone: this.props.reservation.phone,
-            emailError: ""
+            phone: this.props.reservation.phone
         }
             this.onChange = this.onChange.bind(this);
-            this.emailValid = this.emailValid.bind(this);
     }
-
-    emailValid() {
-        let emailError = "";
-    
-        if (!this.state.email.includes("@")) {
-          emailError = "invalid email";
-          this.setState({ emailError });
-        } else {
-          console.log("valid mail" + emailError); 
-         this.setState({ emailError });
-        }
-      }
 
     onChange(event: any) {
         const target = event.target;
@@ -59,10 +45,9 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
         const name = target.name
         this.setState({
           [name]: value
-        } as any, 
-        () => this.emailValid())
-      }
-      
+        } as any)
+    }
+ 
 
       getSingleReservation(id: number) {
         axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
@@ -85,42 +70,37 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
 
       update(e: any){
         e.preventDefault();
-
+        console.log(this.state.date)
+        if (this.state.guests <= 1 || 
+            this.state.date != moment(this.state.date).format('YYYY-MM-DD') || 
+            this.state.time === 0 || 
+            this.state.name === '' || 
+            this.state.name === '' ||
+            this.state.email === '' ||
+            this.state.phone === 0) {
+            alert('Please fill in all fields before saving reservation!')
+            return false
+        }
         this.props.saveUpdate(this.state)
       } 
 
-    // componentDidUpdate(prevProps:any){
-    //     if (this.props.reservation.id !== prevProps.reservation.id &&
-    //         this.props.reservation.guests !== prevProps.reservation.guests &&
-    //         this.props.reservation.date !== prevProps.reservation.date &&
-    //         this.props.reservation.time !== prevProps.reservation.time &&
-    //         this.props.reservation.name !== prevProps.reservation.name &&
-    //         this.props.reservation.email !== prevProps.reservation.email &&
-    //         this.props.reservation.phone !== prevProps.reservation.phone){
-    //         this.setState({
-    //             id: this.props.reservation.id,
-    //             guests: this.props.reservation.guests,
-    //             date: this.props.reservation.date,
-    //             time: this.props.reservation.time,
-    //             name: this.props.reservation.name,
-    //             email: this.props.reservation.email,
-    //             phone: this.props.reservation.phone
-    //         })
-    //     }
-    // }
     render() {
         return (
-            <div>
+            <div>   
+                <div>
+                    <h3>For best results while using a mobile phone, please rotate to landscape.</h3>
+                </div>
+                <div>
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>guests</th>
-                                <th>date</th>
-                                <th>time</th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>phone</th>
+                                <th>ID</th>
+                                <th>Guests</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -137,39 +117,41 @@ class ReservationsView extends React.Component <IReservationViewProps, IReservat
                                     <td>{reservation.name}</td>
                                     <td>{reservation.email}</td>
                                     <td>{reservation.phone}</td>
-                                    <td><button type="button" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
-                                    <td><button type="button" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
+                                    <td><button type="button" className="delete" onClick={this.props.deleteFunction.bind(this, reservation.id)}>Delete</button></td>
+                                    <td><button type="button" className="update" onClick={this.getSingleReservation.bind(this, reservation.id)}>Update</button></td>
                                 </tr>
                             )
                         })}
                         </tbody>
                     </table>
-                    
-                    <form action="submit">
+                </div>
+                <div>    
+                    <form action="submit" className="form-inside-input">
                         <label htmlFor="id">Id:</label>
                         <input name="id" type="text" value={this.state.id} disabled/>
+                        <br />
                         <label htmlFor="guests">Guests:</label>
-                        <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
+                        <input name="guests" placeholder="Number of guests" required type="text" value={this.state.guests} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="date">Date:</label>
-                        <input name="date" type="text" value={this.state.date} onChange={this.onChange} />
+                        <input name="date" type="text" placeholder="Date" required value={this.state.date} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="time">Time:</label>
-                        <input name="time" type="text" value={this.state.time} onChange={this.onChange} />
+                        <input name="time" type="text" placeholder="Time" required value={this.state.time} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="name">Name:</label>
-                        <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
+                        <input name="name" type="text" placeholder="Name" required value={this.state.name} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="email">Email:</label>
-                        <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
-                        {this.state.emailError ? (
-                            <div style={{ fontSize: 11, color: "red" }}>
-                                 {this.state.emailError}
-                            </div>
-                            ) : (undefined
-                        )}
+                        <input name="email" type="text" placeholder="Email" required value={this.state.email} onChange={this.onChange} />
+                        <br />
                         <label htmlFor="phone">Phone:</label>
-                        <input name="phone" type="text" value={this.state.phone} onChange={this.onChange }/>
-                        
-                        <button type="button" onClick={this.update.bind(this)}>Save Changes</button>
+                        <input name="phone" type="text" placeholder="Phone number" required value={this.state.phone} onChange={this.onChange }/>
+                        <br />
+                    <button type="button" className="saveUpdateButton" onClick={this.update.bind(this)}>Save Changes</button>
                     </form>
                 </div>
+            </div>
         )
            
         
