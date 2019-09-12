@@ -17,17 +17,15 @@ export interface IReservation {
     phone: number
 }
 
-
-
 interface IState {
     reservations: IReservation[];
     reservation: IReservation;
     showCreateNewReservation: boolean
 }
 
-    class Admin extends React.Component <{}, IState >{ 
-        constructor(props: any){
-            super(props);
+class Admin extends React.Component <{}, IState >{ 
+    constructor(props: any){
+        super(props);
 
             this.state = {
                 reservations: [],
@@ -50,19 +48,18 @@ interface IState {
             this.getSingleReservation = this.getSingleReservation.bind(this);
             this.toggleCreateNewReservation = this.toggleCreateNewReservation.bind(this)
             this.createBooking = this.createBooking.bind(this)
+    }
 
-        } 
         componentDidMount() {
             this.getAdmin();
         }
         
         getAdmin() {
             axios.get('http://localhost:8888/react-restaurant-booking-backend/admin.php/')
-            .then((result: any)=> {
-                this.setState({
-                    reservations: JSON.parse(result.data)
-                })
-                
+                .then((result: any)=> {
+                    this.setState({
+                        reservations: JSON.parse(result.data)
+                    })                
             });
         }
 
@@ -75,9 +72,9 @@ interface IState {
             res_email: values.email,
             res_tel: values.phone
             })
-            .then((res:any) => {
-                this.getAdmin();
-            });
+                .then((res:any) => {
+                    this.getAdmin();
+                });
         }
     
 
@@ -101,17 +98,17 @@ interface IState {
                     })
                     this.getAdmin();                                           
                 });
-            } 
+        } 
             
         getSingleReservation(id: number) {
             axios.get('http://localhost:8888/react-restaurant-booking-backend/single-reservation.php/', { params: { res_id: id}})
-            .then((result: any)=> {
-                let singleReservation = result.data
+                .then((result: any)=> {
+                    let singleReservation = result.data
                 
-                this.setState({
-                    reservation: singleReservation
+                    this.setState({
+                        reservation: singleReservation
+                    });
                 });
-            });
         }
         
         reservationUpdate(reservation: IReservationUpdate) { 
