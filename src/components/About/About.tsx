@@ -56,9 +56,16 @@ const About = () => {
               <p className='about-text-title-desktop'>-CHEF</p>
               <p className='about-text-paragraph'>
                 With his unparalleled experience and expertise, John created <b>june.</b>
-                I put all my passion and devotion into this. Taste, style and
+                 I put all my passion and devotion into this. Taste, style and
                 message. Those are what count when we choose our menu.
               </p>
+              <footer className="social-media-buttons-about">
+                    <div className="social-icons">
+                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '1.5em', color: 'black' }}/>
+                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '1.5em', color: 'black'  }}/>
+                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '1.5em', color: 'black'  }} />
+                    </div>
+                </footer>
             </div>
           </div>
         </div>
@@ -68,7 +75,12 @@ const About = () => {
             <NavLink className='nav-link' to='/booking'>book</NavLink>
             <NavLink className='nav-link' to='/about'>about</NavLink>
           </nav>
-          <div className='about-image-container'></div>
+          <div className='about-image-container'>
+          <div className="about-page-number-wrapper">
+              <div className="about-vl"></div>
+                <span className="about-page">03.</span>
+              </div>
+          </div>
         </div>
       </div>
     </div> /*Closing main div for entire page*/
