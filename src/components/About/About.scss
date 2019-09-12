@@ -2,10 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
 
-.about-mobile {
-.about-desktop {
-display: none;
+@media screen and (max-width: 768px){
+    .about-wrapper-desktop {
+        display: none;
+        }
 }
+
+
+.about-mobile {
+
+
 .about-box-white {
 display: block;
 display: flex;
@@ -94,6 +100,7 @@ display: block;
 }
 
 .about-wrapper-desktop {
+margin: 2em;
 border: 4px solid black;
 //margin: 2em;
 display: flex;
@@ -110,8 +117,7 @@ background-color:white;
 position: absolute;
 color: $fontcolor;
 text-decoration: none;
-padding: 2em;
-letter-spacing: 0.5em;
+margin: 2em 3em 2em 3em;
 color: black;
 
 h1{
@@ -171,16 +177,16 @@ flex-grow: 2;
 //border: 2px solid green;
 
 .nav-link {
-margin: 1em;
+ margin-left: 1em;
 font-weight: bold;
 color: white;
 text-decoration: none;
 font-size: 1.3em;
-letter-spacing: 2px;
+letter-spacing: 1px;
 }
 
 .about-image-container {
-// background-image: url('../../assets/img/Group2.png');
+background-image: url('../../assets/img/Group2.png');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
@@ -193,7 +199,8 @@ width: 100%;
 }
 
 .main-navigation-about {
-margin: 2em;
+margin: 3em 3em 2em 3em;
+right: 2.3em;
 position: absolute;
 }
 }
