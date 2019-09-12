@@ -3,6 +3,7 @@ import BookingForm from './BookingForm'
 import ContactForm from './ContactForm'
 import BookingComplete from './BookingComplete'
 import GdprConsent from './GdprConsent';
+import Header from '../Header/Header';
 import './booking.scss'
 const axios = require('axios')
 
@@ -54,8 +55,7 @@ class Booking extends React.Component<{}, IBookingState> {
       return
     }
     this.setState({ guests: numberOfGuests, date: date, time: time, showContactForm: true})
-  }
-  
+
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
     console.log(contactFormValid)
@@ -117,12 +117,21 @@ class Booking extends React.Component<{}, IBookingState> {
   render() {
     return (
       <div>
-        {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues} /> :null }
-        {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
-        {this.state.showGdprError ? <p style={{ fontSize: 11, color: "red", margin: 0 }}>You need to accept our terms to continue.</p>:null}
-        {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-        {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
-        {this.state.showBookingComplete ? <BookingComplete /> :null}
+        <div className="wrapper">
+        <Header />
+          <div className="column-wrapper">
+            <div className="left-column">
+              {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+  
+            </div>
+            <div className="right-column">
+            {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+              {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+              {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
+              {this.state.showBookingComplete ? <BookingComplete /> :null}
+            </div>
+          </div>
+        </div>
       </div> 
     )
   }

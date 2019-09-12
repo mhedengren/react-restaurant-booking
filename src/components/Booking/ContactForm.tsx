@@ -97,7 +97,7 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
   render() {
     const name = this.props;
     return (
-      <div>
+      <div className="contact-form-wrapper">
         <form>
           <h2>This is the Contact form component!</h2>
           <div>

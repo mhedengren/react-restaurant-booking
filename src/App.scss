@@ -1,21 +1,33 @@
 @import 'variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lateef&display=swap');
 /* Mobil + grundlayout */
 
  
-// body {
-//   background: $background;
-// }
-.main-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0;
-
+body {
+  background: $background;
 }
+
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
 
-    
+  body, html {
+    height: 100%;
+    margin-top: 60px;
+  }
+
+
 }
+
+@media screen and (min-width: 1024px){ 
+
+
+  body, html {
+    height: 100%;
+    margin-top: 0px;
+    overflow: hidden;
+  }
+}
+    

@@ -8,6 +8,7 @@ import Header from './components/Header/Header'
 import Booking from "./components/Booking/Booking";
 import Admin from "./components/Admin/Admin";
 import ReactDOM from 'react-dom';
+import Footer from './components/Footer/Footer'
 
 
 
@@ -19,8 +20,8 @@ class App extends React.Component<{}, {}> {
   render() {
     return (
       <BrowserRouter>
-          <main className="main-wrapper">
-          <Header />
+        {/* <div className="color-wrapper"> */}
+          {/* <Header /> */}
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/about" component={About} />
@@ -28,9 +29,8 @@ class App extends React.Component<{}, {}> {
               <Route path="/admin" component={Admin} />
               <Route component={NotFound}/>
             </Switch>
-            
-
-          </main>
+            {/* <Footer /> */}
+          {/* </div> */}
       </BrowserRouter>
     )
   }

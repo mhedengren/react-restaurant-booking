@@ -1,19 +1,26 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-header {
+.header-desktop {
+    display: none;
+}
+
+.header-mobile {
     display: flex;
     align-items: center;
-    background: $wrapper;
+    background: $background;
     height: 300px;
+    padding:  0 1em;
 
-    .main-navigation {
+    .main-navigation-mobile {
         display: flex;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         align-items: center;
+        width: 100%;
+        justify-content: space-between;
 
         .logo {
-            order: 2;
+            // order: 2;
             font-family: 'Roboto Mono', monospace;
             font-size: 30px;
             font-weight: lighter;
@@ -22,31 +29,36 @@ header {
         }
   
        .about {
-            order: 3;
+            // order: 3;
             font-size: 20px;
             font-weight: bold;
             writing-mode: vertical-lr;
             text-decoration: none;
             color: black;
-            margin: 40px;
+            //margin: 40px;
         }
 
         .booking {
-            order: 1;
+            // order: 1;
             font-size: 20px;
             font-weight: bold;
-            -webkit-transform: rotate(270deg);
-            -moz-transform: rotate(270deg);
-            -ms-transform: rotate(270deg);
-            -o-transform: rotate(270deg);
-            transform: rotate(270deg);
-            display: inline-block;
+            writing-mode: vertical-lr;
+            //  -webkit-transform: rotate(90deg);
+            //  -moz-transform: rotate(90deg);
+            // -ms-transform: rotate(90deg);
+            // -o-transform: rotate(90deg);
+            // transform: rotate(90deg);
+
             text-decoration: none;
             color: black;
         }
 
         .adminlink {
             display: none;
+        }
+
+        .nav-link {
+            letter-spacing: 5px;
         }
     }
 }
@@ -55,7 +67,39 @@ header {
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
-    header .adminlink {
-        display: inline;
+    .header-mobile {
+        display: none;
+    }
+
+    .header-desktop {
+        padding:  2em 3em;
+       display: block;
+       //border: 1px solid blue;
+
+       .logo {
+           color: white;
+           text-decoration: none;
+            h1{
+                margin: 0;
+            }
+        //    display:none;
+       }
+
+       .header-desktop-wrapper {
+           display:flex;
+           justify-content: space-between;
+           align-items: flex-end;
+
+           .nav-link {
+               margin-left: 1em;
+               font-weight: bold;
+               color: white;
+               text-decoration: none;
+               font-size: 1.3em;
+               letter-spacing: 2px;
+           }
+       }
     }
 }
+    
+   

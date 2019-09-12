@@ -6,31 +6,59 @@ import {
     faTwitter,
     faInstagram
   } from "@fortawesome/free-brands-svg-icons";
+import Header from '../Header/Header';
+
 
 
 
 const Home = () => {
     return(
-        <div>  
-            <div className="welcome">
-            </div>
-            <div className="BeigeBoxOne">
-            </div>
-            <div className="whiteBox">
-                <div className="welcomeTextBox">
-                    <p className="welcomeText">welcome . </p>
-                    <p className="adressText">regeringsgatan 67</p>
+        <div>{/* opening div for page */}  
+            <div className="mobile-landing-page">
+                <Header />
+                <div className="welcome"></div>
+                <div className="whiteBox">
+                    <div className="welcomeTextBox">
+                        <p className="welcomeText">welcome . </p>
+                        <p className="adressText">regeringsgatan 67</p>
+                    </div>
+                </div>{/* closing div for whiteBox */} 
+                <footer className="footer-mob">
+                    <div className="social-icons">
+                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
+                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
+                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
+                    </div>
+                    <div className="page-number-wrapper">
+                            <div className="vl"></div>
+                            <span className="page">01.</span>
+                    </div>
+                </footer>
+            </div>{/* closing div for mobile-landing-page */} 
+
+            <div className="desktop-landing-page">
+                <Header />
+
+                <div className="entry-text">
+                    <h2>welcome.</h2>
+                    <h3>regeringsgatan 67</h3>
                 </div>
-            </div>
-            <div className="footer">
-                <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '5px' }}/>
-                <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '5px' }}/>
-                <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '5px' }} />
-                <div className="vl"></div>
-                <span className="page">01 .</span>
-            </div>
+                <footer className="footer-desktop">
+                    <div className="social-icons">
+                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
+                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
+                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
+                    </div>
+                    <div className="page-number-wrapper">
+                            <div className="vl"></div>
+                            <span className="page">01.</span>
+                    </div>
+                </footer>
+            </div>  
+        
            
-        </div>     
+        </div>  
+        
     )
 }
 
