@@ -145,6 +145,15 @@
     // .booking-form-wrapper {
     //     padding: 2em 6em;
     // }
+        .wrapper {
+            margin: 2em;
+            border: 5px solid white;
+        }
+
+        .column-wrapper {
+            padding: 0 6em;
+        }
+        
 
 }
 
@@ -164,6 +173,7 @@
     .column-wrapper {
         display: flex;
         flex-flow: row wrap;
+        padding: 0;
 
         .left-column {
             flex-grow: 1;
@@ -171,7 +181,7 @@
             // border: 1px solid red;
             // border-right: 5px solid white;
             // background: rgba(255, 255, 255, 0.7);
-            margin: 0em 3em 3em 3em;
+            margin: 1em 3em 3em 3em;
 
             .booking-form-wrapper {
                 padding: 2em !important;
@@ -183,7 +193,7 @@
             flex-grow: 1;
             flex-basis: 0;
             // border: 1px solid blue;
-            margin: 0em 3em 3em 3em;
+            margin: 1em 3em 3em 3em;
             padding: 2em;
         }
     }

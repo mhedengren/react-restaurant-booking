@@ -165,7 +165,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
             minDate={new Date()}
           />
           <select onChange={this.handleSubmit} className="select-css">
-            <option value='1'>Pick time</option>
+            <option value='1'>Pick a time</option>
             {this.state.show18 ? <option value='18'>18</option> : null}
             {this.state.show21 ? <option value='21'>21</option> : null}
           </select>
