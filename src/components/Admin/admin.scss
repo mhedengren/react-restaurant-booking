@@ -3,7 +3,7 @@
 
 .admin-wrapper {
     display: flexbox;
-    max-width: 740px;
+    margin: 0 auto;
 }
 
 .admin-h3 {
@@ -17,18 +17,19 @@
 }
 
 .admin-table {
-    max-width: 80%;
+    border-collapse: collapse;
     margin: 0 auto;
-    tr:nth-child(even) {background: $wrapper};
-    tr:nth-child(odd);
+    tr:nth-child(even) {background: whitesmoke};
 }
 
-.admin-thead {
+.admin-thead, td {
     color: $fontcolor;
+    padding-top: .5%;
+    text-align: left;
 }
 
 .admin-form {
-    max-width: 80%;
+    max-width: 75%;
     margin: 2% auto 2% auto;
     border: 1px solid $fontcolor;
     border-radius: 4px;
@@ -106,6 +107,13 @@
 @media screen and (min-width: 768px) {
     .admin-wrapper {
         display: flexbox;
+        margin: 0px auto;
         max-width: 1200px;
-    }    
+    } 
+    .admin-h3 {
+        display: none;
+    }
+    .admin-form {
+        max-width: 50%;
+    }   
 }
