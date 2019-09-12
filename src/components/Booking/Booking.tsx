@@ -120,17 +120,19 @@ class Booking extends React.Component<{}, IBookingState> {
           <div>
             <div className="wrapper">
               <Header />
-              <div className="column-wrapper">
-                <div className="left-column">
-                  {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
-                </div>
-                <div className="right-column">
-                  {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
-                  {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
-                  {this.state.showContactForm ? <button onClick={this.postReservation}> Book your table </button> : null}
-                  {this.state.showBookingComplete ? <BookingComplete /> :null}
-                </div>
-              </div>
+              {this.state.showBookingForm !? 
+                <div className="column-wrapper">
+                  <div className="left-column">
+                    {this.state.showBookingForm ? <BookingForm getBookingFormValues={this.getBookingFormValues}/> :null }
+                  </div>
+                  <div className="right-column">
+                    {this.state.showContactForm ? <ContactForm getContactFormValues={this.getContactFormValues} /> : null}
+                    {this.state.showGdprError ? <p style={{ fontSize: 11, color: "red"}}> You need to accept our terms </p> : null}
+                    {this.state.showContactForm ? <GdprConsent toggleGdpr={this.toggleGdpr} /> :null}
+                    {this.state.showContactForm ? <button className="book-button" onClick={this.postReservation}> Book your table </button> : null}
+                  </div>
+                </div> :null}
+                {this.state.showBookingComplete ? <BookingComplete /> :null}
             </div>
           </div>
     )

@@ -72,15 +72,20 @@
     }
 
     .header-desktop {
-        padding:  2em 3em;
+        padding:  2em 3em 0 3em;
        display: block;
        //border: 1px solid blue;
 
        .logo {
            color: white;
            text-decoration: none;
+           transition: 1s;
             h1{
                 margin: 0;
+            }
+
+            &:hover {
+                color: black;
             }
         //    display:none;
        }
@@ -96,7 +101,12 @@
                color: white;
                text-decoration: none;
                font-size: 1.3em;
-               letter-spacing: 2px;
+               letter-spacing: 1px;
+               transition: 1s;
+
+               &:hover {
+                   color: black;
+               }
            }
        }
     }
