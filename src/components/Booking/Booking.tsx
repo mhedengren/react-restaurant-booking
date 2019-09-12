@@ -59,7 +59,6 @@ class Booking extends React.Component<{}, IBookingState> {
   
    //Get values from the contact form.
   getContactFormValues(name: string, tel: string, email: string, contactFormValid: boolean) {
-    console.log(contactFormValid)
     this.setState(() => ({ name, tel, email, contactFormValid }))
   }
 
@@ -86,8 +85,6 @@ class Booking extends React.Component<{}, IBookingState> {
         }) 
         return false
     } 
-
-    console.log(this.state.contactFormValid)
     if (!this.state.contactFormValid){
       return false
     }
