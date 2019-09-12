@@ -112,24 +112,24 @@ class CreateReservation extends React.Component<ICreateReservationProps,ICreateR
 
     render() {
         return(
-          <form action="submit">
+          <form action="submit" className="admin-form">
             <label htmlFor="guests">Guests:</label>
-            <input name="guests" type="text" value={this.state.guests} onChange={this.onChange} />
+            <input name="guests" className="admin-input" type="text" value={this.state.guests} onChange={this.onChange} />
             <Calendar
             onChange={this.calendarOnChange}
             value={this.state.date}
             minDate={new Date()}
             />
             <label htmlFor="time">Time:</label>
-            <input name="time" type="text" value={this.state.time} onChange={this.onChange} />
+            <input name="time" className="admin-input" type="text" value={this.state.time} onChange={this.onChange} />
             <label htmlFor="name">Name:</label>
-            <input name="name" type="text" value={this.state.name} onChange={this.onChange} />
+            <input name="name" className="admin-input" type="text" value={this.state.name} onChange={this.onChange} />
             <label htmlFor="email">Email:</label>
-            <input name="email" type="text" value={this.state.email} onChange={this.onChange} />
+            <input name="email" className="admin-input" type="text" value={this.state.email} onChange={this.onChange} />
             <label htmlFor="phone">Phone:</label>
-            <input name="phone" type="text" value={this.state.phone} onChange={this.onChange} />
+            <input name="phone" className="admin-input" type="text" value={this.state.phone} onChange={this.onChange} />
            
-            <button type="button" className="createNowButton" onClick={this.postReservation}>Create Now</button>
+            <button type="button" className="admin-createNowButton" onClick={this.postReservation}>Create Now</button>
           </form>
         )
     }
