@@ -5,210 +5,216 @@
 @media screen and (max-width: 768px){
     .about-wrapper-desktop {
         display: none;
-        }
+    }
 }
-
 
 .about-mobile {
 
+    .about-box-white {
+    display: block;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 430px;
+    background-color: white;
 
-.about-box-white {
-display: block;
-display: flex;
-justify-content: center;
-text-align: center;
-height: 430px;
-background-color: white;
-.black-border-about {
-margin: 1em;
-align-self: center;
-height: 300px;
-border: 6px solid black;
-padding: 20px;
-}
-.aboutTextName {
-text-align: center;
-font-family: $robotomono;
-font-size: 12px;
-color: black;
-font-weight: bolder;
-}
-.aboutTextQuote {
-font-family: $robotomono;
-font-size: 8px;
-letter-spacing: 3px;
-font-weight: bolder;
-color: black;
-}
-.aboutTextTitle {
-text-align: center;
-font-family: 'Roboto Mono', monospace;
-font-size: 8px;
-color: black;
-font-weight: bolder;
-}
-.aboutTextParagraph {
-margin-top: 4em;
-font-family: $lateef;
-color: black;
-}
-}
-}
+        .black-border-about {
+        margin: 1em;
+        align-self: center;
+        height: 300px;
+        border: 6px solid black;
+        padding: 20px;
 
+            .about-text-name {
+                text-align: center;
+                font-family: $robotomono;
+                font-size: 12px;
+                color: black;
+                font-weight: bolder;
+            }
 
+            .about-text-quote {
+                font-family: $robotomono;
+                font-size: 8px;
+                letter-spacing: 3px;
+                font-weight: bolder;
+                color: black;
+            }
 
+            .aboutTextTitle {
+                text-align: center;
+                font-family: 'Roboto Mono', monospace;
+                font-size: 8px;
+                color: black;
+                font-weight: bolder;
+            }
 
-.image-container {
-background-image: url("../../assets/img/Group1.png");
-height: 1000px;
-width: 100%;
-background-position: center;
-background-repeat: no-repeat;
-}
+            .about-text-paragraph {
+                margin-top: 4em;
+                font-family: $lateef;
+                color: black;
+            }
+        }
+    }
+    .image-container {
+        background-image: url("../../assets/img/Group1.png");
+        height: 1000px;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
-.footer-mobile {
-padding: 2em;
-display: flex;
-justify-content: space-between;
-align-items: baseline;
-.vl {
-// align-self: baseline;
-text-align:center;
-border-right: 2px solid black;
-height: 100px;
-}
-.page {
-font-family: $raleway;
-font-weight: bold;
-font-size: 20px;
-letter-spacing: 4px;
-color: black;
-}
+    .footer-mobile {
+        padding: 2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        .vl {
+            text-align:center;
+            border-right: 2px solid black;
+            height: 100px;
+        }
+        .page {
+            font-family: $raleway;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: black;
+        }
+
+    }
 }
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px){
 
-.about-mobile {
-display: none;
-}
-.main-navigation {
-display:block;
-}
-.logo-container {
-display: block;
-}
+    .about-mobile {
+        display: none;
+    }
 
-.about-wrapper-desktop {
-margin: 2em;
-border: 4px solid black;
-//margin: 2em;
-display: flex;
-//justify-content: center;
-//align-items: center;
-.about-left-section {
-flex-grow: 1;
-//border: 2px solid red;
-background-color:white;
+    .main-navigation {
+    display:block;
+    }
 
-.logo-container-about{
-//border: 2px solid yellow;
-.logo-about{
-position: absolute;
-color: $fontcolor;
-text-decoration: none;
-margin: 2em 3em 2em 3em;
-color: black;
+    .logo-container {
+        display: block;
+    }
 
-h1{
-margin: 0;
-}
-}
-}
+    .about-wrapper-desktop {
+        margin: 2em;
+        border: 4px solid black;
+        display: flex;
+    
 
-.about-text-desktop {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 700px;
-//border: 2px solid black;
-margin: 0;
-//width: 300px;
+        .about-left-section {
+            flex-grow: 1;
+            background-color:white;
 
-.about-paragraph-desktop {
-//border: 2px solid yellow;
-//padding: 3em;
-color: black;
-width: 200px;
+            .logo-container-about{
 
-.about-text-name-desktop {
-text-align: center;
-font-family: $robotomono;
-font-size: 12px;
-color: black;
-font-weight: bolder;
-}
-.about-text-quote-desktop {
-font-family: $robotomono;
-font-size:10px;
-letter-spacing: 3px;
-font-weight: bolder;
-color: black;
-}
-.about-text-title-desktop {
-text-align: center;
-font-family: 'Roboto Mono', monospace;
-font-size: 12px;
-color: black;
-font-weight: bolder;
-}
-.about-text-paragraph {
-margin-top: 4em;
-font-family: $lateef;
-color: black;
-}
-}
-}
+                .logo-about{
+                    position: absolute;
+                    color: $fontcolor;
+                    text-decoration: none;
+                    margin: 2em 3em 2em 3em;
+                    color: black;
+                    transition: 1s;
 
-}
+                    &:hover {
+                        color:$wrapper;
+                    }
 
-.about-right-section {
-flex-grow: 2;
-//border: 2px solid green;
+                    h1  {
+                        margin: 0;
+                    }
+                }
+            }
+            .about-text-desktop {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 700px;
+                margin: 0;
 
-.nav-link {
- margin-left: 1em;
-font-weight: bold;
-color: white;
-text-decoration: none;
-font-size: 1.3em;
-letter-spacing: 1px;
-}
+                .about-paragraph-desktop {
+                    padding: 1em;
+                    color: black;
+                    width: 200px;
 
-.about-image-container {
-background-image: url('../../assets/img/aboutpicdesktop.png');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-height: 100%;
-width: 100%;
-}
+                    .about-text-name-desktop {
+                        text-align: center;
+                        font-family: $robotomono;
+                        font-size: 12px;
+                        color: black;
+                        font-weight: bolder;
+                    }
 
-}
+                    .about-text-quote-desktop {
+                        font-family: $robotomono;
+                        font-size: 9px;
+                        letter-spacing: 1px;
+                        font-weight: bolder;
+                        color: black;
+                    }
 
-}
+                    .about-text-title-desktop {
+                        text-align: center;
+                        font-family: 'Roboto Mono', monospace;
+                        font-size: 8px;
+                        color: black;
+                        font-weight: bolder;
+                    }
 
-.main-navigation-about {
-margin: 2.8em 3em 2em 3em;
-right: 2.3em;
-position: absolute;
-}
-}
+                    .about-text-paragraph {
+                        margin-top: 4em;
+                        font-family: $lateef;
+                        color: black;
+                     }
+                }
+            }
+        }
 
+        .about-right-section {
+            flex-grow: 2;
 
+            .nav-link {
+                margin-left: 1em;
+               font-weight: bold;
+               color: white;
+               text-decoration: none;
+               font-size: 1.3em;
+               letter-spacing: 1px;
+               transition: 1s;
+
+               &:hover {
+                    color: black;
+                }
+            }
+            
+                .about-image-container {
+                    background-image: url('../../assets/img/aboutpicdesktop.png');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    height: 100%;
+                    width: 100%;
+                }
+            
+                .main-navigation-about {
+                    margin: 2.8em 3em 2em 3em;
+                    right: 2.3em;
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+/* Desktop */
 @media screen and (min-width: 1024px) {
-.about-wrapper-desktop {
-height: 90vh;
-margin: 2em;
-}
+
+    .about-wrapper-desktop {
+        height: 90vh;
+        margin: 2em;
+    }
 }
