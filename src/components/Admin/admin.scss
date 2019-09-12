@@ -1,12 +1,12 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-div {
+.admin-wrapper {
     display: flexbox;
-    max-width: 660px;
+    max-width: 740px;
 }
 
-h3 {
+.admin-h3 {
     color: $fontcolor;
     max-width: 90%;
     text-align: center;
@@ -16,26 +16,25 @@ h3 {
     margin: 5%;
 }
 
-table {
-    max-width: 90%;
+.admin-table {
+    max-width: 80%;
     margin: 0 auto;
     tr:nth-child(even) {background: $wrapper};
     tr:nth-child(odd);
 }
 
-thead {
+.admin-thead {
     color: $fontcolor;
-    
 }
 
-form {
+.admin-form {
     max-width: 80%;
     margin: 2% auto 2% auto;
     border: 1px solid $fontcolor;
     border-radius: 4px;
     padding: 5%;
     // margin: 10%;
-    input {
+    .admin-input {
         width: 100%;
         padding: 1%;
         margin: 1% auto;
@@ -44,23 +43,19 @@ form {
         border-radius: 4px;
         box-sizing: border-box;
         // resize: vertical;
-        input:focus {
+        .admin-input:focus {
             background-color: $wrapper;   
         }
     }
 }
 
-label {
-    display: inline-block;
-  }
-
-.createDiv {
+.admin-createDiv {
     display: flex;
     justify-content: center;
     margin-bottom: 2%; 
 }
 
-.saveUpdateButton, .update, .createNewButton, .createNowButton {
+.admin-saveUpdateButton, .admin-update, .admin-createNewButton, .admin-createNowButton {
     display: inline-block;
     padding: 0.35em 1.2em;
     border: 2px solid $fontcolor;
@@ -73,11 +68,11 @@ label {
     color: $fontcolor;
     text-align: center;
 }
-.saveUpdateButton, .update, .createNowButton { 
+.admin-saveUpdateButton, .admin-update, .admmin-createNowButton { 
     margin: 2% auto;
 }
-.saveUpdateButton:hover, .update:hover, .createNewButton:hover, .createNowButton:hover,
-.saveUpdateButton:focus, .update:focus, .createNewButton:focus, .createNowButton:focus {
+.admin-saveUpdateButton:hover, .admin-update:hover, .admin-createNewButton:hover, .admin-createNowButton:hover,
+.admin-saveUpdateButton:focus, .admin-update:focus, .admin-createNewButton:focus, .admin-createNowButton:focus {
     color: #ffffff !important;
     background: $buttonColor2;
     border-color: $buttonColor2 !important;
@@ -85,7 +80,7 @@ label {
     box-shadow: 0 0 10px #43D1AF;
     }
 
-.delete {
+.admin-delete {
     display: inline-block;
     padding: 0.35em 1.2em;
     border: 2px solid $buttonColor1;
@@ -109,7 +104,7 @@ label {
 
 /* Tablet och desktop */
 @media screen and (min-width: 768px) {
-    div {
+    .admin-wrapper {
         display: flexbox;
         max-width: 1200px;
     }    
