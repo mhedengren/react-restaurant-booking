@@ -41,6 +41,12 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
     this.calendarOnChange = this.calendarOnChange.bind(this)
   }
 
+
+    // Will get reservations for todays date.
+    componentDidMount() {
+      this.getTodaysBookings()
+    }
+
   getTodaysBookings() {
     let today = moment(new Date())
     let dateToSend = today.format('YYYY-MM-DD')
@@ -59,12 +65,7 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
       })
   }
 
-  // Will get reservations for todays date.
-  componentDidMount() {
-    this.getTodaysBookings()
-  }
-
-  // Lifting state up.
+  // Lifting state up with the values from the booking-form. Calls parent component.
   handleSubmit(event: any) {
     if (this.state.numberOfGuestsError){
       return
@@ -128,7 +129,6 @@ class BookingForm extends React.Component<IBookingFormProps, IBookingFormState> 
 
   // Reacts default multiple form input handler.
   handleInputChange(event: any) {
-
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name

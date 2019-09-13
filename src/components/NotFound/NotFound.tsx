@@ -2,7 +2,6 @@ import React from 'react'
 import './notfound.scss'
 import {NavLink} from 'react-router-dom'
 
-
 const NotFound = () => {
     return(
         <div className="notfound-wrapper">

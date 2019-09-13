@@ -85,7 +85,9 @@ class Booking extends React.Component<{}, IBookingState> {
         }) 
         return false
     } 
-    //This doesn't work for some reason, it will always be false :( Validation error in contact form?
+    /* Validation bug with contactFormValid. 
+    This doesn't work for some reason, it will always be false
+    unless you type something again in the input fields. */ 
     if (!this.state.contactFormValid){
       return false
     }

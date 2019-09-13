@@ -1,15 +1,8 @@
 import React from 'react'
 import './home.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faFacebookF,
-    faTwitter,
-    faInstagram
-  } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faTwitter, faInstagram} from "@fortawesome/free-brands-svg-icons";
 import Header from '../Header/Header';
-
-
-
 
 const Home = () => {
     return(
@@ -25,29 +18,28 @@ const Home = () => {
                 </div>{/* closing div for whiteBox */} 
                 <footer className="footer-mobile">
                     <div className="social-icons">
-                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'black' }}/>
-                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'black'  }}/>
-                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'black'  }} />
+                        <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'black' }}/>
+                        <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'black'  }}/>
+                        <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'black'  }} />
                     </div>
                     <div className="page-number-wrapper">
-                            <div className="vl"></div>
-                            <span className="page">01.</span>
+                        <div className="vl"></div>
+                        <span className="page">01.</span>
                     </div>
                 </footer>
             </div>{/* closing div for mobile-landing-page */} 
 
             <div className="desktop-landing-page">
                 <Header />
-
                 <div className="entry-text">
                     <h2>welcome.</h2>
                     <h3>regeringsgatan 67</h3>
                 </div>
                 <footer className="footer-desktop">
                     <div className="social-icons">
-                            <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
-                            <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
-                            <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
+                        <FontAwesomeIcon icon={faFacebookF} size="1x" style={{ padding: '7px', color: 'white' }}/>
+                        <FontAwesomeIcon icon={faInstagram} size="1x" style={{ padding: '7px', color: 'white'  }}/>
+                        <FontAwesomeIcon icon={faTwitter} size="1x" style={{ padding: '7px', color: 'white'  }} />
                     </div>
                     <div className="page-number-wrapper">
                          <div className="vl"></div>
@@ -55,10 +47,7 @@ const Home = () => {
                     </div>
                 </footer>
             </div>  
-        
-           
         </div>  
-        
     )
 }
 

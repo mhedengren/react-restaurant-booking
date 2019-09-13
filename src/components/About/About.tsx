@@ -9,7 +9,6 @@ faInstagram
 } from "@fortawesome/free-brands-svg-icons";
 import Header from '../Header/Header';
 
-
 const About = () => {
   return (
     <div>
