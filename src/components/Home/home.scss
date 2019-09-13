@@ -1,9 +1,8 @@
 @import '../../variables';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono:100&display=swap');
 
-
 .desktop-landing-page {
-    display:none;
+    display: none;
 }
 
 .footer-desktop {
@@ -12,85 +11,85 @@
 
 .mobile-landing-page {
 
-.welcome {
-    background-image: url('../../assets/img/welcome_mobile.png');
-    height: 600px; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    margin-bottom: 100px;
-}
+    .welcome {
+        background-image: url('../../assets/img/welcome_mobile.png');
+        height: 600px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: 100px;
+    }
 
-.whiteBox {
-    height: 300px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
-    text-align:right;
+    .whiteBox {
+        height: 300px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 50px;
+        text-align: right;
 
-    .welcomeTextBox {
-        border: 2px black solid;
-        padding: 70px; 
+        .welcomeTextBox {
+            border: 2px black solid;
+            padding: 70px;
 
-        .welcomeText {
-            
-            font-family: $robotomono;
-            color: black;
+            .welcomeText {
+
+                font-family: $robotomono;
+                color: black;
+            }
+
+            .adressText {
+                font-family: $raleway;
+                color: black;
+            }
         }
-        .adressText {
+    }
+
+    .footer-mobile {
+        padding: 3em;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+
+        .vl {
+            text-align: center;
+            border-right: 2px solid black;
+            height: 70px;
+        }
+
+        .page {
             font-family: $raleway;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 4px;
             color: black;
         }
     }
-}
-
-.footer-mobile {
-    padding: 3em;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    
-
-    .vl {
-        text-align: center;
-        border-right: 2px solid black;
-        height: 70px;
-    }
-
-    .page {
-        font-family: $raleway;
-        font-weight: bold;
-        font-size: 20px;
-        letter-spacing: 4px;
-        color: black;
-    }
-}
 
 }
 
 /* Tablet och desktop */
-@media screen and (min-width: 768px){
-    
+@media screen and (min-width: 768px) {
+
     .footer-mobile {
-        display:none;
+        display: none;
     }
 
-    
     .footer-desktop {
         padding: 2em 3em;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        
+
 
         .vl {
             border-right: 2px solid white;
             height: 90px;
-        
+
         }
-    
+
         .page {
             font-family: $raleway;
             font-weight: bold;
@@ -102,32 +101,33 @@
     }
 
     .mobile-landing-page {
-        display:none;
+        display: none;
     }
 
     .desktop-landing-page {
-        display:flex;
+        display: flex;
         flex-direction: column;
         justify-content: space-between;
         background-image: url('../../assets/img/latestlandingpage.png');
         height: 600px;
-        margin:2em;
+        margin: 2em;
         background-position: center top;
         background-repeat: no-repeat;
-        background-size: cover; 
-    
-     
+        background-size: cover;
+
+
         .entry-text {
             padding-left: 2.5em;
             position: absolute;
-            top:50vh;
-            text-align:right;
+            top: 50vh;
+            text-align: right;
             width: 220px;
+
             h2 {
                 font-family: $robotomono;
                 font-size: 0.8em;
                 letter-spacing: 2px;
-             
+
             }
 
             h3 {
@@ -140,7 +140,7 @@
     }
 }
 
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 1024px) {
 
     .desktop-landing-page {
         margin-top: 2em;

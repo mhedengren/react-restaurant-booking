@@ -7,9 +7,9 @@ const Header = () => {
         <div>
             <header className="header-mobile">
                 <nav className="main-navigation-mobile">
-                <NavLink className="nav-link booking" to="/booking">book a table</NavLink>
-                <NavLink className="logo" to="/"><h1>june.</h1></NavLink>
-                <NavLink className="nav-link about" to="/about">about us</NavLink>
+                    <NavLink className="nav-link booking" to="/booking">book a table</NavLink>
+                    <NavLink className="logo" to="/"><h1>june.</h1></NavLink>
+                    <NavLink className="nav-link about" to="/about">about us</NavLink>
                 </nav>
             </header>
 
@@ -22,7 +22,6 @@ const Header = () => {
                         <NavLink className="nav-link booking" to="/booking">book</NavLink>
                         <NavLink className="nav-link about" to="/about">about</NavLink>
                     </nav>
-
                 </div>
             </header>
         </div>

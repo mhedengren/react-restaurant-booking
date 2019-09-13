@@ -80,7 +80,7 @@
 
     }
 
-    /* contact form */
+    /* Contact form */
     .right-column {
         padding: 2em;
 
@@ -140,14 +140,9 @@
     margin-top: 15vh;
 }
 
-
 @media screen and (min-width: 768px) {
-    // .booking-form-wrapper {
-    //     padding: 2em 6em;
-    // }
         .wrapper {
             margin: 2em;
-            border: 5px solid white;
         }
 
         .column-wrapper {
@@ -157,16 +152,12 @@
 
 }
 
-
 @media screen and (min-width: 1024px) {
 
     .wrapper {
         margin: 2em;
         min-height: 600px;
         height: 90vh;
-        border: 5px solid white;
-        // max-width: 1200px;
-        // margin: 2em auto;
     }
 
 
@@ -178,9 +169,6 @@
         .left-column {
             flex-grow: 1;
             flex-basis: 0;
-            // border: 1px solid red;
-            // border-right: 5px solid white;
-            // background: rgba(255, 255, 255, 0.7);
             margin: 1em 3em 3em 3em;
 
             .booking-form-wrapper {
@@ -192,13 +180,9 @@
         .right-column {
             flex-grow: 1;
             flex-basis: 0;
-            // border: 1px solid blue;
             margin: 1em 3em 3em 3em;
             padding: 2em;
         }
     }
-
-
-
 
 }

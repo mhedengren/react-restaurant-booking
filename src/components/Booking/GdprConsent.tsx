@@ -9,11 +9,11 @@ class GdprConsent extends React.Component <IGdprConsentProps, {}> {
         this.toggle = this.toggle.bind(this)
     }
 
+    //Calls parent function which sets the state for Gdpr-consent in the parent component.
     toggle(){
         this.props.toggleGdpr();
     }
 
-    
     render(){
         return (
           <div className='gdpr-notice-wrapper'>
