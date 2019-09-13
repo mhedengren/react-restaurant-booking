@@ -24,6 +24,7 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
     super(p);
     this.handleValues = this.handleValues.bind(this);
     this.validateInput = this.validateInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
 
     this.state = {
       name: "",
@@ -63,15 +64,24 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
     }
 
     if (!emailError && !nameError && !telError) {
+      console.log('Setting to true',this.state.contactFormValid)
         this.setState({ contactFormValid: true });
+      
     } else {
+      console.log('Setting to false',this.state.contactFormValid)
         this.setState({ contactFormValid: false });
     }
+    
+  }
+
+  handleBlur(){
+    this.validateInput();
   }
 
   handleValues(event: React.FormEvent<HTMLInputElement>) {
     const { name, value } = event.currentTarget;
     const cleanedValue = this.preventInjections(value);
+    
     this.setState(
       (prevState: IContactFormState) => ({ ...prevState, [name]: cleanedValue }),
       () => {
@@ -81,7 +91,6 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
           this.state.email,
           this.state.contactFormValid
         );
-        this.validateInput();
       }
     );
   }
@@ -101,6 +110,7 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             <input
               value={this.state.name}
               onChange={this.handleValues}
+              onBlur={this.handleBlur}
               name="name"
               required
             />
@@ -115,6 +125,7 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             <input
               value={this.state.tel}
               onChange={this.handleValues}
+              onBlur={this.handleBlur}
               name="tel"
               required
             />
@@ -130,6 +141,7 @@ class ContactForm extends React.Component<IContactFormProps, IContactFormState> 
             <input
               value={this.state.email}
               onChange={this.handleValues}
+              onBlur={this.handleBlur}
               name="email"
             />
             {this.state.emailError ? (
